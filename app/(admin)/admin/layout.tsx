@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
@@ -23,31 +23,70 @@ import {
   Bell,
   Search,
   Sun,
+  GraduationCap,
+  ChevronDown,
+  Sparkles,
 } from "lucide-react";
 
-const sidebarLinks = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/users", label: "Users", icon: Users },
-  { href: "/admin/projects", label: "Projects", icon: FolderOpen },
-  { href: "/admin/events", label: "Events", icon: Calendar },
-  { href: "/admin/gallery", label: "Gallery", icon: Image },
-  { href: "/admin/volunteers", label: "Volunteers", icon: HandHeart },
-  { href: "/admin/donations", label: "Donations", icon: Heart },
-  { href: "/admin/contact", label: "Messages", icon: MessageSquare },
-  { href: "/admin/settings", label: "Settings", icon: Settings },
-  { href: "/admin/audit-logs", label: "Audit Logs", icon: Shield },
+type NavLink = {
+  href: string;
+  label: string;
+  icon: React.ElementType;
+  exact?: boolean;
+};
+
+const navGroups: { label: string; links: NavLink[] }[] = [
+  {
+    label: "Overview",
+    links: [
+      { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
+    ],
+  },
+  {
+    label: "Management",
+    links: [
+      { href: "/admin/users", label: "Users", icon: Users },
+      { href: "/admin/projects", label: "Projects", icon: FolderOpen },
+      { href: "/admin/events", label: "Events", icon: Calendar },
+      { href: "/admin/gallery", label: "Gallery", icon: Image },
+    ],
+  },
+  {
+    label: "Community",
+    links: [
+      { href: "/admin/volunteers", label: "Volunteers", icon: HandHeart },
+      { href: "/admin/donations", label: "Donations", icon: Heart },
+      { href: "/admin/scholarships", label: "Scholarships", icon: GraduationCap },
+      { href: "/admin/contact", label: "Messages", icon: MessageSquare },
+    ],
+  },
+  {
+    label: "System",
+    links: [
+      { href: "/admin/settings", label: "Settings", icon: Settings },
+      { href: "/admin/audit-logs", label: "Audit Logs", icon: Shield },
+    ],
+  },
 ];
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const notifications = [
+  { id: 1, text: "New volunteer registration", time: "5m ago", unread: true },
+  { id: 2, text: "Donation of ₹5,000 received", time: "30m ago", unread: true },
+  { id: 3, text: "Event registration confirmed", time: "1h ago", unread: true },
+  { id: 4, text: "Contact form submitted", time: "2h ago", unread: false },
+];
+
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [user, setUser] = useState<{ firstName: string; lastName: string; role: string } | null>(null);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
+  const notifRef = useRef<HTMLDivElement>(null);
+  const userRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch("/api/auth/me")
@@ -59,138 +98,320 @@ export default function AdminLayout({
       .catch(() => router.push("/login"));
   }, [router]);
 
+  // Close dropdowns on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (notifRef.current && !notifRef.current.contains(e.target as Node)) setShowNotifications(false);
+      if (userRef.current && !userRef.current.contains(e.target as Node)) setShowUserMenu(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
   const handleLogout = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
     router.push("/login");
   };
 
+  const isActive = (href: string, exact?: boolean) => {
+    if (exact) return pathname === href;
+    return pathname === href || pathname.startsWith(href + "/");
+  };
+
+  const unreadCount = notifications.filter((n) => n.unread).length;
+
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
+    <div className="flex h-screen overflow-hidden" style={{ background: "#f1f5f9" }}>
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
+      {/* ─────────────── SIDEBAR ─────────────── */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex flex-col border-r bg-white transition-all duration-300 lg:static",
-          sidebarOpen ? "w-64" : "w-16",
+          "fixed inset-y-0 left-0 z-50 flex flex-col transition-all duration-300 ease-in-out lg:static",
+          sidebarOpen ? "w-64" : "w-[68px]",
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
+        style={{
+          background: "linear-gradient(180deg, #0f172a 0%, #0c1425 100%)",
+          borderRight: "1px solid rgba(255,255,255,0.06)",
+        }}
       >
-        <div className="flex h-16 items-center justify-between border-b px-4">
+        {/* Logo area */}
+        <div
+          className="flex h-16 items-center justify-between px-4 shrink-0"
+          style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+        >
           {sidebarOpen ? (
-            <Link href="/" className="flex items-center gap-2 font-bold text-orange-600">
-              <span className="flex size-8 items-center justify-center rounded-lg bg-orange-600 text-white">
-                <Sun className="size-4" />
-              </span>
-              <span className="text-sm">NCV Admin</span>
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div
+                className="flex size-9 items-center justify-center rounded-xl shrink-0 transition-transform group-hover:scale-105"
+                style={{ background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)", boxShadow: "0 0 20px rgba(249,115,22,0.4)" }}
+              >
+                <Sun className="size-4 text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-white leading-none">NCV Admin</p>
+                <p className="text-[10px] text-slate-400 leading-none mt-0.5">Management Portal</p>
+              </div>
             </Link>
           ) : (
-            <span className="mx-auto flex size-8 items-center justify-center rounded-lg bg-orange-600 text-white">
-              <Sun className="size-4" />
-            </span>
+            <div className="mx-auto flex size-9 items-center justify-center rounded-xl shrink-0"
+              style={{ background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)", boxShadow: "0 0 20px rgba(249,115,22,0.4)" }}
+            >
+              <Sun className="size-4 text-white" />
+            </div>
           )}
+
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="hidden rounded-md p-1 text-gray-400 hover:text-gray-600 lg:block"
+            className="hidden rounded-lg p-1.5 text-slate-400 hover:text-white hover:bg-white/10 transition-colors lg:flex items-center justify-center"
           >
             {sidebarOpen ? <ChevronLeft className="size-4" /> : <ChevronRight className="size-4" />}
           </button>
           <button
             onClick={() => setMobileOpen(false)}
-            className="rounded-md p-1 text-gray-400 hover:text-gray-600 lg:hidden"
+            className="rounded-lg p-1.5 text-slate-400 hover:text-white hover:bg-white/10 transition-colors lg:hidden"
           >
             <X className="size-4" />
           </button>
         </div>
 
-        <nav className="flex-1 overflow-y-auto p-3 space-y-1">
-          {sidebarLinks.map((link) => {
-            const isActive = pathname === link.href || (link.href !== "/admin" && pathname.startsWith(link.href));
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                  isActive
-                    ? "bg-orange-50 text-orange-700"
-                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
-                  !sidebarOpen && "justify-center px-2"
-                )}
-                title={!sidebarOpen ? link.label : undefined}
-              >
-                <link.icon className="size-5 shrink-0" />
-                {sidebarOpen && <span>{link.label}</span>}
-              </Link>
-            );
-          })}
+        {/* Navigation */}
+        <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-6 admin-scroll">
+          {navGroups.map((group) => (
+            <div key={group.label}>
+              {sidebarOpen && (
+                <p className="mb-1.5 px-3 text-[10px] font-semibold uppercase tracking-widest text-slate-500">
+                  {group.label}
+                </p>
+              )}
+              <div className="space-y-0.5">
+                {group.links.map((link) => {
+                  const active = isActive(link.href, link.exact);
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      title={!sidebarOpen ? link.label : undefined}
+                      className={cn(
+                        "sidebar-item flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium relative group",
+                        active
+                          ? "text-white"
+                          : "text-slate-400 hover:text-white hover:bg-white/5",
+                        !sidebarOpen && "justify-center px-2"
+                      )}
+                      style={active ? {
+                        background: "linear-gradient(90deg, rgba(249,115,22,0.18) 0%, rgba(249,115,22,0.05) 100%)",
+                        boxShadow: "inset 3px 0 0 #f97316",
+                      } : {}}
+                    >
+                      <link.icon className={cn("size-5 shrink-0", active ? "text-orange-400" : "")} />
+                      {sidebarOpen && <span>{link.label}</span>}
+                      {active && sidebarOpen && (
+                        <span className="ml-auto flex size-1.5 rounded-full bg-orange-400" />
+                      )}
+                      {/* Tooltip when collapsed */}
+                      {!sidebarOpen && (
+                        <span className="absolute left-full ml-2.5 whitespace-nowrap rounded-md bg-slate-800 px-2.5 py-1.5 text-xs text-white opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
+                          {link.label}
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </nav>
 
-        <div className="border-t p-3">
+        {/* User area at bottom */}
+        <div className="shrink-0 p-3" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           {sidebarOpen && user && (
-            <div className="mb-2 px-3 py-2 text-xs text-gray-500">
-              {user.firstName} {user.lastName}
-              <span className="ml-1 text-[10px] uppercase text-orange-600">({user.role})</span>
+            <div className="mb-3 flex items-center gap-3 rounded-lg px-3 py-2.5"
+              style={{ background: "rgba(255,255,255,0.05)" }}>
+              <div
+                className="flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
+                style={{ background: "linear-gradient(135deg, #f97316, #ea580c)" }}
+              >
+                {user.firstName[0]}{user.lastName[0]}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium text-white">{user.firstName} {user.lastName}</p>
+                <p className="text-[10px] text-orange-400 uppercase tracking-wide">{user.role.replace("_", " ")}</p>
+              </div>
             </div>
           )}
           <button
             onClick={handleLogout}
             className={cn(
-              "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-50",
+              "sidebar-item flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400 hover:text-red-400 hover:bg-red-400/10",
               !sidebarOpen && "justify-center px-2"
             )}
           >
             <LogOut className="size-5 shrink-0" />
-            {sidebarOpen && <span>Logout</span>}
+            {sidebarOpen && <span>Sign Out</span>}
           </button>
         </div>
       </aside>
 
-      {/* Main content */}
+      {/* ─────────────── MAIN CONTENT ─────────────── */}
       <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Top bar */}
-        <header className="flex h-16 items-center justify-between border-b bg-white px-4 lg:px-6">
+        {/* Top Bar */}
+        <header
+          className="flex h-16 items-center justify-between px-4 lg:px-6 shrink-0"
+          style={{
+            background: "rgba(255,255,255,0.85)",
+            backdropFilter: "blur(16px)",
+            borderBottom: "1px solid rgba(0,0,0,0.07)",
+            boxShadow: "0 1px 12px rgba(0,0,0,0.04)",
+          }}
+        >
           <div className="flex items-center gap-3">
+            {/* Mobile menu */}
             <button
               onClick={() => setMobileOpen(true)}
-              className="rounded-md p-1 text-gray-500 hover:text-gray-700 lg:hidden"
+              className="rounded-lg p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors lg:hidden"
             >
               <Menu className="size-5" />
             </button>
-            <div className="relative hidden sm:block">
-              <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" />
+
+            {/* Search */}
+            <div className={cn(
+              "relative hidden sm:flex items-center transition-all duration-200",
+              searchFocused ? "w-72" : "w-56"
+            )}>
+              <Search className="absolute left-3 size-4 text-slate-400 pointer-events-none" />
               <input
-                placeholder="Search..."
-                className="h-9 w-64 rounded-lg border bg-gray-50 pl-9 pr-3 text-sm outline-none focus:border-orange-300 focus:ring-1 focus:ring-orange-300"
+                id="admin-search"
+                placeholder="Search anything..."
+                onFocus={() => setSearchFocused(true)}
+                onBlur={() => setSearchFocused(false)}
+                className="h-9 w-full rounded-xl border pl-9 pr-3 text-sm outline-none transition-all"
+                style={{
+                  background: searchFocused ? "#fff" : "#f8fafc",
+                  borderColor: searchFocused ? "#f97316" : "#e2e8f0",
+                  boxShadow: searchFocused ? "0 0 0 3px rgba(249,115,22,0.12)" : "none",
+                }}
               />
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <button className="relative rounded-md p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100">
-              <Bell className="size-5" />
-              <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-orange-500 text-[9px] text-white">3</span>
-            </button>
-            <div className="flex items-center gap-2 border-l pl-3">
-              <div className="flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-orange-600 text-[11px] font-bold text-white">
-                {user ? `${user.firstName[0]}${user.lastName[0]}` : "A"}
-              </div>
-              {user && (
-                <span className="hidden text-sm font-medium text-gray-700 sm:block">
-                  {user.firstName}
-                </span>
+
+          <div className="flex items-center gap-2">
+            {/* Live indicator */}
+            <div className="hidden sm:flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-emerald-700"
+              style={{ background: "rgba(5,150,105,0.08)", border: "1px solid rgba(5,150,105,0.2)" }}>
+              <span className="animate-pulse-dot size-1.5 rounded-full bg-emerald-500" />
+              Live
+            </div>
+
+            {/* Notifications */}
+            <div ref={notifRef} className="relative">
+              <button
+                onClick={() => { setShowNotifications(!showNotifications); setShowUserMenu(false); }}
+                className="relative flex size-9 items-center justify-center rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+              >
+                <Bell className="size-5" />
+                {unreadCount > 0 && (
+                  <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-orange-500 text-[9px] font-bold text-white">
+                    {unreadCount}
+                  </span>
+                )}
+              </button>
+
+              {showNotifications && (
+                <div
+                  className="absolute right-0 top-11 z-50 w-80 rounded-2xl p-1 shadow-2xl"
+                  style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.08)" }}
+                >
+                  <div className="flex items-center justify-between px-4 py-3 border-b">
+                    <p className="text-sm font-semibold text-slate-800">Notifications</p>
+                    <span className="rounded-full bg-orange-100 px-2 py-0.5 text-[10px] font-semibold text-orange-600">{unreadCount} new</span>
+                  </div>
+                  {notifications.map((n) => (
+                    <div key={n.id} className={cn(
+                      "flex items-start gap-3 px-4 py-3 rounded-xl transition-colors cursor-pointer hover:bg-slate-50",
+                      n.unread && "bg-orange-50/60"
+                    )}>
+                      <div className={cn(
+                        "mt-0.5 size-2 rounded-full shrink-0",
+                        n.unread ? "bg-orange-400" : "bg-transparent"
+                      )} />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm text-slate-700">{n.text}</p>
+                        <p className="text-xs text-slate-400 mt-0.5">{n.time}</p>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="px-4 py-2 border-t">
+                    <button className="text-xs font-medium text-orange-600 hover:text-orange-700">View all notifications</button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* User menu */}
+            <div ref={userRef} className="relative">
+              <button
+                onClick={() => { setShowUserMenu(!showUserMenu); setShowNotifications(false); }}
+                className="flex items-center gap-2 rounded-xl px-2 py-1.5 hover:bg-slate-100 transition-colors"
+              >
+                <div
+                  className="flex size-8 items-center justify-center rounded-full text-[11px] font-bold text-white"
+                  style={{ background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)" }}
+                >
+                  {user ? `${user.firstName[0]}${user.lastName[0]}` : "A"}
+                </div>
+                {user && (
+                  <span className="hidden text-sm font-medium text-slate-700 sm:block">
+                    {user.firstName}
+                  </span>
+                )}
+                <ChevronDown className="size-3.5 text-slate-400 hidden sm:block" />
+              </button>
+
+              {showUserMenu && (
+                <div
+                  className="absolute right-0 top-11 z-50 w-52 rounded-2xl p-1.5 shadow-2xl"
+                  style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.08)" }}
+                >
+                  {user && (
+                    <div className="px-3 py-2.5 border-b mb-1">
+                      <p className="text-sm font-semibold text-slate-800">{user.firstName} {user.lastName}</p>
+                      <p className="text-xs text-slate-400 capitalize">{user.role.replace("_", " ").toLowerCase()}</p>
+                    </div>
+                  )}
+                  <Link href="/admin/settings" className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+                    <Settings className="size-4" />
+                    Settings
+                  </Link>
+                  <Link href="/" className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+                    <Sparkles className="size-4" />
+                    View Website
+                  </Link>
+                  <div className="my-1 border-t" />
+                  <button
+                    onClick={handleLogout}
+                    className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-red-500 hover:bg-red-50 transition-colors"
+                  >
+                    <LogOut className="size-4" />
+                    Sign Out
+                  </button>
+                </div>
               )}
             </div>
           </div>
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto p-4 lg:p-6">{children}</main>
+        <main className="flex-1 overflow-y-auto p-4 lg:p-6 dot-grid-bg">
+          {children}
+        </main>
       </div>
     </div>
   );
