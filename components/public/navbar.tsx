@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X, Heart, Sparkles, Sun, Leaf } from "lucide-react";
+import { Menu, X, Heart, Sparkles } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -17,80 +18,19 @@ const navLinks = [
 ];
 
 // ── Trust Logo Component ─────────────────────────────────────────────────────
+// 👉 To use your real logo: replace /public/logo.png with your actual logo file.
 function TrustLogo({ size = "default" }: { size?: "default" | "small" }) {
   const isSmall = size === "small";
   return (
-    <div className={cn("flex items-center gap-3", isSmall && "gap-2")}>
-      {/* Emblem */}
-      <div className="relative shrink-0">
-        {/* Outer ring */}
-        <div
-          className={cn(
-            "flex items-center justify-center rounded-full",
-            isSmall ? "size-9" : "size-12"
-          )}
-          style={{
-            background: "linear-gradient(135deg, #f97316 0%, #ea580c 50%, #c2410c 100%)",
-            boxShadow: "0 4px 16px rgba(249,115,22,0.4), inset 0 1px 1px rgba(255,255,255,0.2)",
-          }}
-        >
-          {/* Inner lotus/sun motif */}
-          <div className="relative flex items-center justify-center">
-            <Sun
-              className={cn("text-white", isSmall ? "size-4" : "size-6")}
-              style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.3))" }}
-            />
-            <Leaf
-              className={cn(
-                "absolute text-amber-200 opacity-70",
-                isSmall ? "size-2.5" : "size-3.5"
-              )}
-              style={{ transform: "rotate(135deg) translateX(2px)" }}
-            />
-          </div>
-        </div>
-        {/* Small green accent dot */}
-        <span
-          className="absolute -bottom-0.5 -right-0.5 flex size-3 items-center justify-center rounded-full bg-emerald-500"
-          style={{ border: "1.5px solid #fff" }}
-        >
-          <Heart className="size-1.5 text-white fill-white" />
-        </span>
-      </div>
-
-      {/* Text block */}
-      <div className="flex flex-col leading-none">
-        <div className="flex items-baseline gap-1.5">
-          <span
-            className={cn("font-extrabold tracking-tight text-gray-900", isSmall ? "text-base" : "text-xl")}
-            style={{ letterSpacing: "-0.02em" }}
-          >
-            NCV
-          </span>
-          <span
-            className={cn("font-bold text-orange-600", isSmall ? "text-xs" : "text-sm")}
-          >
-            Trust
-          </span>
-        </div>
-        <span
-          className={cn(
-            "font-medium text-gray-500 tracking-wide",
-            isSmall ? "text-[9px]" : "text-[10px]"
-          )}
-          style={{ letterSpacing: "0.08em" }}
-        >
-          NARCHINTHANAI VATTAM
-        </span>
-        {!isSmall && (
-          <span
-            className="text-[9px] text-orange-500 font-medium tracking-widest uppercase mt-0.5"
-            style={{ letterSpacing: "0.12em" }}
-          >
-            Charitable Trust · Est. 2015
-          </span>
-        )}
-      </div>
+    <div className="flex items-center">
+      <Image
+        src="/logo.png"
+        alt="NCV Trust — Narchinthanai Vattam"
+        width={isSmall ? 120 : 160}
+        height={isSmall ? 40 : 52}
+        className="object-contain"
+        priority
+      />
     </div>
   );
 }
