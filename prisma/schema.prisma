@@ -1,0 +1,421 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  CONTENT_MANAGER
+  VOLUNTEER_COORDINATOR
+}
+
+enum ProjectStatus {
+  ACTIVE
+  COMPLETED
+  UPCOMING
+  ON_HOLD
+}
+
+enum EventStatus {
+  UPCOMING
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum RegistrationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  ATTENDED
+}
+
+enum VolunteerStatus {
+  ACTIVE
+  INACTIVE
+  ON_LEAVE
+  REMOVED
+}
+
+enum DonationStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  RAZORPAY
+  BANK_TRANSFER
+  CASH
+  CHEQUE
+}
+
+enum ScholarshipStatus {
+  APPLIED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  DISBURSED
+}
+
+enum CmsPageStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum TestimonialStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  firstName     String
+  lastName      String
+  phone         String?
+  avatarUrl     String?
+  role          UserRole  @default(CONTENT_MANAGER)
+  isActive      Boolean   @default(true)
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  auditLogs     AuditLog[]
+
+  @@index([email])
+  @@index([role])
+  @@map("users")
+}
+
+model Project {
+  id            String        @id @default(uuid())
+  title         String
+  slug          String        @unique
+  description   String
+  content       String?
+  shortDescription String?
+  coverImageUrl String?
+  status        ProjectStatus @default(ACTIVE)
+  startDate     DateTime?
+  endDate       DateTime?
+  targetAmount  Float?
+  raisedAmount  Float?        @default(0)
+  location      String?
+  isFeatured    Boolean       @default(false)
+  orderIndex    Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  images        ProjectImage[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([isFeatured])
+  @@map("projects")
+}
+
+model ProjectImage {
+  id        String   @id @default(uuid())
+  url       String
+  alt       String?
+  caption   String?
+  orderIndex Int     @default(0)
+  projectId String
+  createdAt DateTime @default(now())
+
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@map("project_images")
+}
+
+model Event {
+  id              String             @id @default(uuid())
+  title           String
+  slug            String             @unique
+  description     String
+  shortDescription String?
+  coverImageUrl   String?
+  eventDate       DateTime
+  endDate         DateTime?
+  startTime       String?
+  endTime         String?
+  venue           String?
+  address         String?
+  city            String?
+  maxAttendees    Int?
+  status          EventStatus        @default(UPCOMING)
+  registrationDeadline DateTime?
+  isFeatured      Boolean            @default(false)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  registrations   EventRegistration[]
+
+  @@index([slug])
+  @@index([eventDate])
+  @@index([status])
+  @@index([city])
+  @@map("events")
+}
+
+model EventRegistration {
+  id            String             @id @default(uuid())
+  eventId       String
+  firstName     String
+  lastName      String
+  email         String
+  phone         String?
+  city          String?
+  organization  String?
+  status        RegistrationStatus @default(PENDING)
+  notes         String?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  event         Event              @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+  @@index([email])
+  @@map("event_registrations")
+}
+
+model GalleryPhoto {
+  id          String   @id @default(uuid())
+  url         String
+  thumbnailUrl String?
+  alt         String?
+  caption     String?
+  album       String?
+  isFeatured  Boolean  @default(false)
+  orderIndex  Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([album])
+  @@index([isFeatured])
+  @@map("gallery_photos")
+}
+
+model GalleryVideo {
+  id          String   @id @default(uuid())
+  title       String
+  url         String
+  thumbnailUrl String?
+  description String?
+  platform    String   @default("youtube")
+  isFeatured  Boolean  @default(false)
+  orderIndex  Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isFeatured])
+  @@map("gallery_videos")
+}
+
+model Volunteer {
+  id            String          @id @default(uuid())
+  firstName     String
+  lastName      String
+  email         String          @unique
+  phone         String?
+  dateOfBirth   DateTime?
+  address       String?
+  city          String?
+  state         String?
+  pincode       String?
+  occupation    String?
+  skills        String?
+  availability  String?
+  reason        String?
+  status        VolunteerStatus @default(ACTIVE)
+  joinedAt      DateTime?
+  userId        String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@index([city])
+  @@map("volunteers")
+}
+
+model Scholarship {
+  id              String            @id @default(uuid())
+  title           String
+  slug            String            @unique
+  description     String
+  eligibility     String?
+  benefits        String?
+  coverImageUrl   String?
+  applicationDeadline DateTime?
+  totalAmount     Float?
+  totalSlots      Int?
+  isActive        Boolean           @default(true)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  students        Student[]
+
+  @@index([slug])
+  @@index([isActive])
+  @@map("scholarships")
+}
+
+model Student {
+  id              String           @id @default(uuid())
+  scholarshipId   String
+  firstName       String
+  lastName        String
+  email           String
+  phone           String?
+  dateOfBirth     DateTime?
+  address         String?
+  city            String?
+  state           String?
+  pincode         String?
+  institute       String?
+  course          String?
+  yearOfStudy     Int?
+  familyIncome    Float?
+  documentsUrl    String?
+  status          ScholarshipStatus @default(APPLIED)
+  appliedAt       DateTime         @default(now())
+  reviewedAt      DateTime?
+  reviewNotes     String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  scholarship     Scholarship      @relation(fields: [scholarshipId], references: [id], onDelete: Cascade)
+
+  @@index([scholarshipId])
+  @@index([email])
+  @@index([status])
+  @@map("students")
+}
+
+model Donation {
+  id            String        @id @default(uuid())
+  donorName     String
+  email         String
+  phone         String?
+  amount        Float
+  paymentMethod PaymentMethod @default(RAZORPAY)
+  paymentId     String?       @unique
+  orderId       String?
+  status        DonationStatus @default(PENDING)
+  message       String?
+  isAnonymous   Boolean       @default(false)
+  projectId     String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@index([projectId])
+  @@map("donations")
+}
+
+model Testimonial {
+  id        String            @id @default(uuid())
+  authorName String
+  authorRole String?
+  authorPhotoUrl String?
+  content   String
+  rating    Int?
+  status    TestimonialStatus @default(PENDING)
+  orderIndex Int              @default(0)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@index([status])
+  @@map("testimonials")
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([isRead])
+  @@map("contact_messages")
+}
+
+model CmsPage {
+  id        String       @id @default(uuid())
+  title     String
+  slug      String       @unique
+  content   String?
+  metaTitle String?
+  metaDescription String?
+  status    CmsPageStatus @default(DRAFT)
+  orderIndex Int          @default(0)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  versions  CmsContentVersion[]
+
+  @@index([slug])
+  @@index([status])
+  @@map("cms_pages")
+}
+
+model CmsContentVersion {
+  id        String   @id @default(uuid())
+  pageId    String
+  content   String?
+  version   Int
+  createdBy String?
+  createdAt DateTime @default(now())
+
+  page      CmsPage  @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@index([pageId])
+  @@index([version])
+  @@map("cms_content_versions")
+}
+
+model Settings {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+  @@map("settings")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String
+  action    String
+  entity    String?
+  entityId  String?
+  details   String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([action])
+  @@index([entity])
+  @@index([createdAt])
+  @@map("audit_logs")
+}

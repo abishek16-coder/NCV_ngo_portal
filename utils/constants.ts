@@ -1,0 +1,45 @@
+export const ROLES = {
+  SUPER_ADMIN: "SUPER_ADMIN",
+  CONTENT_MANAGER: "CONTENT_MANAGER",
+  VOLUNTEER_COORDINATOR: "VOLUNTEER_COORDINATOR",
+} as const;
+
+export const PROJECT_STATUS = {
+  ACTIVE: "ACTIVE",
+  COMPLETED: "COMPLETED",
+  UPCOMING: "UPCOMING",
+  ON_HOLD: "ON_HOLD",
+} as const;
+
+export const EVENT_STATUS = {
+  UPCOMING: "UPCOMING",
+  ONGOING: "ONGOING",
+  COMPLETED: "COMPLETED",
+  CANCELLED: "CANCELLED",
+} as const;
+
+export const DONATION_STATUS = {
+  PENDING: "PENDING",
+  COMPLETED: "COMPLETED",
+  FAILED: "FAILED",
+  REFUNDED: "REFUNDED",
+} as const;
+
+export const PAYMENT_METHODS = {
+  RAZORPAY: "RAZORPAY",
+  BANK_TRANSFER: "BANK_TRANSFER",
+  CASH: "CASH",
+  CHEQUE: "CHEQUE",
+} as const;
+
+export const FILE_LIMITS = {
+  MAX_IMAGE_SIZE: 5 * 1024 * 1024,
+  ALLOWED_IMAGE_TYPES: ["image/jpeg", "image/jpg", "image/png"],
+  ALLOWED_DOCUMENT_TYPES: ["application/pdf"],
+} as const;
+
+export const PAGINATION = {
+  DEFAULT_PAGE: 1,
+  DEFAULT_LIMIT: 10,
+  MAX_LIMIT: 100,
+} as const;
