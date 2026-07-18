@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { verifyToken } from "./lib/auth";
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const adminRoutes = ["/admin"];
 const apiProtectedRoutes = ["/api/admin"];
@@ -13,6 +14,19 @@ const publicRoutes = [
   "/api/contact",
   "/api/volunteers/register",
 ];
+
+function verifyToken(token: string): boolean {
+  try {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const payload = JSON.parse(atob(base64));
+    if (!payload.userId || !payload.role) return false;
+    if (payload.exp && payload.exp * 1000 < Date.now()) return false;
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -41,10 +55,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  try {
-    verifyToken(token);
-    return NextResponse.next();
-  } catch {
+  if (!verifyToken(token)) {
     if (pathname.startsWith("/api/")) {
       return NextResponse.json(
         { success: false, error: "Invalid or expired token" },
@@ -53,6 +64,8 @@ export function middleware(request: NextRequest) {
     }
     return NextResponse.redirect(new URL("/login", request.url));
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
