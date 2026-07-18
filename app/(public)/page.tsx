@@ -1,20 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import {
   Target,
@@ -22,12 +6,9 @@ import {
   Heart,
   Users,
   FolderOpen,
-  Clock,
   Calendar,
   MapPin,
-  Quote,
   ArrowRight,
-  ChevronRight,
   Award,
   Star,
   HandHeart,
@@ -38,45 +19,58 @@ import {
   Sparkles,
   Activity,
   Smile,
-  TreePine,
   Brain,
-  Music,
-  Dumbbell,
+  CheckCircle,
+  Quote,
+  Play,
+  ChevronRight,
+  Phone,
 } from "lucide-react";
 
+// ─────────────────────────── Data ────────────────────────────────────────────
+
 const stats = [
-  { label: "Yoga Sessions", value: "1000+", icon: Sun },
-  { label: "Lives Reached", value: "10000+", icon: Heart },
-  { label: "Workshops", value: "200+", icon: Star },
-  { label: "Volunteers", value: "500+", icon: Users },
+  { label: "Yoga Sessions", value: "1,000+", icon: Sun, color: "from-orange-500 to-amber-500" },
+  { label: "Lives Reached", value: "10,000+", icon: Heart, color: "from-rose-500 to-pink-500" },
+  { label: "Workshops", value: "200+", icon: Star, color: "from-violet-500 to-purple-500" },
+  { label: "Volunteers", value: "500+", icon: Users, color: "from-emerald-500 to-teal-500" },
+];
+
+const whyNcv = [
+  { icon: Award, title: "Expert Instructors", desc: "Certified and experienced yoga trainers dedicated to holistic wellness." },
+  { icon: Heart, title: "Holistic Approach", desc: "Complete harmony of body, mind, and spirit through integrated programs." },
+  { icon: Users, title: "All Age Groups", desc: "Inclusive programs designed for children, adults, and senior citizens." },
+  { icon: Globe, title: "Online & Offline", desc: "Accessible daily yoga sessions both in-person and via live streaming." },
+  { icon: HandHeart, title: "Community Focus", desc: "Charitable initiatives that uplift entire communities through service." },
+  { icon: Brain, title: "Positive Thinking", desc: "Personality development and mindset programs for all walks of life." },
+  { icon: Smile, title: "Inclusive Environment", desc: "Supportive and welcoming space for everyone, regardless of background." },
+  { icon: BookOpen, title: "Affordable Access", desc: "Quality wellness education made available to all, free or at low cost." },
+  { icon: Star, title: "Proven Impact", desc: "A track record of transforming thousands of lives across India." },
 ];
 
 const projects = [
   {
-    title: "International Day of Yoga Celebrations",
-    description:
-      "Annual large-scale yoga events celebrating the global day of yoga with mass participation, expert-led sessions, and community engagement.",
-    image: "https://placehold.co/800x500/2563EB/ffffff?text=IDY+Celebrations",
-    status: "Active",
-    statusVariant: "default" as const,
+    title: "International Day of Yoga",
+    desc: "Annual large-scale yoga events with mass participation, expert-led sessions, and community engagement.",
+    tag: "Flagship Program",
+    color: "#f97316",
+    icon: Sun,
     href: "/projects/idy-celebrations",
   },
   {
     title: "Free Online Yoga Sessions",
-    description:
-      "Accessible daily yoga classes streamed online for participants of all ages, promoting physical fitness and mental wellness from home.",
-    image: "https://placehold.co/800x500/059669/ffffff?text=Online+Yoga",
-    status: "Active",
-    statusVariant: "default" as const,
+    desc: "Daily yoga classes streamed live for participants of all ages, promoting fitness and mental wellness from home.",
+    tag: "Daily Program",
+    color: "#10b981",
+    icon: Activity,
     href: "/projects/online-yoga",
   },
   {
-    title: "Yoga Sangamam Programs",
-    description:
-      "Community yoga gatherings that bring together practitioners, instructors, and enthusiasts for immersive wellness experiences.",
-    image: "https://placehold.co/800x500/F59E0B/ffffff?text=Yoga+Sangamam",
-    status: "Active",
-    statusVariant: "default" as const,
+    title: "Yoga Sangamam",
+    desc: "Community gatherings bringing together practitioners and instructors for immersive wellness experiences.",
+    tag: "Community",
+    color: "#8b5cf6",
+    icon: Users,
     href: "/projects/yoga-sangamam",
   },
 ];
@@ -84,26 +78,26 @@ const projects = [
 const events = [
   {
     title: "Weekly Yoga Workshop",
-    description:
-      "Join us every week for guided yoga sessions focusing on asanas, pranayama, and meditation for complete mind-body wellness.",
+    desc: "Guided sessions on asanas, pranayama, and meditation for complete mind-body wellness.",
     date: "Every Sunday",
-    location: "NCV Centre, Chennai & Online",
+    location: "NCV Centre & Online",
+    tag: "Recurring",
     href: "/events/weekly-yoga",
   },
   {
-    title: "Happy Morning Wellness Series",
-    description:
-      "A rejuvenating morning series combining yoga, breathing exercises, and positive affirmations to start your day with energy and calm.",
+    title: "Happy Morning Wellness",
+    desc: "A rejuvenating morning series combining yoga, breathing exercises, and positive affirmations.",
     date: "Daily at 6:00 AM",
     location: "Online (Live Stream)",
+    tag: "Daily",
     href: "/events/happy-morning",
   },
   {
     title: "Meditation & Mindfulness Camp",
-    description:
-      "Deepen your practice with guided meditation, yoga nidra, and mindfulness techniques in a serene and supportive environment.",
+    desc: "Guided yoga nidra and mindfulness techniques in a serene and supportive environment.",
     date: "Monthly",
     location: "NCV Trust Office, Chennai",
+    tag: "Monthly",
     href: "/events/meditation-camp",
   },
 ];
@@ -112,534 +106,585 @@ const testimonials = [
   {
     name: "Priya S.",
     role: "Yoga Practitioner",
-    avatar: "https://placehold.co/100x100/2563EB/ffffff?text=PS",
     initials: "PS",
-    quote:
-      "NCV's yoga sessions transformed my health. I feel stronger, calmer, and more focused. The free online classes make it so easy to stay consistent.",
+    color: "from-blue-500 to-blue-600",
+    rating: 5,
+    quote: "NCV's yoga sessions transformed my health completely. I feel stronger, calmer, and more focused. The free online classes make it so easy to stay consistent every day.",
   },
   {
     name: "Rajesh K.",
     role: "Community Member",
-    avatar: "https://placehold.co/100x100/059669/ffffff?text=RK",
     initials: "RK",
-    quote:
-      "The positive thinking workshops changed my outlook on life. NCV's holistic approach to wellness is truly remarkable and accessible to everyone.",
+    color: "from-emerald-500 to-emerald-600",
+    rating: 5,
+    quote: "The positive thinking workshops changed my entire outlook on life. NCV's holistic approach to wellness is truly remarkable and accessible to absolutely everyone.",
   },
   {
     name: "Anita R.",
     role: "Senior Wellness Program",
-    avatar: "https://placehold.co/100x100/F59E0B/ffffff?text=AR",
     initials: "AR",
-    quote:
-      "At 65, I never thought I could practice yoga. The senior citizen wellness program at NCV made it possible. I feel healthier and happier than ever.",
+    color: "from-amber-500 to-orange-500",
+    rating: 5,
+    quote: "At 65, I never thought I could practice yoga. The senior citizen wellness program at NCV made it possible. I feel healthier and happier than ever before.",
   },
 ];
 
-const partners = [
-  "Partner 1",
-  "Partner 2",
-  "Partner 3",
-  "Partner 4",
-  "Partner 5",
-  "Partner 6",
+const coreActivities = [
+  "Daily Yoga Classes", "Free Online Yoga Sessions", "Pranayama & Meditation",
+  "Yoga Nidra & Relaxation", "Therapeutic Yoga", "Health Awareness Programs",
+  "Positive Thinking Workshops", "Stress Management", "Personality Development",
+  "Student Development", "Women's Wellness Programs", "Senior Citizen Wellness",
+  "International Yoga Day", "Environmental Awareness", "Community Service",
+  "Volunteer Development", "Educational Welfare Projects",
 ];
 
-const coreActivities = [
-  "Daily Yoga Classes",
-  "Free Online Yoga Sessions",
-  "Pranayama & Meditation Programs",
-  "Yoga Nidra & Relaxation Sessions",
-  "Therapeutic Yoga",
-  "Health & Wellness Awareness Programs",
-  "Positive Thinking Workshops",
-  "Stress Management Programs",
-  "Personality Development & Leadership Training",
-  "Student Development Initiatives",
-  "Women's Wellness Programs",
-  "Senior Citizen Wellness Programs",
-  "International Day of Yoga Celebrations",
-  "Environmental Awareness Campaigns",
-  "Community Service Activities",
-  "Volunteer Development Programs",
-  "Educational & Social Welfare Projects",
-];
+// ─────────────────────────── Components ──────────────────────────────────────
+
+function SectionBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <span
+      className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-orange-700"
+      style={{ background: "rgba(249,115,22,0.1)", border: "1px solid rgba(249,115,22,0.2)" }}
+    >
+      <span className="size-1.5 rounded-full bg-orange-500" />
+      {children}
+    </span>
+  );
+}
+
+function SectionHeader({ badge, title, subtitle, center = true }: {
+  badge: string; title: string; subtitle?: string; center?: boolean;
+}) {
+  return (
+    <div className={cn("mb-12", center && "text-center")}>
+      <SectionBadge>{badge}</SectionBadge>
+      <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
+        {title}
+      </h2>
+      {subtitle && (
+        <p className={cn("mt-4 text-lg text-gray-500 leading-relaxed", center && "mx-auto max-w-2xl")}>
+          {subtitle}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────── Page ────────────────────────────────────────────
 
 export default function HomePage() {
   return (
     <>
-      {/* ── Hero Banner ── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-amber-600 via-orange-600 to-green-700">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-10"
-          style={{
-            backgroundImage:
-              "url('https://placehold.co/1600x900/1e3a5f/ffffff?text=NCV+Hero')",
-          }}
-        />
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
-          <div className="max-w-3xl">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-amber-200">
-              Narchinthanai Vattam (NCV)
-            </p>
-            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl">
-              Health &bull; Yoga &bull; Positive Thinking
-            </h1>
-            <p className="mt-4 text-base text-orange-100 sm:mt-6 sm:text-lg lg:text-xl">
-              Transforming Lives Through Yoga, Wellness, and Selfless Service.
-              Empowering individuals and communities to embrace holistic health,
-              mental resilience, and value-based living.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:mt-10">
-              <Button
-                size="lg"
-                render={<Link href="/donate" />}
-                className="bg-white text-orange-700 hover:bg-orange-50"
-              >
-                <Heart className="mr-1.5 size-4" />
-                Support Our Mission
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                render={<Link href="/volunteer" />}
-                className="border-white/30 text-white hover:bg-white/10 hover:text-white"
-              >
-                Join Our Programs
-                <ArrowRight className="ml-1.5 size-4" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ══════════════════════ HERO ══════════════════════ */}
+      <section className="relative overflow-hidden" style={{ minHeight: "92vh", display: "flex", alignItems: "center" }}>
+        {/* Background layers */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e1a3a 40%, #0f2d1a 100%)" }} />
+        {/* Animated orbs */}
+        <div className="absolute -top-24 -right-24 size-[500px] rounded-full opacity-20 blur-3xl"
+          style={{ background: "radial-gradient(circle, #f97316, transparent 70%)" }} />
+        <div className="absolute -bottom-24 -left-24 size-[400px] rounded-full opacity-15 blur-3xl"
+          style={{ background: "radial-gradient(circle, #10b981, transparent 70%)" }} />
+        <div className="absolute top-1/3 right-1/3 size-64 rounded-full opacity-10 blur-3xl"
+          style={{ background: "radial-gradient(circle, #8b5cf6, transparent 70%)" }} />
+        {/* Dot grid */}
+        <div className="absolute inset-0 opacity-20"
+          style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
 
-      {/* ── About Section ── */}
-      <section className="bg-background py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 w-full">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Left — text */}
             <div>
-              <Badge variant="outline" className="mb-3">
-                About Us
-              </Badge>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
-                Narchinthanai Vattam (NCV)
-              </h2>
-              <p className="mt-4 text-muted-foreground sm:text-lg">
-                NCV is a registered charitable trust dedicated to promoting
-                holistic health, yoga, positive thinking, education, and
-                community welfare. Founded with the vision of creating a
-                healthier and more compassionate society, NCV empowers
-                individuals through physical wellness, mental resilience,
-                emotional balance, and value-based living.
+              <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6"
+                style={{ background: "rgba(249,115,22,0.15)", border: "1px solid rgba(249,115,22,0.3)" }}>
+                <span className="size-2 rounded-full bg-orange-400 animate-pulse" />
+                <span className="text-sm font-semibold text-orange-300">Narchinthanai Vattam (NCV)</span>
+              </div>
+
+              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1]">
+                Health &bull; Yoga &bull;
+                <span
+                  className="block mt-2"
+                  style={{
+                    background: "linear-gradient(90deg, #f97316, #fbbf24, #10b981)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Positive Thinking
+                </span>
+              </h1>
+
+              <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-xl">
+                Transforming lives through Yoga, Wellness, and Selfless Service. Empowering individuals and communities to embrace holistic health and value-based living.
               </p>
-              <p className="mt-4 text-muted-foreground">
-                NCV believes that true transformation begins within. By
-                combining the timeless principles of Yoga with modern health
-                awareness and personal development, the organization inspires
-                people of all ages to lead disciplined, healthy, and meaningful
-                lives. Our initiatives are open to everyone, irrespective of
-                age, gender, religion, or background, making wellness and
-                education accessible to all.
-              </p>
-              <p className="mt-4 text-muted-foreground">
-                Over the years, NCV has conducted thousands of yoga sessions,
-                wellness workshops, awareness campaigns, motivational programs,
-                and community service activities. Through both online and
-                offline platforms, we continue to reach individuals, educational
-                institutions, corporate organizations, and communities across
-                India, promoting the message of healthy living and positive
-                thinking.
-              </p>
-              <div className="mt-8">
-                <Button variant="outline" render={<Link href="/about" />}>
-                  Learn More About NCV
-                  <ChevronRight className="ml-1 size-4" />
-                </Button>
+
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link
+                  href="/donate"
+                  className="flex items-center gap-2 rounded-xl px-7 py-4 text-base font-semibold text-white transition-all hover:shadow-2xl hover:scale-105"
+                  style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 8px 30px rgba(249,115,22,0.4)" }}
+                >
+                  <Heart className="size-5" />
+                  Support Our Mission
+                </Link>
+                <Link
+                  href="/volunteer"
+                  className="flex items-center gap-2 rounded-xl px-7 py-4 text-base font-semibold text-white transition-all hover:bg-white/15"
+                  style={{ border: "1px solid rgba(255,255,255,0.25)", background: "rgba(255,255,255,0.08)" }}
+                >
+                  Join Our Programs
+                  <ArrowRight className="size-5" />
+                </Link>
+              </div>
+
+              {/* Trust badges */}
+              <div className="mt-10 flex flex-wrap items-center gap-6">
+                {[
+                  { icon: CheckCircle, text: "Registered Charitable Trust" },
+                  { icon: Award, text: "Certified Instructors" },
+                  { icon: Globe, text: "Free Online Sessions" },
+                ].map((b) => (
+                  <div key={b.text} className="flex items-center gap-2">
+                    <b.icon className="size-4 text-emerald-400" />
+                    <span className="text-sm text-slate-400">{b.text}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
+            {/* Right — stats + visual card */}
             <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat) => (
-                <Card key={stat.label} className="text-center">
-                  <CardContent className="flex flex-col items-center gap-2 pt-6">
-                    <div className="flex size-12 items-center justify-center rounded-full bg-orange-50 text-orange-600 dark:bg-orange-950">
-                      <stat.icon className="size-6" />
-                    </div>
-                    <p className="text-2xl font-bold text-foreground sm:text-3xl">
-                      {stat.value}
-                    </p>
-                    <p className="text-xs text-muted-foreground sm:text-sm">
-                      {stat.label}
-                    </p>
-                  </CardContent>
-                </Card>
+              {stats.map((s) => (
+                <div
+                  key={s.label}
+                  className="rounded-2xl p-6 text-white transition-transform hover:scale-105"
+                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(10px)" }}
+                >
+                  <div
+                    className="mb-4 flex size-12 items-center justify-center rounded-xl bg-gradient-to-br"
+                    style={{ background: `linear-gradient(135deg, ${s.color.includes("orange") ? "#f97316, #f59e0b" : s.color.includes("rose") ? "#f43f5e, #ec4899" : s.color.includes("violet") ? "#8b5cf6, #a855f7" : "#10b981, #14b8a6"})` }}
+                  >
+                    <s.icon className="size-6 text-white" />
+                  </div>
+                  <p className="text-3xl font-bold">{s.value}</p>
+                  <p className="mt-1 text-sm text-slate-300">{s.label}</p>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <Separator />
-
-      {/* ── Mission & Vision ── */}
-      <section className="bg-muted/30 py-16 sm:py-20 lg:py-24">
+      {/* ══════════════════════ ABOUT ══════════════════════ */}
+      <section className="py-20 lg:py-28" style={{ background: "#fff" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center sm:mb-12">
-            <Badge variant="outline" className="mb-3">
-              Our Purpose
-            </Badge>
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
-              Mission &amp; Vision
-            </h2>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:gap-8">
-            <Card className="border-l-4 border-l-amber-500">
-              <CardHeader>
-                <div className="mb-2 flex size-10 items-center justify-center rounded-lg bg-amber-50 text-amber-600 dark:bg-amber-950">
-                  <Target className="size-5" />
+          <div className="grid items-center gap-16 lg:grid-cols-2">
+            {/* Left visual */}
+            <div className="relative">
+              <div
+                className="aspect-[4/3] rounded-3xl overflow-hidden"
+                style={{ background: "linear-gradient(135deg, #0f172a, #1e293b)" }}
+              >
+                {/* Placeholder visual */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <div
+                      className="mx-auto mb-6 flex size-24 items-center justify-center rounded-3xl"
+                      style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 0 60px rgba(249,115,22,0.5)" }}
+                    >
+                      <Sun className="size-12 text-white" />
+                    </div>
+                    <p className="text-2xl font-bold text-white">Est. 2015</p>
+                    <p className="text-slate-400 mt-1">Serving Communities Across India</p>
+                  </div>
                 </div>
-                <CardTitle className="text-xl">Our Mission</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base leading-relaxed text-muted-foreground">
-                  To inspire individuals and communities to adopt Yoga as a way
-                  of life while promoting physical health, mental well-being,
-                  emotional stability, and social responsibility. We strive to
-                  provide accessible yoga education, wellness programs, positive
-                  thinking initiatives, health awareness campaigns, and
-                  community development activities that empower people to lead
-                  balanced and purposeful lives.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="border-l-4 border-l-green-600">
-              <CardHeader>
-                <div className="mb-2 flex size-10 items-center justify-center rounded-lg bg-green-50 text-green-600 dark:bg-green-950">
-                  <Eye className="size-5" />
+                {/* Corner badges */}
+                <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-3">
+                  {[
+                    { label: "Cities Reached", value: "15+" },
+                    { label: "Years of Service", value: "10+" },
+                  ].map((b) => (
+                    <div key={b.label} className="rounded-xl px-4 py-3 text-white text-center"
+                      style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)" }}>
+                      <p className="text-xl font-bold">{b.value}</p>
+                      <p className="text-xs text-slate-300 mt-0.5">{b.label}</p>
+                    </div>
+                  ))}
                 </div>
-                <CardTitle className="text-xl">Our Vision</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base leading-relaxed text-muted-foreground">
-                  To build a healthier, happier, and more harmonious society
-                  where every individual enjoys physical fitness, mental peace,
-                  emotional strength, moral values, and spiritual well-being
-                  through Yoga, education, and selfless service.
-                </CardDescription>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+              {/* Floating accent */}
+              <div
+                className="absolute -right-5 -top-5 size-28 rounded-2xl flex items-center justify-center text-white font-bold text-sm text-center leading-tight"
+                style={{ background: "linear-gradient(135deg, #10b981, #059669)", boxShadow: "0 8px 30px rgba(16,185,129,0.4)" }}
+              >
+                <div>
+                  <p className="text-2xl font-bold">10K+</p>
+                  <p className="text-xs text-emerald-100">Lives Touched</p>
+                </div>
+              </div>
+            </div>
 
-          {/* Motto */}
-          <div className="mt-12 text-center">
-            <Badge variant="secondary" className="mb-3">
-              Our Motto
-            </Badge>
-            <p className="text-xl font-semibold italic text-foreground sm:text-2xl">
+            {/* Right — text */}
+            <div>
+              <SectionBadge>About NCV</SectionBadge>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
+                Narchinthanai Vattam (NCV)
+              </h2>
+              <div className="mt-6 space-y-4">
+                {[
+                  "NCV is a registered charitable trust dedicated to promoting holistic health, yoga, positive thinking, education, and community welfare. Founded with the vision of creating a healthier and more compassionate society.",
+                  "We believe that true transformation begins within. By combining the timeless principles of Yoga with modern health awareness and personal development, we inspire people of all ages to lead disciplined, healthy, and meaningful lives.",
+                  "Our initiatives are open to everyone, irrespective of age, gender, religion, or background, making wellness and education truly accessible to all.",
+                ].map((para, i) => (
+                  <p key={i} className="text-base text-gray-500 leading-relaxed">{para}</p>
+                ))}
+              </div>
+
+              {/* Mission & Vision mini cards */}
+              <div className="mt-8 grid grid-cols-2 gap-4">
+                {[
+                  { icon: Target, label: "Our Mission", color: "#f97316", bg: "rgba(249,115,22,0.08)", border: "rgba(249,115,22,0.2)", text: "Inspire through Yoga & Wellness" },
+                  { icon: Eye, label: "Our Vision", color: "#10b981", bg: "rgba(16,185,129,0.08)", border: "rgba(16,185,129,0.2)", text: "Healthier, Happier Society" },
+                ].map((c) => (
+                  <div key={c.label} className="rounded-xl p-4" style={{ background: c.bg, border: `1px solid ${c.border}` }}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <c.icon className="size-4" style={{ color: c.color }} />
+                      <span className="text-xs font-semibold text-gray-600">{c.label}</span>
+                    </div>
+                    <p className="text-sm text-gray-700 font-medium">{c.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href="/about"
+                className="mt-8 inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg"
+                style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 4px 14px rgba(249,115,22,0.3)" }}
+              >
+                Learn More About NCV
+                <ChevronRight className="size-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════ MOTTO STRIP ══════════════════════ */}
+      <div
+        className="py-8 overflow-hidden"
+        style={{ background: "linear-gradient(90deg, #f97316 0%, #ea580c 50%, #dc7a0a 100%)" }}
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+            <p className="text-xl font-bold text-white sm:text-2xl italic">
               &ldquo;Health &bull; Yoga &bull; Positive Thinking&rdquo;
             </p>
-            <p className="mt-2 text-muted-foreground">
-              Transforming Lives Through Yoga, Wellness, and Selfless Service.
+            <p className="text-orange-100 text-sm text-center sm:text-right">
+              Transforming Lives Through Yoga, Wellness &amp; Selfless Service
             </p>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* ── Why Choose NCV ── */}
-      <section className="bg-background py-16 sm:py-20 lg:py-24">
+      {/* ══════════════════════ WHY NCV ══════════════════════ */}
+      <section className="py-20 lg:py-28" style={{ background: "#f8fafc" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center sm:mb-12">
-            <Badge variant="outline" className="mb-3">
-              Why NCV
-            </Badge>
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
-              Why Choose NCV?
-            </h2>
-            <p className="mt-2 mx-auto max-w-2xl text-muted-foreground">
-              At NCV, we believe that wellness is not just about physical
-              fitness&mdash;it is about achieving complete harmony of body,
-              mind, and spirit. Our programs are designed by experienced yoga
-              instructors and wellness professionals.
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { icon: Award, text: "Experienced and certified yoga trainers" },
-              { icon: Heart, text: "Holistic approach to health and wellness" },
-              { icon: Users, text: "Programs suitable for all age groups" },
-              { icon: Globe, text: "Regular free online and offline yoga sessions" },
-              { icon: HandHeart, text: "Community-focused charitable initiatives" },
-              { icon: Brain, text: "Positive thinking and personality development programs" },
-              { icon: Smile, text: "Supportive and inclusive learning environment" },
-              { icon: BookOpen, text: "Affordable and accessible wellness education" },
-              { icon: Star, text: "Commitment to quality, compassion, and service" },
-            ].map((item) => (
+          <SectionHeader
+            badge="Why NCV"
+            title="Why Choose NCV?"
+            subtitle="We believe wellness is not just about physical fitness — it is about achieving complete harmony of body, mind, and spirit."
+          />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {whyNcv.map((item, i) => (
               <div
-                key={item.text}
-                className="flex items-start gap-3 rounded-lg border p-4"
+                key={item.title}
+                className="group flex gap-4 rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
               >
-                <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-orange-50 text-orange-600 dark:bg-orange-950">
-                  <item.icon className="size-4" />
+                <div
+                  className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-110"
+                  style={{ background: "linear-gradient(135deg, rgba(249,115,22,0.12), rgba(249,115,22,0.06))", border: "1px solid rgba(249,115,22,0.2)" }}
+                >
+                  <item.icon className="size-5 text-orange-500" />
                 </div>
-                <p className="text-sm text-muted-foreground">{item.text}</p>
+                <div>
+                  <p className="font-semibold text-gray-800">{item.title}</p>
+                  <p className="mt-1 text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <Separator />
-
-      {/* ── Core Activities ── */}
-      <section className="bg-muted/30 py-16 sm:py-20 lg:py-24">
+      {/* ══════════════════════ CORE ACTIVITIES ══════════════════════ */}
+      <section className="py-20 lg:py-28" style={{ background: "#fff" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center sm:mb-12">
-            <Badge variant="outline" className="mb-3">
-              What We Do
-            </Badge>
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
-              Our Core Activities
-            </h2>
-            <p className="mt-2 mx-auto max-w-xl text-muted-foreground">
-              NCV conducts a wide range of programs focused on health,
-              education, and community development.
-            </p>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {coreActivities.map((activity) => (
+          <SectionHeader
+            badge="What We Do"
+            title="Our Core Activities"
+            subtitle="A comprehensive range of programs focused on health, education, and community development."
+          />
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {coreActivities.map((activity, i) => (
               <div
                 key={activity}
-                className="flex items-center gap-2 rounded-lg border bg-background px-4 py-3 text-sm"
+                className="group flex items-center gap-3 rounded-xl px-4 py-3.5 transition-all duration-200 hover:shadow-sm"
+                style={{ background: "#f8fafc", border: "1px solid rgba(0,0,0,0.06)" }}
               >
-                <div className="size-1.5 rounded-full bg-orange-500" />
-                <span>{activity}</span>
+                <span
+                  className="size-2 shrink-0 rounded-full transition-transform group-hover:scale-150"
+                  style={{ background: "linear-gradient(135deg, #f97316, #ea580c)" }}
+                />
+                <span className="text-sm text-gray-700">{activity}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Latest Projects ── */}
-      <section className="bg-background py-16 sm:py-20 lg:py-24">
+      {/* ══════════════════════ PROJECTS ══════════════════════ */}
+      <section className="py-20 lg:py-28" style={{ background: "#f8fafc" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between mb-12">
             <div>
-              <Badge variant="outline" className="mb-3">
-                Our Work
-              </Badge>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
-                Projects &amp; Events
+              <SectionBadge>Our Work</SectionBadge>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                Projects &amp; Initiatives
               </h2>
-              <p className="mt-2 max-w-xl text-muted-foreground">
-                NCV organizes impactful programs throughout the year to promote
-                holistic wellness and social responsibility.
+              <p className="mt-3 text-gray-500 max-w-xl">
+                Impactful programs throughout the year to promote holistic wellness and social responsibility.
               </p>
             </div>
-            <Button variant="outline" render={<Link href="/projects" />}>
-              View All Projects
-              <ArrowRight className="ml-1 size-4" />
-            </Button>
-          </div>
-
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3">
-            {projects.map((project) => (
-              <Card key={project.title} className="overflow-hidden">
-                <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg">{project.title}</CardTitle>
-                    <Badge variant={project.statusVariant}>
-                      {project.status}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="line-clamp-3 text-sm leading-relaxed">
-                    {project.description}
-                  </CardDescription>
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    variant="link"
-                    render={<Link href={project.href} />}
-                    className="px-0 text-orange-600"
-                  >
-                    Learn More
-                    <ChevronRight className="ml-0.5 size-3.5" />
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Separator />
-
-      {/* ── Upcoming Events ── */}
-      <section className="bg-muted/30 py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <Badge variant="outline" className="mb-3">
-                Join Us
-              </Badge>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
-                Upcoming Events
-              </h2>
-              <p className="mt-2 max-w-xl text-muted-foreground">
-                Participate in our wellness programs and community events.
-              </p>
-            </div>
-            <Button variant="outline" render={<Link href="/events" />}>
-              View All Events
-              <ArrowRight className="ml-1 size-4" />
-            </Button>
-          </div>
-
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3">
-            {events.map((event) => (
-              <Card key={event.title}>
-                <CardHeader>
-                  <div className="mb-1 flex items-center gap-2 text-sm text-orange-600">
-                    <Calendar className="size-4" />
-                    <span>{event.date}</span>
-                  </div>
-                  <CardTitle className="text-lg">{event.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <CardDescription className="line-clamp-2 text-sm leading-relaxed">
-                    {event.description}
-                  </CardDescription>
-                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                    <MapPin className="size-3.5" />
-                    <span>{event.location}</span>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    variant="link"
-                    render={<Link href={event.href} />}
-                    className="px-0 text-orange-600"
-                  >
-                    Register Now
-                    <ChevronRight className="ml-0.5 size-3.5" />
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Testimonials ── */}
-      <section className="bg-background py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center sm:mb-12">
-            <Badge variant="outline" className="mb-3">
-              Stories of Change
-            </Badge>
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
-              What People Say
-            </h2>
-            <p className="mt-2 mx-auto max-w-xl text-muted-foreground">
-              Hear from the individuals whose lives have been touched by NCV&apos;s
-              wellness programs.
-            </p>
+            <Link
+              href="/projects"
+              className="inline-flex shrink-0 items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all hover:bg-gray-50"
+              style={{ borderColor: "rgba(0,0,0,0.12)" }}
+            >
+              View All Projects <ArrowRight className="size-4" />
+            </Link>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {testimonials.map((t) => (
-              <Card key={t.name}>
-                <CardContent className="pt-6">
-                  <Quote className="mb-3 size-8 text-orange-200 dark:text-orange-800" />
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                </CardContent>
-                <CardFooter>
-                  <div className="flex items-center gap-3">
-                    <Avatar>
-                      <AvatarImage src={t.avatar} alt={t.name} />
-                      <AvatarFallback>{t.initials}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-sm font-medium">{t.name}</p>
-                      <p className="text-xs text-muted-foreground">{t.role}</p>
-                    </div>
+            {projects.map((p) => (
+              <Link
+                key={p.title}
+                href={p.href}
+                className="group overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}
+              >
+                {/* Visual header */}
+                <div
+                  className="relative flex h-44 items-center justify-center overflow-hidden"
+                  style={{ background: `linear-gradient(135deg, ${p.color}22, ${p.color}11)` }}
+                >
+                  <div
+                    className="flex size-20 items-center justify-center rounded-3xl transition-transform group-hover:scale-110"
+                    style={{ background: `linear-gradient(135deg, ${p.color}, ${p.color}cc)`, boxShadow: `0 10px 30px ${p.color}44` }}
+                  >
+                    <p.icon className="size-10 text-white" />
                   </div>
-                </CardFooter>
-              </Card>
+                  <div
+                    className="absolute top-4 right-4 rounded-full px-3 py-1 text-xs font-semibold text-white"
+                    style={{ background: p.color }}
+                  >
+                    {p.tag}
+                  </div>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-bold text-gray-900">{p.title}</h3>
+                  <p className="mt-2 text-sm text-gray-500 leading-relaxed line-clamp-2">{p.desc}</p>
+                  <div className="mt-4 flex items-center gap-1 text-sm font-semibold" style={{ color: p.color }}>
+                    Learn More <ChevronRight className="size-4" />
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Call to Action ── */}
-      <section className="bg-gradient-to-r from-amber-600 via-orange-600 to-green-700 py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <Sparkles className="mx-auto mb-4 size-12 text-white/80" />
-          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
-            Join Us in Building a Healthier Society
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-orange-100 sm:text-lg">
-            Together, let&apos;s build a healthier, happier, and more compassionate
-            society through Yoga, Positive Thinking, and Selfless Service. Your
-            support can transform lives.
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button
-              size="lg"
-              render={<Link href="/volunteer" />}
-              className="bg-white text-orange-700 hover:bg-orange-50"
+      {/* ══════════════════════ EVENTS ══════════════════════ */}
+      <section className="py-20 lg:py-28" style={{ background: "#fff" }}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between mb-12">
+            <div>
+              <SectionBadge>Join Us</SectionBadge>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                Upcoming Events
+              </h2>
+              <p className="mt-3 text-gray-500 max-w-xl">
+                Participate in our wellness programs and community events open to everyone.
+              </p>
+            </div>
+            <Link
+              href="/events"
+              className="inline-flex shrink-0 items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all hover:bg-gray-50"
+              style={{ borderColor: "rgba(0,0,0,0.12)" }}
             >
-              <Heart className="mr-1.5 size-4" />
-              Join Our Programs
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              render={<Link href="/contact" />}
-              className="border-white/30 text-white hover:bg-white/10 hover:text-white"
-            >
-              Contact Us
-              <ArrowRight className="ml-1.5 size-4" />
-            </Button>
+              View All Events <ArrowRight className="size-4" />
+            </Link>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {events.map((ev, i) => (
+              <div
+                key={ev.title}
+                className="group rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+              >
+                {/* Colored top bar */}
+                <div className="h-1.5" style={{ background: i === 0 ? "#f97316" : i === 1 ? "#10b981" : "#8b5cf6" }} />
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div
+                      className="flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
+                      style={{
+                        background: i === 0 ? "rgba(249,115,22,0.1)" : i === 1 ? "rgba(16,185,129,0.1)" : "rgba(139,92,246,0.1)",
+                        color: i === 0 ? "#ea580c" : i === 1 ? "#059669" : "#7c3aed",
+                      }}
+                    >
+                      <Calendar className="size-3" />
+                      {ev.date}
+                    </div>
+                    <span className="text-xs font-semibold rounded-full px-2.5 py-1 bg-gray-100 text-gray-500">{ev.tag}</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900">{ev.title}</h3>
+                  <p className="mt-2 text-sm text-gray-500 leading-relaxed line-clamp-2">{ev.desc}</p>
+                  <div className="mt-4 flex items-center gap-1.5 text-xs text-gray-400">
+                    <MapPin className="size-3.5 text-orange-400" />
+                    {ev.location}
+                  </div>
+                  <Link
+                    href={ev.href}
+                    className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold text-white transition-all hover:shadow-md"
+                    style={{
+                      background: i === 0 ? "linear-gradient(135deg, #f97316, #ea580c)" : i === 1 ? "linear-gradient(135deg, #10b981, #059669)" : "linear-gradient(135deg, #8b5cf6, #7c3aed)",
+                    }}
+                  >
+                    Register Now <ArrowRight className="size-4" />
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── Partners / Supporters ── */}
-      <section className="bg-background py-16 sm:py-20 lg:py-24">
+      {/* ══════════════════════ TESTIMONIALS ══════════════════════ */}
+      <section className="py-20 lg:py-28" style={{ background: "#f8fafc" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center sm:mb-12">
-            <Badge variant="outline" className="mb-3">
-              Our Network
-            </Badge>
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
-              Partners &amp; Supporters
-            </h2>
-            <p className="mt-2 mx-auto max-w-xl text-muted-foreground">
-              We are proud to collaborate with organizations that share our
-              vision for a healthier world.
-            </p>
+          <SectionHeader
+            badge="Stories of Change"
+            title="What People Say"
+            subtitle="Hear from the individuals whose lives have been touched by NCV's wellness programs."
+          />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {testimonials.map((t) => (
+              <div
+                key={t.name}
+                className="group flex flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+              >
+                {/* Stars */}
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: t.rating }).map((_, i) => (
+                    <Star key={i} className="size-4 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                {/* Quote */}
+                <div className="relative flex-1">
+                  <Quote className="absolute -top-1 -left-1 size-8 text-orange-100" />
+                  <p className="relative text-sm text-gray-600 leading-relaxed pl-2">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                </div>
+                {/* Author */}
+                <div className="mt-6 flex items-center gap-3 pt-5" style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}>
+                  <div
+                    className="flex size-11 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white"
+                    style={{ background: `linear-gradient(135deg, ${t.color.includes("blue") ? "#3b82f6, #2563eb" : t.color.includes("emerald") ? "#10b981, #059669" : "#f97316, #ea580c"})` }}
+                  >
+                    {t.initials}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-800">{t.name}</p>
+                    <p className="text-xs text-gray-400">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════ CTA BANNER ══════════════════════ */}
+      <section className="relative overflow-hidden py-20 lg:py-28">
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #0f172a, #1e1a3a, #0f2d1a)" }} />
+        <div className="absolute -right-16 -top-16 size-72 rounded-full opacity-20 blur-3xl"
+          style={{ background: "radial-gradient(circle, #f97316, transparent)" }} />
+        <div className="absolute -left-16 -bottom-16 size-72 rounded-full opacity-15 blur-3xl"
+          style={{ background: "radial-gradient(circle, #10b981, transparent)" }} />
+
+        <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6"
+            style={{ background: "rgba(249,115,22,0.15)", border: "1px solid rgba(249,115,22,0.3)" }}>
+            <Sparkles className="size-4 text-orange-400" />
+            <span className="text-sm font-semibold text-orange-300">Together We Transform</span>
+          </div>
+          <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+            Join Us in Building a <br />
+            <span style={{ color: "#f97316" }}>Healthier Society</span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-300 leading-relaxed">
+            Together, let&apos;s build a healthier, happier, and more compassionate society through Yoga, Positive Thinking, and Selfless Service.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/volunteer"
+              className="flex items-center gap-2 rounded-xl px-8 py-4 text-base font-bold text-white transition-all hover:shadow-2xl hover:scale-105"
+              style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 8px 30px rgba(249,115,22,0.4)" }}
+            >
+              <Heart className="size-5" /> Join Our Programs
+            </Link>
+            <Link
+              href="/contact"
+              className="flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white transition-all hover:bg-white/15"
+              style={{ border: "1px solid rgba(255,255,255,0.25)", background: "rgba(255,255,255,0.08)" }}
+            >
+              Contact Us <ArrowRight className="size-5" />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-6">
-            {partners.map((partner) => (
+          {/* Contact info strip */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
+            <a href="tel:9003075333" className="flex items-center gap-2 text-slate-400 hover:text-orange-400 transition-colors text-sm">
+              <Phone className="size-4" /> +91 9003075333
+            </a>
+            <span className="text-slate-700">|</span>
+            <span className="flex items-center gap-2 text-slate-400 text-sm">
+              <MapPin className="size-4 text-orange-400" /> Valasaravakkam, Chennai
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════ PARTNERS ══════════════════════ */}
+      <section className="py-16" style={{ background: "#fff" }}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 text-center">
+            <SectionBadge>Our Network</SectionBadge>
+            <h2 className="mt-4 text-2xl font-bold text-gray-900">Partners &amp; Supporters</h2>
+            <p className="mt-2 text-gray-500">Proud to collaborate with organizations sharing our vision.</p>
+          </div>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            {Array.from({ length: 6 }).map((_, i) => (
               <div
-                key={partner}
-                className="flex aspect-[3/2] items-center justify-center rounded-xl border border-dashed bg-muted/30 p-4 text-xs text-muted-foreground"
+                key={i}
+                className="flex aspect-[3/2] items-center justify-center rounded-2xl text-xs text-gray-400 font-medium transition-all hover:shadow-md"
+                style={{ background: "#f8fafc", border: "1px dashed rgba(0,0,0,0.12)" }}
               >
-                {partner}
+                Partner {i + 1}
               </div>
             ))}
           </div>

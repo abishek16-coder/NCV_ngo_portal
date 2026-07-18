@@ -1,20 +1,9 @@
 import Link from "next/link";
-import { Heart, MapPin, Phone } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+import { Heart, MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 
-// Inline SVGs for brand icons not available in lucide-react v1.x
 function InstagramIcon({ className }: { className?: string }) {
   return (
-    <svg
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
@@ -24,57 +13,89 @@ function InstagramIcon({ className }: { className?: string }) {
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
-    <svg
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
     </svg>
   );
 }
 
-const footerLinks = [
-  { href: "/about", label: "About Us" },
-  { href: "/projects", label: "Projects & Events" },
+const quickLinks = [
+  { href: "/about", label: "About NCV" },
+  { href: "/projects", label: "Projects" },
+  { href: "/events", label: "Events" },
   { href: "/gallery", label: "Gallery" },
   { href: "/volunteer", label: "Volunteer" },
-  { href: "/contact", label: "Contact" },
+  { href: "/contact", label: "Contact Us" },
+];
+
+const programs = [
+  "Daily Yoga Classes",
+  "Free Online Yoga",
+  "Positive Thinking Workshops",
+  "Health Awareness Campaigns",
+  "Senior Citizen Wellness",
+  "Community Service",
+];
+
+const socialLinks = [
+  { icon: InstagramIcon, label: "@ncv_speaks", href: "https://instagram.com/ncv_speaks" },
+  { icon: FacebookIcon, label: "Narchinthanai Vattam", href: "https://facebook.com" },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="space-y-3">
-            <Link href="/" className="flex items-center gap-2 text-lg font-bold text-white">
-              <span className="flex size-7 items-center justify-center rounded-lg bg-orange-600 text-white">
-                <Heart className="size-3.5" />
+    <footer style={{ background: "linear-gradient(180deg, #0f172a 0%, #0c1421 100%)" }}>
+      {/* Main footer */}
+      <div className="mx-auto max-w-7xl px-4 pt-16 pb-10 sm:px-6 lg:px-8">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+
+          {/* Brand column */}
+          <div className="lg:col-span-1">
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <span
+                className="flex size-10 items-center justify-center rounded-xl transition-transform group-hover:scale-105"
+                style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 0 20px rgba(249,115,22,0.35)" }}
+              >
+                <Heart className="size-5 text-white" />
               </span>
-              NCV
+              <div>
+                <p className="text-base font-bold text-white leading-none">NCV</p>
+                <p className="text-[10px] text-slate-400 leading-none mt-0.5 tracking-wide">Narchinthanai Vattam</p>
+              </div>
             </Link>
-            <p className="text-sm text-gray-400">
-              Narchinthanai Vattam (NCV) &ndash; A registered charitable trust
-              dedicated to promoting holistic health, yoga, positive thinking,
-              education, and community welfare.
+            <p className="mt-5 text-sm text-slate-400 leading-relaxed">
+              A registered charitable trust dedicated to promoting holistic health, yoga, positive thinking, education, and community welfare across India.
             </p>
+
+            {/* Social */}
+            <div className="mt-6 flex gap-3">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex size-9 items-center justify-center rounded-lg transition-all hover:scale-110"
+                  style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
+                  aria-label={s.label}
+                >
+                  <s.icon className="size-4 text-slate-300" />
+                </a>
+              ))}
+            </div>
           </div>
 
+          {/* Quick links */}
           <div>
-            <h4 className="mb-3 text-sm font-semibold text-white">Quick Links</h4>
-            <ul className="space-y-2">
-              {footerLinks.map((link) => (
+            <h4 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">Quick Links</h4>
+            <ul className="space-y-2.5">
+              {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 transition-colors hover:text-orange-400"
+                    className="group flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-orange-400"
                   >
+                    <span className="size-1 rounded-full bg-orange-500/50 group-hover:bg-orange-400 transition-colors" />
                     {link.label}
                   </Link>
                 </li>
@@ -82,55 +103,77 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* Programs */}
           <div>
-            <h4 className="mb-3 text-sm font-semibold text-white">Programs</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>Daily Yoga Classes</li>
-              <li>Free Online Yoga Sessions</li>
-              <li>Positive Thinking Workshops</li>
-              <li>Health Awareness Campaigns</li>
-              <li>Community Service Activities</li>
+            <h4 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">Programs</h4>
+            <ul className="space-y-2.5">
+              {programs.map((p) => (
+                <li key={p} className="flex items-center gap-1.5 text-sm text-slate-400">
+                  <span className="size-1 rounded-full bg-slate-600" />
+                  {p}
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Contact */}
           <div>
-            <h4 className="mb-3 text-sm font-semibold text-white">Contact</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li className="flex items-start gap-2">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-orange-400" />
-                <span>
-                  87, 4th St, West Kamakoti Nagar,
-                  <br />
-                  Valasaravakkam, Chennai,
-                  <br />
+            <h4 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">Get In Touch</h4>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg"
+                  style={{ background: "rgba(249,115,22,0.15)" }}>
+                  <MapPin className="size-4 text-orange-400" />
+                </div>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  87, 4th St, West Kamakoti Nagar,<br />
+                  Valasaravakkam, Chennai,<br />
                   Tamil Nadu 600095, India
-                </span>
+                </p>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone className="size-4 shrink-0 text-orange-400" />
-                <span>9003075333</span>
+              <li className="flex items-center gap-3">
+                <div className="flex size-8 shrink-0 items-center justify-center rounded-lg"
+                  style={{ background: "rgba(249,115,22,0.15)" }}>
+                  <Phone className="size-4 text-orange-400" />
+                </div>
+                <a href="tel:9003075333" className="text-sm text-slate-400 hover:text-orange-400 transition-colors">
+                  +91 9003075333
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <InstagramIcon className="size-4 shrink-0 text-orange-400" />
-                <span>ncv_speaks</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <FacebookIcon className="size-4 shrink-0 text-orange-400" />
-                <span>Narchinthanai Vattam</span>
+              <li className="flex items-center gap-3">
+                <div className="flex size-8 shrink-0 items-center justify-center rounded-lg"
+                  style={{ background: "rgba(249,115,22,0.15)" }}>
+                  <InstagramIcon className="size-4 text-orange-400" />
+                </div>
+                <a href="https://instagram.com/ncv_speaks" className="text-sm text-slate-400 hover:text-orange-400 transition-colors">
+                  @ncv_speaks
+                </a>
               </li>
             </ul>
+
+            {/* CTA */}
+            <Link
+              href="/donate"
+              className="mt-6 flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg"
+              style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 4px 14px rgba(249,115,22,0.25)" }}
+            >
+              <Heart className="size-4" />
+              Support Our Mission
+              <ArrowUpRight className="ml-auto size-4" />
+            </Link>
           </div>
         </div>
 
-        <Separator className="my-8 bg-gray-800" />
+        {/* Divider */}
+        <div className="my-10 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
 
-        <div className="flex flex-col items-center justify-between gap-2 text-xs text-gray-500 sm:flex-row">
-          <p>
-            &copy; {new Date().getFullYear()} Narchinthanai Vattam (NCV). All
-            rights reserved.
+        {/* Bottom bar */}
+        <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+          <p className="text-xs text-slate-500">
+            &copy; {new Date().getFullYear()} Narchinthanai Vattam (NCV) Trust. All rights reserved.
           </p>
-          <p className="text-center text-gray-600">
-            Health &bull; Yoga &bull; Positive Thinking
+          <p className="text-xs text-slate-600 italic">
+            &ldquo;Health &bull; Yoga &bull; Positive Thinking&rdquo;
           </p>
         </div>
       </div>
