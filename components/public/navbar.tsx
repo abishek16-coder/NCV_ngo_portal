@@ -11,6 +11,8 @@ const navLinks = [
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
   { href: "/events", label: "Events" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/volunteer", label: "Volunteer" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -21,10 +23,10 @@ export function Navbar() {
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
-          <span className="flex size-8 items-center justify-center rounded-lg bg-blue-600 text-white">
+          <span className="flex size-8 items-center justify-center rounded-lg bg-orange-600 text-white">
             <Heart className="size-4" />
           </span>
-          <span>NCV Trust</span>
+          <span>NCV</span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
@@ -40,9 +42,9 @@ export function Navbar() {
         </nav>
 
         <div className="hidden md:block">
-          <Button render={<Link href="/donate" />}>
+          <Button variant="default" className="bg-orange-600 hover:bg-orange-700" render={<Link href="/volunteer" />}>
             <Heart className="mr-1 size-3.5" />
-            Donate
+            Join Us
           </Button>
         </div>
 
@@ -68,9 +70,9 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Button render={<Link href="/donate" />} className="mt-2">
+            <Button className="mt-2 bg-orange-600 hover:bg-orange-700" render={<Link href="/volunteer" />}>
               <Heart className="mr-1 size-3.5" />
-              Donate
+              Join Us
             </Button>
           </nav>
         </div>

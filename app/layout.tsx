@@ -10,47 +10,48 @@ const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://ncvtrust.org";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "NCV Trust | Empowering Communities, Transforming Lives",
-    template: "%s | NCV Trust",
+    default: "NCV | Health • Yoga • Positive Thinking",
+    template: "%s | Narchinthanai Vattam",
   },
   description:
-    "NCV Trust is a non-profit organization dedicated to education, community development, and social welfare. Join us in making a difference.",
+    "Narchinthanai Vattam (NCV) is a registered charitable trust dedicated to promoting holistic health, yoga, positive thinking, education, and community welfare.",
   keywords: [
-    "NGO",
-    "NCV Trust",
-    "non-profit",
-    "education",
-    "community development",
-    "social welfare",
-    "charity",
-    "volunteer",
-    "donate",
+    "NCV",
+    "Narchinthanai Vattam",
+    "yoga",
+    "positive thinking",
+    "health",
+    "wellness",
+    "meditation",
+    "charitable trust",
+    "Chennai",
+    "community service",
   ],
-  authors: [{ name: "NCV Trust" }],
-  creator: "NCV Trust",
-  publisher: "NCV Trust",
+  authors: [{ name: "Narchinthanai Vattam" }],
+  creator: "Narchinthanai Vattam",
+  publisher: "Narchinthanai Vattam",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "NCV Trust",
-    title: "NCV Trust | Empowering Communities, Transforming Lives",
+    siteName: "Narchinthanai Vattam",
+    title: "NCV | Health • Yoga • Positive Thinking",
     description:
-      "NCV Trust is a non-profit organization dedicated to education, community development, and social welfare.",
+      "Narchinthanai Vattam (NCV) is a registered charitable trust dedicated to promoting holistic health, yoga, positive thinking, education, and community welfare.",
     images: [
       {
         url: `${siteUrl}/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: "NCV Trust",
+        alt: "Narchinthanai Vattam",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NCV Trust | Empowering Communities, Transforming Lives",
+    title: "NCV | Health • Yoga • Positive Thinking",
     description:
-      "NCV Trust is a non-profit organization dedicated to education, community development, and social welfare.",
+      "Narchinthanai Vattam (NCV) is a registered charitable trust dedicated to promoting holistic health, yoga, positive thinking, education, and community welfare.",
     images: [`${siteUrl}/og-image.jpg`],
   },
   robots: {
@@ -85,11 +86,11 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "NGO",
-              name: "NCV Trust",
+              name: "Narchinthanai Vattam (NCV)",
               url: siteUrl,
               logo: `${siteUrl}/logo.png`,
               description:
-                "NCV Trust is a non-profit organization dedicated to education, community development, and social welfare.",
+                "Narchinthanai Vattam is a registered charitable trust dedicated to promoting holistic health, yoga, positive thinking, education, and community welfare.",
               address: {
                 "@type": "PostalAddress",
                 addressCountry: "IN",
