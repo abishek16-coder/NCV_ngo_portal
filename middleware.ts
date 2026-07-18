@@ -8,6 +8,7 @@ const apiProtectedRoutes = ["/api/admin"];
 
 const publicRoutes = [
   "/login",
+  "/_next",
   "/api/auth/login",
   "/api/auth/logout",
   "/api/donations/webhook",
