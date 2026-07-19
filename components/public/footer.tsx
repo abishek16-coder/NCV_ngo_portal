@@ -44,7 +44,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer style={{ background: "linear-gradient(180deg, #0f172a 0%, #0c1421 100%)" }}>
+    <footer style={{ background: "linear-gradient(180deg, #1B8271 0%, #0f3d33 100%)" }}>
       {/* Main footer */}
       <div className="mx-auto max-w-7xl px-4 pt-16 pb-10 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -54,7 +54,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2.5 group">
               <span
                 className="flex size-10 items-center justify-center rounded-xl transition-transform group-hover:scale-105"
-                style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 0 20px rgba(249,115,22,0.35)" }}
+                style={{ background: "linear-gradient(135deg, #FF7468, #F64F40)", boxShadow: "0 0 20px rgba(255,116,104,0.35)" }}
               >
                 <Heart className="size-5 text-white" />
               </span>
@@ -93,9 +93,9 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="group flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-orange-400"
+                    className="group flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-[#FF7468]"
                   >
-                    <span className="size-1 rounded-full bg-orange-500/50 group-hover:bg-orange-400 transition-colors" />
+                    <span className="size-1 rounded-full bg-[#FF7468]/50 group-hover:bg-[#FF7468] transition-colors" />
                     {link.label}
                   </Link>
                 </li>
@@ -122,8 +122,8 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg"
-                  style={{ background: "rgba(249,115,22,0.15)" }}>
-                  <MapPin className="size-4 text-orange-400" />
+                  style={{ background: "rgba(255,116,104,0.15)" }}>
+                  <MapPin className="size-4 text-[#FF7468]" />
                 </div>
                 <p className="text-sm text-slate-400 leading-relaxed">
                   87, 4th St, West Kamakoti Nagar,<br />
@@ -133,19 +133,19 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <div className="flex size-8 shrink-0 items-center justify-center rounded-lg"
-                  style={{ background: "rgba(249,115,22,0.15)" }}>
-                  <Phone className="size-4 text-orange-400" />
+                  style={{ background: "rgba(255,116,104,0.15)" }}>
+                  <Phone className="size-4 text-[#FF7468]" />
                 </div>
-                <a href="tel:9003075333" className="text-sm text-slate-400 hover:text-orange-400 transition-colors">
+                <a href="tel:9003075333" className="text-sm text-slate-400 hover:text-[#FF7468] transition-colors">
                   +91 9003075333
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <div className="flex size-8 shrink-0 items-center justify-center rounded-lg"
-                  style={{ background: "rgba(249,115,22,0.15)" }}>
-                  <InstagramIcon className="size-4 text-orange-400" />
+                  style={{ background: "rgba(255,116,104,0.15)" }}>
+                  <InstagramIcon className="size-4 text-[#FF7468]" />
                 </div>
-                <a href="https://instagram.com/ncv_speaks" className="text-sm text-slate-400 hover:text-orange-400 transition-colors">
+                <a href="https://instagram.com/ncv_speaks" className="text-sm text-slate-400 hover:text-[#FF7468] transition-colors">
                   @ncv_speaks
                 </a>
               </li>
@@ -155,7 +155,7 @@ export function Footer() {
             <Link
               href="/donate"
               className="mt-6 flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg"
-              style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 4px 14px rgba(249,115,22,0.25)" }}
+              style={{ background: "linear-gradient(135deg, #FF7468, #F64F40)", boxShadow: "0 4px 14px rgba(255,116,104,0.25)" }}
             >
               <Heart className="size-4" />
               Support Our Mission

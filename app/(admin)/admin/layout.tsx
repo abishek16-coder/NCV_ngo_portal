@@ -138,7 +138,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
         style={{
-          background: "linear-gradient(180deg, #0f172a 0%, #0c1425 100%)",
+          background: "linear-gradient(180deg, #1B8271 0%, #0f3d33 100%)",
           borderRight: "1px solid rgba(255,255,255,0.06)",
         }}
       >
@@ -151,7 +151,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/" className="flex items-center gap-2.5 group">
               <div
                 className="flex size-9 items-center justify-center rounded-xl shrink-0 transition-transform group-hover:scale-105"
-                style={{ background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)", boxShadow: "0 0 20px rgba(249,115,22,0.4)" }}
+                style={{ background: "linear-gradient(135deg, #FF7468 0%, #F64F40 100%)", boxShadow: "0 0 20px rgba(255,116,104,0.4)" }}
               >
                 <Sun className="size-4 text-white" />
               </div>
@@ -162,7 +162,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </Link>
           ) : (
             <div className="mx-auto flex size-9 items-center justify-center rounded-xl shrink-0"
-              style={{ background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)", boxShadow: "0 0 20px rgba(249,115,22,0.4)" }}
+              style={{ background: "linear-gradient(135deg, #FF7468 0%, #F64F40 100%)", boxShadow: "0 0 20px rgba(255,116,104,0.4)" }}
             >
               <Sun className="size-4 text-white" />
             </div>
@@ -207,14 +207,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         !sidebarOpen && "justify-center px-2"
                       )}
                       style={active ? {
-                        background: "linear-gradient(90deg, rgba(249,115,22,0.18) 0%, rgba(249,115,22,0.05) 100%)",
-                        boxShadow: "inset 3px 0 0 #f97316",
+                        background: "linear-gradient(90deg, rgba(255,116,104,0.18) 0%, rgba(255,116,104,0.05) 100%)",
+                        boxShadow: "inset 3px 0 0 #FF7468",
                       } : {}}
                     >
-                      <link.icon className={cn("size-5 shrink-0", active ? "text-orange-400" : "")} />
+                      <link.icon className={cn("size-5 shrink-0", active ? "text-[#FF7468]" : "")} />
                       {sidebarOpen && <span>{link.label}</span>}
                       {active && sidebarOpen && (
-                        <span className="ml-auto flex size-1.5 rounded-full bg-orange-400" />
+                        <span className="ml-auto flex size-1.5 rounded-full bg-[#FF7468]" />
                       )}
                       {/* Tooltip when collapsed */}
                       {!sidebarOpen && (
@@ -237,13 +237,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               style={{ background: "rgba(255,255,255,0.05)" }}>
               <div
                 className="flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
-                style={{ background: "linear-gradient(135deg, #f97316, #ea580c)" }}
+                style={{ background: "linear-gradient(135deg, #FF7468, #F64F40)" }}
               >
                 {user.firstName[0]}{user.lastName[0]}
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium text-white">{user.firstName} {user.lastName}</p>
-                <p className="text-[10px] text-orange-400 uppercase tracking-wide">{user.role.replace("_", " ")}</p>
+                <p className="text-[10px] text-[#FF7468] uppercase tracking-wide">{user.role.replace("_", " ")}</p>
               </div>
             </div>
           )}
@@ -295,8 +295,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 className="h-9 w-full rounded-xl border pl-9 pr-3 text-sm outline-none transition-all"
                 style={{
                   background: searchFocused ? "#fff" : "#f8fafc",
-                  borderColor: searchFocused ? "#f97316" : "#e2e8f0",
-                  boxShadow: searchFocused ? "0 0 0 3px rgba(249,115,22,0.12)" : "none",
+                  borderColor: searchFocused ? "#FF7468" : "#e2e8f0",
+                  boxShadow: searchFocused ? "0 0 0 3px rgba(255,116,104,0.12)" : "none",
                 }}
               />
             </div>
@@ -318,7 +318,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               >
                 <Bell className="size-5" />
                 {unreadCount > 0 && (
-                  <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-orange-500 text-[9px] font-bold text-white">
+                  <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-[#FF7468] text-[9px] font-bold text-white">
                     {unreadCount}
                   </span>
                 )}
@@ -331,16 +331,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 >
                   <div className="flex items-center justify-between px-4 py-3 border-b">
                     <p className="text-sm font-semibold text-slate-800">Notifications</p>
-                    <span className="rounded-full bg-orange-100 px-2 py-0.5 text-[10px] font-semibold text-orange-600">{unreadCount} new</span>
+                    <span className="rounded-full bg-[#FFE7E4] px-2 py-0.5 text-[10px] font-semibold text-[#FF7468]">{unreadCount} new</span>
                   </div>
                   {notifications.map((n) => (
                     <div key={n.id} className={cn(
                       "flex items-start gap-3 px-4 py-3 rounded-xl transition-colors cursor-pointer hover:bg-slate-50",
-                      n.unread && "bg-orange-50/60"
+                      n.unread && "bg-[#FFF0EE]/60"
                     )}>
                       <div className={cn(
                         "mt-0.5 size-2 rounded-full shrink-0",
-                        n.unread ? "bg-orange-400" : "bg-transparent"
+                        n.unread ? "bg-[#FF7468]" : "bg-transparent"
                       )} />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm text-slate-700">{n.text}</p>
@@ -349,7 +349,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     </div>
                   ))}
                   <div className="px-4 py-2 border-t">
-                    <button className="text-xs font-medium text-orange-600 hover:text-orange-700">View all notifications</button>
+                    <button className="text-xs font-medium text-[#FF7468] hover:text-[#F64F40]">View all notifications</button>
                   </div>
                 </div>
               )}
@@ -363,7 +363,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               >
                 <div
                   className="flex size-8 items-center justify-center rounded-full text-[11px] font-bold text-white"
-                  style={{ background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)" }}
+                  style={{ background: "linear-gradient(135deg, #FF7468 0%, #F64F40 100%)" }}
                 >
                   {user ? `${user.firstName[0]}${user.lastName[0]}` : "A"}
                 </div>

@@ -30,11 +30,21 @@ import {
 
 // ─────────────────────────── Data ────────────────────────────────────────────
 
+const palette = {
+  primary: "#1B8271",
+  primaryHover: "#186F61",
+  secondary: "#FF7468",
+  secondaryHover: "#F64F40",
+  surface: "#F3F4F8",
+  heading: "#071C35",
+  body: "#475569",
+};
+
 const stats = [
-  { label: "Yoga Sessions", value: "1,000+", icon: Sun, color: "from-orange-500 to-amber-500" },
-  { label: "Lives Reached", value: "10,000+", icon: Heart, color: "from-rose-500 to-pink-500" },
-  { label: "Workshops", value: "200+", icon: Star, color: "from-violet-500 to-purple-500" },
-  { label: "Volunteers", value: "500+", icon: Users, color: "from-emerald-500 to-teal-500" },
+  { label: "Yoga Sessions", value: "1,000+", icon: Sun, color: palette.primary },
+  { label: "Lives Reached", value: "10,000+", icon: Heart, color: palette.secondary },
+  { label: "Workshops", value: "200+", icon: Star, color: palette.primaryHover },
+  { label: "Volunteers", value: "500+", icon: Users, color: palette.primary },
 ];
 
 const whyNcv = [
@@ -54,7 +64,7 @@ const projects = [
     title: "International Day of Yoga",
     desc: "Annual large-scale yoga events with mass participation, expert-led sessions, and community engagement.",
     tag: "Flagship Program",
-    color: "#f97316",
+    color: palette.primary,
     icon: Sun,
     href: "/projects/idy-celebrations",
   },
@@ -62,7 +72,7 @@ const projects = [
     title: "Free Online Yoga Sessions",
     desc: "Daily yoga classes streamed live for participants of all ages, promoting fitness and mental wellness from home.",
     tag: "Daily Program",
-    color: "#10b981",
+    color: palette.primaryHover,
     icon: Activity,
     href: "/projects/online-yoga",
   },
@@ -70,7 +80,7 @@ const projects = [
     title: "Yoga Sangamam",
     desc: "Community gatherings bringing together practitioners and instructors for immersive wellness experiences.",
     tag: "Community",
-    color: "#8b5cf6",
+    color: palette.secondary,
     icon: Users,
     href: "/projects/yoga-sangamam",
   },
@@ -124,7 +134,7 @@ const testimonials = [
     name: "Anita R.",
     role: "Senior Wellness Program",
     initials: "AR",
-    color: "from-amber-500 to-orange-500",
+    color: "from-amber-500 to-[#FF7468]",
     rating: 5,
     quote: "At 65, I never thought I could practice yoga. The senior citizen wellness program at NCV made it possible. I feel healthier and happier than ever before.",
   },
@@ -144,10 +154,10 @@ const coreActivities = [
 function SectionBadge({ children }: { children: React.ReactNode }) {
   return (
     <span
-      className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-orange-700"
-      style={{ background: "rgba(249,115,22,0.1)", border: "1px solid rgba(249,115,22,0.2)" }}
+      className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider"
+      style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113,0.2)", color: palette.primary }}
     >
-      <span className="size-1.5 rounded-full bg-orange-500" />
+      <span className="size-1.5 rounded-full" style={{ background: palette.primary }} />
       {children}
     </span>
   );
@@ -174,7 +184,7 @@ function SectionHeader({ badge, title, subtitle, center = true }: {
 function HeroLogoCircle() {
   return (
     <div className="relative inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 p-2 shadow-[0_20px_60px_rgba(255,255,255,0.08)] backdrop-blur-xl overflow-hidden">
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-orange-400 via-amber-300 to-emerald-500 opacity-40 animate-pulse-slow" />
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#FF7468] via-[#F64F40] to-[#1B8271] opacity-40 animate-pulse-slow" />
       <div className="relative flex h-28 w-28 items-center justify-center rounded-full bg-slate-950/90 border border-white/10 shadow-lg shadow-slate-950/40 overflow-hidden">
         <div className="absolute inset-0 rounded-full ring-2 ring-white/10" />
         <Image
@@ -186,7 +196,7 @@ function HeroLogoCircle() {
           priority
         />
       </div>
-      <div className="pointer-events-none absolute -right-5 -top-5 h-12 w-12 rounded-full bg-gradient-to-br from-orange-300 to-pink-400 opacity-85 blur-2xl animate-float" />
+      <div className="pointer-events-none absolute -right-5 -top-5 h-12 w-12 rounded-full bg-gradient-to-br from-[#FF7468] to-[#F64F40] opacity-85 blur-2xl animate-float" />
     </div>
   );
 }
@@ -199,14 +209,14 @@ export default function HomePage() {
       {/* ══════════════════════ HERO ══════════════════════ */}
       <section className="relative overflow-hidden" style={{ minHeight: "92vh", display: "flex", alignItems: "center" }}>
         {/* Background layers */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e1a3a 40%, #0f2d1a 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #ffffff 0%, #F3F4F8 45%, #ffffff 100%)" }} />
         {/* Animated orbs */}
         <div className="absolute -top-24 -right-24 size-[500px] rounded-full opacity-20 blur-3xl"
-          style={{ background: "radial-gradient(circle, #f97316, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, #FF7468, transparent 70%)" }} />
         <div className="absolute -bottom-24 -left-24 size-[400px] rounded-full opacity-15 blur-3xl"
-          style={{ background: "radial-gradient(circle, #10b981, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, #1B8271, transparent 70%)" }} />
         <div className="absolute top-1/3 right-1/3 size-64 rounded-full opacity-10 blur-3xl"
-          style={{ background: "radial-gradient(circle, #8b5cf6, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, #F64F40, transparent 70%)" }} />
         {/* Dot grid */}
         <div className="absolute inset-0 opacity-20"
           style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
@@ -216,19 +226,19 @@ export default function HomePage() {
             {/* Left — text */}
             <div>
               <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6"
-                style={{ background: "rgba(249,115,22,0.15)", border: "1px solid rgba(249,115,22,0.3)" }}>
-                <span className="size-2 rounded-full bg-orange-400 animate-pulse" />
-                <span className="text-sm font-semibold text-orange-300">Narchinthanai Vattam (NCV)</span>
+style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113,0.2)" }}>
+                <span className="size-2 rounded-full" style={{ background: palette.primary }} />
+                <span className="text-sm font-semibold" style={{ color: palette.primaryHover }}>Narchinthanai Vattam (NCV)</span>
               </div>
 
               <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
                 <div className="min-w-0">
-                  <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1]">
+<h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1]">
                     Health &bull; Yoga &bull;
                     <span
                       className="block mt-2"
                       style={{
-                        background: "linear-gradient(90deg, #f97316, #fbbf24, #10b981)",
+                        background: "linear-gradient(90deg, #FF7468, #F64F40, #1B8271)",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                       }}
@@ -251,7 +261,7 @@ export default function HomePage() {
                 <Link
                   href="/donate"
                   className="flex items-center gap-2 rounded-xl px-7 py-4 text-base font-semibold text-white transition-all hover:shadow-2xl hover:scale-105"
-                  style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 8px 30px rgba(249,115,22,0.4)" }}
+                  style={{ background: palette.secondary, boxShadow: "0 8px 30px rgba(255,116,104,0.35)" }}
                 >
                   <Heart className="size-5" />
                   Support Our Mission
@@ -290,8 +300,8 @@ export default function HomePage() {
                   style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(10px)" }}
                 >
                   <div
-                    className="mb-4 flex size-12 items-center justify-center rounded-xl bg-gradient-to-br"
-                    style={{ background: `linear-gradient(135deg, ${s.color.includes("orange") ? "#f97316, #f59e0b" : s.color.includes("rose") ? "#f43f5e, #ec4899" : s.color.includes("violet") ? "#8b5cf6, #a855f7" : "#10b981, #14b8a6"})` }}
+                    className="mb-4 flex size-12 items-center justify-center rounded-xl"
+                    style={{ background: `linear-gradient(135deg, ${s.color}, ${s.color}CC)` }}
                   >
                     <s.icon className="size-6 text-white" />
                   </div>
@@ -312,14 +322,14 @@ export default function HomePage() {
             <div className="relative">
               <div
                 className="aspect-[4/3] rounded-3xl overflow-hidden"
-                style={{ background: "linear-gradient(135deg, #0f172a, #1e293b)" }}
+                style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.primary})` }}
               >
                 {/* Placeholder visual */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <div
                       className="mx-auto mb-6 flex size-24 items-center justify-center rounded-3xl"
-                      style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 0 60px rgba(249,115,22,0.5)" }}
+                      style={{ background: palette.secondary, boxShadow: "0 0 60px rgba(255,116,104,0.5)" }}
                     >
                       <Sun className="size-12 text-white" />
                     </div>
@@ -344,7 +354,7 @@ export default function HomePage() {
               {/* Floating accent */}
               <div
                 className="absolute -right-5 -top-5 size-28 rounded-2xl flex items-center justify-center text-white font-bold text-sm text-center leading-tight"
-                style={{ background: "linear-gradient(135deg, #10b981, #059669)", boxShadow: "0 8px 30px rgba(16,185,129,0.4)" }}
+                style={{ background: "linear-gradient(135deg, #1B8271, #186F61)", boxShadow: "0 8px 30px rgba(27,130,113,0.4)" }}
               >
                 <div>
                   <p className="text-2xl font-bold">10K+</p>
@@ -372,8 +382,8 @@ export default function HomePage() {
               {/* Mission & Vision mini cards */}
               <div className="mt-8 grid grid-cols-2 gap-4">
                 {[
-                  { icon: Target, label: "Our Mission", color: "#f97316", bg: "rgba(249,115,22,0.08)", border: "rgba(249,115,22,0.2)", text: "Inspire through Yoga & Wellness" },
-                  { icon: Eye, label: "Our Vision", color: "#10b981", bg: "rgba(16,185,129,0.08)", border: "rgba(16,185,129,0.2)", text: "Healthier, Happier Society" },
+                  { icon: Target, label: "Our Mission", color: palette.secondary, bg: "rgba(255,116,104,0.08)", border: "rgba(255,116,104,0.2)", text: "Inspire through Yoga & Wellness" },
+                  { icon: Eye, label: "Our Vision", color: palette.primary, bg: "rgba(27,130,113,0.08)", border: "rgba(27,130,113,0.2)", text: "Healthier, Happier Society" },
                 ].map((c) => (
                   <div key={c.label} className="rounded-xl p-4" style={{ background: c.bg, border: `1px solid ${c.border}` }}>
                     <div className="flex items-center gap-2 mb-2">
@@ -388,7 +398,7 @@ export default function HomePage() {
               <Link
                 href="/about"
                 className="mt-8 inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg"
-                style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 4px 14px rgba(249,115,22,0.3)" }}
+                style={{ background: palette.secondary, boxShadow: "0 4px 14px rgba(255,116,104,0.3)" }}
               >
                 Learn More About NCV
                 <ChevronRight className="size-4" />
@@ -401,14 +411,14 @@ export default function HomePage() {
       {/* ══════════════════════ MOTTO STRIP ══════════════════════ */}
       <div
         className="py-8 overflow-hidden"
-        style={{ background: "linear-gradient(90deg, #f97316 0%, #ea580c 50%, #dc7a0a 100%)" }}
+        style={{ background: "linear-gradient(90deg, #FF7468 0%, #F64F40 45%, #1B8271 100%)" }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
             <p className="text-xl font-bold text-white sm:text-2xl italic">
               &ldquo;Health &bull; Yoga &bull; Positive Thinking&rdquo;
             </p>
-            <p className="text-orange-100 text-sm text-center sm:text-right">
+            <p className="text-[#FFB5AB] text-sm text-center sm:text-right">
               Transforming Lives Through Yoga, Wellness &amp; Selfless Service
             </p>
           </div>
@@ -432,9 +442,9 @@ export default function HomePage() {
               >
                 <div
                   className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-110"
-                  style={{ background: "linear-gradient(135deg, rgba(249,115,22,0.12), rgba(249,115,22,0.06))", border: "1px solid rgba(249,115,22,0.2)" }}
+                  style={{ background: "linear-gradient(135deg, rgba(255,116,104,0.12), rgba(255,116,104,0.06))", border: "1px solid rgba(255,116,104,0.2)" }}
                 >
-                  <item.icon className="size-5 text-orange-500" />
+                  <item.icon className="size-5 text-[#FF7468]" />
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">{item.title}</p>
@@ -463,7 +473,7 @@ export default function HomePage() {
               >
                 <span
                   className="size-2 shrink-0 rounded-full transition-transform group-hover:scale-150"
-                  style={{ background: "linear-gradient(135deg, #f97316, #ea580c)" }}
+                  style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})` }}
                 />
                 <span className="text-sm text-gray-700">{activity}</span>
               </div>
@@ -563,14 +573,14 @@ export default function HomePage() {
                 style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
               >
                 {/* Colored top bar */}
-                <div className="h-1.5" style={{ background: i === 0 ? "#f97316" : i === 1 ? "#10b981" : "#8b5cf6" }} />
+                <div className="h-1.5" style={{ background: i === 0 ? palette.secondary : i === 1 ? palette.primary : palette.primaryHover }} />
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div
                       className="flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
                       style={{
-                        background: i === 0 ? "rgba(249,115,22,0.1)" : i === 1 ? "rgba(16,185,129,0.1)" : "rgba(139,92,246,0.1)",
-                        color: i === 0 ? "#ea580c" : i === 1 ? "#059669" : "#7c3aed",
+                        background: i === 0 ? "rgba(255,116,104,0.1)" : i === 1 ? "rgba(27,130,113,0.1)" : "rgba(24,111,97,0.08)",
+                        color: i === 0 ? palette.secondary : i === 1 ? palette.primary : palette.primaryHover,
                       }}
                     >
                       <Calendar className="size-3" />
@@ -581,14 +591,14 @@ export default function HomePage() {
                   <h3 className="text-lg font-bold text-gray-900">{ev.title}</h3>
                   <p className="mt-2 text-sm text-gray-500 leading-relaxed line-clamp-2">{ev.desc}</p>
                   <div className="mt-4 flex items-center gap-1.5 text-xs text-gray-400">
-                    <MapPin className="size-3.5 text-orange-400" />
+                    <MapPin className="size-3.5 text-[#FF7468]" />
                     {ev.location}
                   </div>
                   <Link
                     href={ev.href}
                     className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold text-white transition-all hover:shadow-md"
                     style={{
-                      background: i === 0 ? "linear-gradient(135deg, #f97316, #ea580c)" : i === 1 ? "linear-gradient(135deg, #10b981, #059669)" : "linear-gradient(135deg, #8b5cf6, #7c3aed)",
+                      background: i === 0 ? `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})` : i === 1 ? `linear-gradient(135deg, ${palette.primary}, ${palette.primaryHover})` : `linear-gradient(135deg, ${palette.primaryHover}, ${palette.primary})`,
                     }}
                   >
                     Register Now <ArrowRight className="size-4" />
@@ -623,7 +633,7 @@ export default function HomePage() {
                 </div>
                 {/* Quote */}
                 <div className="relative flex-1">
-                  <Quote className="absolute -top-1 -left-1 size-8 text-orange-100" />
+                  <Quote className="absolute -top-1 -left-1 size-8 text-[#FFB5AB]" />
                   <p className="relative text-sm text-gray-600 leading-relaxed pl-2">
                     &ldquo;{t.quote}&rdquo;
                   </p>
@@ -632,7 +642,7 @@ export default function HomePage() {
                 <div className="mt-6 flex items-center gap-3 pt-5" style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}>
                   <div
                     className="flex size-11 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white"
-                    style={{ background: `linear-gradient(135deg, ${t.color.includes("blue") ? "#3b82f6, #2563eb" : t.color.includes("emerald") ? "#10b981, #059669" : "#f97316, #ea580c"})` }}
+                    style={{ background: t.color }}
                   >
                     {t.initials}
                   </div>
@@ -649,21 +659,21 @@ export default function HomePage() {
 
       {/* ══════════════════════ CTA BANNER ══════════════════════ */}
       <section className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #0f172a, #1e1a3a, #0f2d1a)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #1B8271 0%, #F3F4F8 60%, #ffffff 100%)" }} />
         <div className="absolute -right-16 -top-16 size-72 rounded-full opacity-20 blur-3xl"
-          style={{ background: "radial-gradient(circle, #f97316, transparent)" }} />
+          style={{ background: "radial-gradient(circle, #FF7468, transparent)" }} />
         <div className="absolute -left-16 -bottom-16 size-72 rounded-full opacity-15 blur-3xl"
-          style={{ background: "radial-gradient(circle, #10b981, transparent)" }} />
+          style={{ background: "radial-gradient(circle, #1B8271, transparent)" }} />
 
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6"
-            style={{ background: "rgba(249,115,22,0.15)", border: "1px solid rgba(249,115,22,0.3)" }}>
-            <Sparkles className="size-4 text-orange-400" />
-            <span className="text-sm font-semibold text-orange-300">Together We Transform</span>
+            style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113,0.2)" }}>
+            <Sparkles className="size-4 text-[#FF7468]" />
+            <span className="text-sm font-semibold text-[#F64F40]">Together We Transform</span>
           </div>
           <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Join Us in Building a <br />
-            <span style={{ color: "#f97316" }}>Healthier Society</span>
+            <span style={{ color: palette.secondary }}>Healthier Society</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-300 leading-relaxed">
             Together, let&apos;s build a healthier, happier, and more compassionate society through Yoga, Positive Thinking, and Selfless Service.
@@ -672,7 +682,7 @@ export default function HomePage() {
             <Link
               href="/volunteer"
               className="flex items-center gap-2 rounded-xl px-8 py-4 text-base font-bold text-white transition-all hover:shadow-2xl hover:scale-105"
-              style={{ background: "linear-gradient(135deg, #f97316, #ea580c)", boxShadow: "0 8px 30px rgba(249,115,22,0.4)" }}
+              style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})`, boxShadow: "0 8px 30px rgba(255,116,104,0.4)" }}
             >
               <Heart className="size-5" /> Join Our Programs
             </Link>
@@ -687,12 +697,12 @@ export default function HomePage() {
 
           {/* Contact info strip */}
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
-            <a href="tel:9003075333" className="flex items-center gap-2 text-slate-400 hover:text-orange-400 transition-colors text-sm">
+            <a href="tel:9003075333" className="flex items-center gap-2 text-slate-400 hover:text-[#FF7468] transition-colors text-sm">
               <Phone className="size-4" /> +91 9003075333
             </a>
             <span className="text-slate-700">|</span>
             <span className="flex items-center gap-2 text-slate-400 text-sm">
-              <MapPin className="size-4 text-orange-400" /> Valasaravakkam, Chennai
+              <MapPin className="size-4 text-[#FF7468]" /> Valasaravakkam, Chennai
             </span>
           </div>
         </div>

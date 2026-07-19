@@ -8,16 +8,16 @@
   background: transparent;
 }
 .admin-scroll::-webkit-scrollbar-thumb {
-  background: rgba(249, 115, 22, 0.3);
+  background: rgba(255, 116, 104, 0.3);
   border-radius: 99px;
 }
 .admin-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(249, 115, 22, 0.6);
+  background: rgba(255, 116, 104, 0.6);
 }
 
 /* Sidebar glow on active */
 .sidebar-active-glow {
-  box-shadow: inset 3px 0 0 #f97316, 0 0 12px rgba(249,115,22,0.08);
+  box-shadow: inset 3px 0 0 #FF7468, 0 0 12px rgba(255,116,104,0.08);
 }
 
 /* Count-up animation */
@@ -53,7 +53,7 @@
   100% { background-position:  200% 0; }
 }
 .skeleton-shimmer {
-  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background: linear-gradient(90deg, #eff6ff 25%, #d9f4ee 50%, #eff6ff 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -68,7 +68,7 @@
 
 /* Dot grid background */
 .dot-grid-bg {
-  background-image: radial-gradient(circle, rgba(249,115,22,0.08) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(255,116,104,0.08) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 

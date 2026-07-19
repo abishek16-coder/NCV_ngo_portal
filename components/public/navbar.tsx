@@ -23,7 +23,7 @@ function TrustLogo({ size = "default" }: { size?: "default" | "small" }) {
     <div className="flex items-center gap-3">
       <div
         className={cn(
-          "flex shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 via-orange-600 to-amber-500 text-white shadow-lg shadow-orange-200",
+          "flex shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#FF7468] via-[#F64F40] to-[#FF9A81] text-white shadow-lg shadow-[#FFB5AB]",
           isSmall ? "size-10" : "size-12"
         )}
       >
@@ -77,7 +77,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="hidden items-center justify-center gap-2 bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500 px-4 py-2 text-center text-xs font-medium text-white sm:flex">
+      <div className="hidden items-center justify-center gap-2 bg-gradient-to-r from-[#FF7468] via-[#F64F40] to-[#FF9A81] px-4 py-2 text-center text-xs font-medium text-white sm:flex">
         <Sparkles className="size-3.5" />
         <span>Free online yoga sessions daily at 6:00 AM</span>
         <span className="mx-1 opacity-60">•</span>
@@ -111,13 +111,13 @@ export function Navbar() {
                 className={cn(
                   "relative rounded-full px-3.5 py-2 text-sm font-semibold transition-all duration-200",
                   isActive(link.href)
-                    ? "bg-orange-50 text-orange-600 shadow-sm"
-                    : "text-slate-600 hover:bg-orange-50 hover:text-orange-600"
+                    ? "bg-[#FFF0EE] text-[#FF7468] shadow-sm"
+                    : "text-slate-600 hover:bg-[#FFF0EE] hover:text-[#FF7468]"
                 )}
               >
                 {link.label}
                 {isActive(link.href) && (
-                  <span className="absolute bottom-1 left-1/2 h-1 w-5 -translate-x-1/2 rounded-full bg-orange-500" />
+                  <span className="absolute bottom-1 left-1/2 h-1 w-5 -translate-x-1/2 rounded-full bg-[#FF7468]" />
                 )}
               </Link>
             ))}
@@ -126,14 +126,14 @@ export function Navbar() {
           <div className="hidden items-center gap-2 md:flex">
             <Link
               href="/donate"
-              className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-semibold text-orange-600 transition-all hover:border-orange-300 hover:bg-orange-100"
+              className="inline-flex items-center gap-2 rounded-full border border-[#FFD1CC] bg-[#FFF0EE] px-4 py-2 text-sm font-semibold text-[#FF7468] transition-all hover:border-[#FFC2B7] hover:bg-[#FFE7E4]"
             >
-              <Heart className="size-4 fill-orange-200 text-orange-500" />
+              <Heart className="size-4 fill-[#FFB5AB] text-[#FF7468]" />
               Donate
             </Link>
             <Link
               href="/volunteer"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-orange-200 transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#FF7468] to-[#F64F40] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-[#FFB5AB] transition-all hover:scale-[1.02]"
             >
               <Sparkles className="size-4" />
               Join Us
@@ -157,8 +157,8 @@ export function Navbar() {
         )}
       >
         <div className="mx-auto px-4 py-4 sm:px-6">
-          <div className="mb-4 rounded-2xl border border-orange-100 bg-orange-50/80 p-3">
-            <p className="text-sm font-semibold text-orange-700">Narchinthanai Vattam</p>
+          <div className="mb-4 rounded-2xl border border-[#FFD1CC] bg-[#FFF0EE]/80 p-3">
+            <p className="text-sm font-semibold text-[#FF7468]">Narchinthanai Vattam</p>
             <p className="text-xs text-slate-600">Yoga, wellness and selfless service</p>
           </div>
 
@@ -170,8 +170,8 @@ export function Navbar() {
                 className={cn(
                   "flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold transition-colors",
                   isActive(link.href)
-                    ? "bg-orange-50 text-orange-600"
-                    : "text-slate-600 hover:bg-orange-50 hover:text-orange-600"
+                    ? "bg-[#FFF0EE] text-[#FF7468]"
+                    : "text-slate-600 hover:bg-[#FFF0EE] hover:text-[#FF7468]"
                 )}
                 onClick={() => setMobileOpen(false)}
               >
@@ -184,15 +184,15 @@ export function Navbar() {
           <div className="mt-4 grid grid-cols-2 gap-2">
             <Link
               href="/donate"
-              className="flex items-center justify-center gap-2 rounded-2xl border border-orange-200 bg-orange-50 px-3 py-3 text-sm font-semibold text-orange-600"
+              className="flex items-center justify-center gap-2 rounded-2xl border border-[#FFD1CC] bg-[#FFF0EE] px-3 py-3 text-sm font-semibold text-[#FF7468]"
               onClick={() => setMobileOpen(false)}
             >
-              <Heart className="size-4 fill-orange-200 text-orange-500" />
+              <Heart className="size-4 fill-[#FFB5AB] text-[#FF7468]" />
               Donate
             </Link>
             <Link
               href="/volunteer"
-              className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 px-3 py-3 text-sm font-semibold text-white"
+              className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#FF7468] to-[#F64F40] px-3 py-3 text-sm font-semibold text-white"
               onClick={() => setMobileOpen(false)}
             >
               <Sparkles className="size-4" />
