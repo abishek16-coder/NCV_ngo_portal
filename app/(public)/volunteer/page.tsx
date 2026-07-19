@@ -50,11 +50,11 @@ export default function VolunteerPage() {
         <div className="absolute inset-0 dot-grid-bg opacity-10" />
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-sm">
-            <HandHeart className="size-4 text-[#FF7468]" />
+            <HandHeart className="size-4 text-[#1B8271]" />
             Volunteer With Us
           </div>
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Be the <span className="text-[#FF7468]">Change</span> You Wish to See
+            Be the <span className="text-[#1B8271]">Change</span> You Wish to See
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80">
             Join our community of dedicated volunteers and help us create a healthier, happier world through yoga, education, and service.

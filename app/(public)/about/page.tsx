@@ -38,12 +38,12 @@ export default function AboutPage() {
         <div className="absolute inset-0 dot-grid-bg opacity-10" />
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-sm">
-            <Heart className="size-4 text-[#FF7468]" />
+            <Heart className="size-4 text-[#1B8271]" />
             About NCV Trust
           </div>
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             Transforming Lives Through{" "}
-            <span className="text-[#FF7468]">Yoga & Service</span>
+            <span className="text-[#1B8271]">Yoga & Service</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/80">
             NCV Trust is a non-profit organization dedicated to holistic well-being through yoga, education, positive thinking, and compassionate community service.
@@ -72,9 +72,9 @@ export default function AboutPage() {
                 To empower individuals and communities through accessible yoga education, wellness programs, and compassionate service. We strive to create a healthier, happier, and more mindful society where every person has the opportunity to achieve holistic well-being.
               </p>
             </div>
-            <div className="rounded-3xl border border-[#FFE7E4] bg-gradient-to-br from-[#FFF8F7] to-white p-8 shadow-sm">
-              <div className="flex size-12 items-center justify-center rounded-2xl bg-[#FF7468]/10">
-                <Eye className="size-6 text-[#FF7468]" />
+            <div className="rounded-3xl border border-[#E8F5F3] bg-gradient-to-br from-[#F0FAF8] to-white p-8 shadow-sm">
+              <div className="flex size-12 items-center justify-center rounded-2xl bg-[#1B8271]/10">
+                <Eye className="size-6 text-[#1B8271]" />
               </div>
               <h2 className="mt-5 text-2xl font-bold text-[#071C35]">Our Vision</h2>
               <p className="mt-3 leading-relaxed text-[#475569]">
@@ -114,7 +114,7 @@ export default function AboutPage() {
             <p className="mt-4 text-[#475569]">Key milestones in our mission to transform communities</p>
           </div>
           <div className="relative mt-12">
-            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#1B8271] to-[#FF7468]" />
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#1B8271] to-[#186F61]" />
             <div className="space-y-8">
               {milestones.map((m, i) => (
                 <div key={m.year} className="relative pl-12">
@@ -122,7 +122,7 @@ export default function AboutPage() {
                     <div className="size-1.5 rounded-full bg-[#1B8271]" />
                   </div>
                   <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-                    <span className="text-sm font-bold text-[#FF7468]">{m.year}</span>
+                    <span className="text-sm font-bold text-[#1B8271]">{m.year}</span>
                     <p className="mt-1 text-sm text-[#475569]">{m.event}</p>
                   </div>
                 </div>
@@ -146,7 +146,7 @@ export default function AboutPage() {
                   {t.name.split(" ").map((n) => n[0]).join("")}
                 </div>
                 <h3 className="mt-4 text-lg font-bold text-[#071C35]">{t.name}</h3>
-                <p className="text-sm font-medium text-[#FF7468]">{t.role}</p>
+                <p className="text-sm font-medium text-[#1B8271]">{t.role}</p>
                 <p className="mt-2 text-xs text-[#475569] leading-relaxed">{t.desc}</p>
               </div>
             ))}

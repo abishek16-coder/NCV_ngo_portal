@@ -5,7 +5,7 @@ import { Calendar, MapPin, Clock, Users, ArrowRight } from "lucide-react"
 
 const palette = {
   primary: "#1B8271",
-  secondary: "#FF7468",
+  secondary: "#1B8271",
   heading: "#071C35",
   body: "#475569",
 }
@@ -84,7 +84,7 @@ export default function EventsPage() {
                   <div className="grid md:grid-cols-2 gap-6">
                     {upcoming.map((event) => (
                       <div key={event.id} className="group rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-lg transition-all">
-                        <div className="h-3 bg-gradient-to-r from-[#1B8271] to-[#FF7468]" />
+                        <div className="h-3 bg-gradient-to-r from-[#1B8271] to-[#186F61]" />
                         <div className="p-6">
                           <div className="flex items-start justify-between">
                             <div>
@@ -94,7 +94,7 @@ export default function EventsPage() {
                               <h3 className="mt-3 text-lg font-bold text-[#071C35] group-hover:text-[#1B8271] transition-colors">{event.title}</h3>
                             </div>
                             <div className="text-right shrink-0 ml-4">
-                              <div className="text-2xl font-bold text-[#FF7468]">{new Date(event.eventDate).getDate()}</div>
+                              <div className="text-2xl font-bold text-[#1B8271]">{new Date(event.eventDate).getDate()}</div>
                               <div className="text-xs font-medium text-slate-500 uppercase">{new Date(event.eventDate).toLocaleString("en-IN", { month: "short" })}</div>
                             </div>
                           </div>
@@ -108,7 +108,7 @@ export default function EventsPage() {
                               </span>
                             )}
                           </div>
-                          <a href={`/events/${event.slug}`} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#FF7468] hover:text-[#F64F40] transition-colors">
+                          <a href={`/events/${event.slug}`} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#1B8271] hover:text-[#186F61] transition-colors">
                             View Details <ArrowRight className="size-3.5" />
                           </a>
                         </div>

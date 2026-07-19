@@ -64,8 +64,8 @@ export default function LoginPage() {
         style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)" }}
       >
         {/* Decorative orbs */}
-        <Orb style={{ width: 380, height: 380, top: -100, right: -100, background: "rgba(255,116,104,0.12)", filter: "blur(60px)" }} />
-        <Orb style={{ width: 300, height: 300, bottom: 80, left: -80, background: "rgba(255,116,104,0.08)", filter: "blur(60px)" }} />
+        <Orb style={{ width: 380, height: 380, top: -100, right: -100, background: "rgba(27,130,113,0.12)", filter: "blur(60px)" }} />
+        <Orb style={{ width: 300, height: 300, bottom: 80, left: -80, background: "rgba(27,130,113,0.08)", filter: "blur(60px)" }} />
         <Orb style={{ width: 200, height: 200, top: "40%", left: "40%", background: "rgba(27,130,113,0.08)", filter: "blur(50px)" }} />
 
         {/* Animated dot grid */}
@@ -83,8 +83,8 @@ export default function LoginPage() {
             <div
               className="flex size-12 items-center justify-center rounded-2xl"
               style={{
-                background: "linear-gradient(135deg, #FF7468 0%, #F64F40 100%)",
-                boxShadow: "0 0 30px rgba(255,116,104,0.5)",
+                background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)",
+                boxShadow: "0 0 30px rgba(27,130,113,0.5)",
               }}
             >
               <Sun className="size-6 text-white" />
@@ -100,16 +100,16 @@ export default function LoginPage() {
         <div className="relative space-y-8">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5"
-              style={{ background: "rgba(255,116,104,0.15)", border: "1px solid rgba(255,116,104,0.3)" }}>
-              <span className="size-1.5 rounded-full bg-[#FF7468] animate-pulse" />
-              <span className="text-xs font-semibold text-[#F64F40]">Management Portal</span>
+              style={{ background: "rgba(27,130,113,0.15)", border: "1px solid rgba(27,130,113,0.3)" }}>
+              <span className="size-1.5 rounded-full bg-[#1B8271] animate-pulse" />
+              <span className="text-xs font-semibold text-[#186F61]">Management Portal</span>
             </div>
             <h1 className="text-4xl font-bold text-white leading-tight lg:text-5xl">
               Manage your
               <span
                 className="block mt-1"
                 style={{
-                  background: "linear-gradient(90deg, #FF7468, #F64F40, #1B8271)",
+                  background: "linear-gradient(90deg, #1B8271, #186F61, #1B8271)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
@@ -135,8 +135,8 @@ export default function LoginPage() {
                 }}
               >
                 <div className="flex size-8 shrink-0 items-center justify-center rounded-lg"
-                  style={{ background: "rgba(255,116,104,0.2)" }}>
-                  <f.icon className="size-4 text-[#FF7468]" />
+                  style={{ background: "rgba(27,130,113,0.2)" }}>
+                  <f.icon className="size-4 text-[#1B8271]" />
                 </div>
                 <p className="text-sm text-slate-300">{f.text}</p>
               </div>
@@ -146,7 +146,7 @@ export default function LoginPage() {
 
         {/* Bottom tagline */}
         <div className="relative flex items-center gap-2 text-slate-500 text-sm">
-          <Heart className="size-4 text-[#FF7468]/70" />
+          <Heart className="size-4 text-[#1B8271]/70" />
           <span>Health &bull; Yoga &bull; Positive Thinking &bull; Community Welfare</span>
         </div>
       </div>
@@ -163,7 +163,7 @@ export default function LoginPage() {
           <div className="flex items-center gap-3 mb-8 lg:hidden">
             <div
               className="flex size-10 items-center justify-center rounded-xl"
-              style={{ background: "linear-gradient(135deg, #FF7468 0%, #F64F40 100%)" }}
+              style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)" }}
             >
               <Sun className="size-5 text-white" />
             </div>
@@ -211,7 +211,7 @@ export default function LoginPage() {
                   <Label htmlFor="password" className="text-sm font-semibold text-slate-700">
                     Password
                   </Label>
-                <button type="button" className="text-xs text-[#FF7468] hover:text-[#F64F40] font-medium transition-colors">
+                <button type="button" className="text-xs text-[#1B8271] hover:text-[#186F61] font-medium transition-colors">
                     Forgot password?
                   </button>
                 </div>
@@ -256,7 +256,7 @@ export default function LoginPage() {
                   background: loading
                     ? "#FF7468"
                     : "linear-gradient(135deg, #FF7468 0%, #F64F40 100%)",
-                  boxShadow: "0 4px 14px rgba(255,116,104,0.35)",
+                  boxShadow: "0 4px 14px rgba(27,130,113,0.35)",
                 }}
               >
                 {loading ? (
@@ -284,7 +284,7 @@ export default function LoginPage() {
           {/* Back to website */}
           <p className="mt-5 text-center text-sm text-slate-500">
             Looking for the public site?{" "}
-            <a href="/" className="font-semibold text-[#FF7468] hover:text-[#F64F40] transition-colors">
+            <a href="/" className="font-semibold text-[#1B8271] hover:text-[#186F61] transition-colors">
               Visit ncv.org.in →
             </a>
           </p>

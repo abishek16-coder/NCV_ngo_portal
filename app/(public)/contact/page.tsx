@@ -41,11 +41,11 @@ export default function ContactPage() {
         <div className="absolute inset-0 dot-grid-bg opacity-10" />
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-sm">
-            <MessageSquare className="size-4 text-[#FF7468]" />
+            <MessageSquare className="size-4 text-[#1B8271]" />
             Get In Touch
           </div>
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Contact <span className="text-[#FF7468]">Us</span>
+            Contact <span className="text-[#1B8271]">Us</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80">
             Have a question, want to collaborate, or need support? We would love to hear from you.
@@ -76,8 +76,8 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#FF7468]/10">
-                    <Mail className="size-5 text-[#FF7468]" />
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#1B8271]/10">
+                    <Mail className="size-5 text-[#1B8271]" />
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-[#071C35]">Email</h3>
@@ -94,8 +94,8 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#FF7468]/10">
-                    <Clock className="size-5 text-[#FF7468]" />
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#1B8271]/10">
+                    <Clock className="size-5 text-[#1B8271]" />
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-[#071C35]">Hours</h3>

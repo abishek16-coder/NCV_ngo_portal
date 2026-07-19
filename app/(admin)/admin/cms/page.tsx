@@ -282,7 +282,7 @@ export default function CmsPagesPage() {
                         <Button
                           variant="ghost"
                           size="icon-sm"
-                          onClick={() => router.push(`./cms/${page.slug}`)}
+                          onClick={() => router.push(`/admin/cms/${page.slug}`)}
                         >
                           <Pencil className="size-4" />
                         </Button>

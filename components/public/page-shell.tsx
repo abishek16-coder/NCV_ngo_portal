@@ -19,10 +19,10 @@ export function PublicPageShell({
   secondaryLabel?: string;
 }) {
   return (
-    <section className="min-h-[72vh] bg-[linear-gradient(135deg,#fff4f2_0%,#fff1ef_40%,#fdf6f4_100%)] py-20 sm:py-24">
+    <section className="min-h-[72vh] bg-[linear-gradient(135deg,#f0f9f8_0%,#e8f5f3_40%,#f5fbfa_100%)] py-20 sm:py-24">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] border border-[#FFD1CC] bg-white/80 p-8 shadow-[0_20px_80px_rgba(255,116,104,0.12)] backdrop-blur-xl sm:p-10 lg:p-14">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#F9C2B3] bg-[#FFF0EE] px-3 py-1.5 text-sm font-semibold text-[#FF7468]">
+        <div className="rounded-[2rem] border border-[#B8DDD7] bg-white/80 p-8 shadow-[0_20px_80px_rgba(27,130,113,0.12)] backdrop-blur-xl sm:p-10 lg:p-14">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#9DCFC7] bg-[#E8F5F3] px-3 py-1.5 text-sm font-semibold text-[#1B8271]">
             <HandHeart className="size-4" />
             <span>{eyebrow}</span>
           </div>
@@ -38,14 +38,14 @@ export function PublicPageShell({
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href={primaryHref}
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#FF7468] to-[#F64F40] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#FFB5AB] transition-transform hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#FF7468] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#FF7468]/20 transition-transform hover:scale-[1.02] hover:bg-[#F64F40]"
             >
               {primaryLabel}
               <ArrowRight className="size-4" />
             </Link>
             <Link
               href={secondaryHref}
-              className="inline-flex items-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-[#FFB4AD] hover:text-[#FF7468]"
+              className="inline-flex items-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-[#1B8271]/30 hover:text-[#1B8271]"
             >
               {secondaryLabel}
             </Link>

@@ -8,16 +8,16 @@
   background: transparent;
 }
 .admin-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 116, 104, 0.3);
+  background: rgba(27, 130, 113, 0.3);
   border-radius: 99px;
 }
 .admin-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 116, 104, 0.6);
+  background: rgba(27, 130, 113, 0.6);
 }
 
 /* Sidebar glow on active */
 .sidebar-active-glow {
-  box-shadow: inset 3px 0 0 #FF7468, 0 0 12px rgba(255,116,104,0.08);
+  box-shadow: inset 3px 0 0 #1B8271, 0 0 12px rgba(27,130,113,0.08);
 }
 
 /* Count-up animation */
@@ -68,7 +68,7 @@
 
 /* Dot grid background */
 .dot-grid-bg {
-  background-image: radial-gradient(circle, rgba(255,116,104,0.08) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(27,130,113,0.08) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 

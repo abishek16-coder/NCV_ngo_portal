@@ -57,11 +57,11 @@ export default function DonatePage() {
         <div className="absolute inset-0 dot-grid-bg opacity-10" />
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-sm">
-            <Heart className="size-4 text-[#FF7468]" />
+            <Heart className="size-4 text-[#1B8271]" />
             Make a Difference
           </div>
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Your <span className="text-[#FF7468]">Donation</span> Changes Lives
+            Your <span className="text-[#1B8271]">Donation</span> Changes Lives
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80">
             Every contribution, big or small, helps us provide free yoga, education, and wellness programs to communities in need.
@@ -165,7 +165,7 @@ export default function DonatePage() {
 
             {/* Impact Sidebar */}
             <div className="lg:col-span-2 space-y-6">
-              <div className="rounded-2xl border border-[#FFE7E4] bg-[#FFF8F7] p-6">
+              <div className="rounded-2xl border border-[#D4EDE9] bg-[#F2FAFA] p-6">
                 <h3 className="text-lg font-bold text-[#071C35]">Your Impact</h3>
                 <p className="mt-2 text-sm text-[#475569]">See how your donation makes a difference</p>
                 <div className="mt-4 space-y-4">
@@ -190,10 +190,10 @@ export default function DonatePage() {
               <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
                 <h3 className="text-lg font-bold text-[#071C35]">Other Ways to Give</h3>
                 <ul className="mt-3 space-y-2 text-sm text-[#475569]">
-                  <li className="flex items-center gap-2"><Heart className="size-3.5 text-[#FF7468] shrink-0" /> Monthly recurring donations</li>
-                  <li className="flex items-center gap-2"><Heart className="size-3.5 text-[#FF7468] shrink-0" /> Corporate partnerships</li>
-                  <li className="flex items-center gap-2"><Heart className="size-3.5 text-[#FF7468] shrink-0" /> In-kind donations (supplies, equipment)</li>
-                  <li className="flex items-center gap-2"><Heart className="size-3.5 text-[#FF7468] shrink-0" /> Legacy giving</li>
+                  <li className="flex items-center gap-2"><Heart className="size-3.5 text-[#1B8271] shrink-0" /> Monthly recurring donations</li>
+                  <li className="flex items-center gap-2"><Heart className="size-3.5 text-[#1B8271] shrink-0" /> Corporate partnerships</li>
+                  <li className="flex items-center gap-2"><Heart className="size-3.5 text-[#1B8271] shrink-0" /> In-kind donations (supplies, equipment)</li>
+                  <li className="flex items-center gap-2"><Heart className="size-3.5 text-[#1B8271] shrink-0" /> Legacy giving</li>
                 </ul>
               </div>
             </div>

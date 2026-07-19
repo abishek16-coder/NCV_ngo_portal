@@ -111,9 +111,9 @@ const stats = [
     trend: "up",
     icon: HandHeart,
     href: "/admin/volunteers",
-    gradient: "from-[#FF7468] to-[#F64F40]",
-    lightBg: "bg-[#FFF0EE]",
-    textColor: "text-[#FF7468]",
+    gradient: "from-[#1B8271] to-[#186F61]",
+    lightBg: "bg-[#E8F5F3]",
+    textColor: "text-[#1B8271]",
   },
   {
     label: "Messages",
@@ -175,7 +175,7 @@ const recentActivities = [
 ];
 
 const typeConfig: Record<string, { color: string; bg: string; icon: React.ElementType }> = {
-  volunteer: { color: "text-[#FF7468]", bg: "bg-[#FFE7E4]", icon: HandHeart },
+  volunteer: { color: "text-[#1B8271]", bg: "bg-[#D4EDE9]", icon: HandHeart },
   donation:  { color: "text-green-600",  bg: "bg-green-100",  icon: Heart },
   event:     { color: "text-violet-600", bg: "bg-violet-100", icon: Calendar },
   project:   { color: "text-emerald-600",bg: "bg-emerald-100",icon: FolderOpen },
@@ -187,7 +187,7 @@ const quickActions = [
   { label: "Add User",       desc: "Create admin account",  icon: UserPlus,    href: "/admin/users",        gradient: "from-blue-500 to-blue-600" },
   { label: "New Project",    desc: "Launch a campaign",     icon: FolderOpen,  href: "/admin/projects",     gradient: "from-emerald-500 to-emerald-600" },
   { label: "Create Event",   desc: "Schedule activity",     icon: Calendar,    href: "/admin/events",       gradient: "from-violet-500 to-violet-600" },
-  { label: "View Gallery",   desc: "Manage media",          icon: Eye,         href: "/admin/gallery",      gradient: "from-[#FF7468] to-[#F64F40]" },
+  { label: "View Gallery",   desc: "Manage media",          icon: Eye,         href: "/admin/gallery",      gradient: "from-[#1B8271] to-[#186F61]" },
   { label: "Volunteers",     desc: "Review applications",   icon: HandHeart,   href: "/admin/volunteers",   gradient: "from-rose-500 to-rose-600" },
   { label: "Scholarships",   desc: "Student support",       icon: GraduationCap,href:"/admin/scholarships", gradient: "from-amber-500 to-amber-600" },
 ];
@@ -200,14 +200,14 @@ const schedule = [
 ];
 
 const scheduleTagColor: Record<string, string> = {
-  yoga:     "bg-[#FFF0EE] text-[#FF7468]",
+  yoga:     "bg-[#E8F5F3] text-[#1B8271]",
   internal: "bg-slate-100 text-slate-600",
   workshop: "bg-violet-100 text-violet-700",
   wellness: "bg-emerald-100 text-emerald-700",
 };
 
 const impactCards = [
-  { label: "Yoga Sessions",    value: "124",  sub: "+12% this month",  icon: Activity, gradient: "from-[#FF7468] to-[#F64F40]"   },
+  { label: "Yoga Sessions",    value: "124",  sub: "+12% this month",  icon: Activity, gradient: "from-[#1B8271] to-[#186F61]"   },
   { label: "New Registrations",value: "18",   sub: "This week",        icon: Zap,      gradient: "from-emerald-500 to-teal-500"   },
   { label: "Website Visitors", value: "2,847",sub: "This month",       icon: Target,   gradient: "from-blue-500 to-cyan-500"      },
   { label: "Community Reach",  value: "15.2K",sub: "+8% this week",    icon: Award,    gradient: "from-violet-500 to-purple-500"  },
@@ -218,9 +218,9 @@ function CustomTooltip({ active, payload, label }: { active?: boolean; payload?:
   if (!active || !payload?.length) return null;
   return (
     <div className="rounded-xl border bg-white px-4 py-3 shadow-xl text-sm"
-      style={{ borderColor: "rgba(255,116,104,0.2)" }}>
+      style={{ borderColor: "rgba(27,130,113,0.2)" }}>
       <p className="font-semibold text-slate-800">{label}</p>
-      <p className="text-[#FF7468] font-bold mt-0.5">₹{payload[0].value.toLocaleString("en-IN")}</p>
+      <p className="text-[#1B8271] font-bold mt-0.5">₹{payload[0].value.toLocaleString("en-IN")}</p>
     </div>
   );
 }
@@ -291,7 +291,7 @@ function StatCard({ stat, delay }: { stat: (typeof stats)[0]; delay: number }) {
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: `linear-gradient(90deg, transparent, rgba(255,116,104,0.5), transparent)` }} />
+        style={{ background: `linear-gradient(90deg, transparent, rgba(27,130,113,0.5), transparent)` }} />
     </Link>
   );
 }
@@ -327,13 +327,13 @@ export default function AdminDashboardPage() {
         }}
       >
         {/* Decorative orbs */}
-        <div className="absolute -right-12 -top-12 size-48 rounded-full bg-[#FF7468]/10 blur-3xl pointer-events-none" />
+        <div className="absolute -right-12 -top-12 size-48 rounded-full bg-[#1B8271]/10 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-8 left-1/3 size-40 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
 
         <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FF7468]/20 px-3 py-1 text-xs font-semibold text-[#FF7468]">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1B8271]/20 px-3 py-1 text-xs font-semibold text-[#1B8271]">
                 <Star className="size-3" /> NCV Management Portal
               </span>
             </div>
@@ -393,7 +393,7 @@ export default function AdminDashboardPage() {
               <p className="text-xs text-slate-400 mt-0.5">Monthly donation totals — last 6 months</p>
             </div>
             <Link href="/admin/donations"
-              className="flex items-center gap-1 rounded-lg bg-[#FFF0EE] px-3 py-1.5 text-xs font-semibold text-[#FF7468] hover:bg-[#FFE7E4] transition-colors">
+              className="flex items-center gap-1 rounded-lg bg-[#E8F5F3] px-3 py-1.5 text-xs font-semibold text-[#1B8271] hover:bg-[#D4EDE9] transition-colors">
               View All <ArrowUpRight className="size-3" />
             </Link>
           </div>
@@ -401,8 +401,8 @@ export default function AdminDashboardPage() {
             <AreaChart data={donationData} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
               <defs>
                 <linearGradient id="donationGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#FF7468" stopOpacity={0.25} />
-                  <stop offset="100%" stopColor="#FF7468" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#1B8271" stopOpacity={0.25} />
+                  <stop offset="100%" stopColor="#1B8271" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" />
@@ -410,9 +410,9 @@ export default function AdminDashboardPage() {
               <YAxis tick={{ fontSize: 11, fill: "#94a3b8" }} axisLine={false} tickLine={false}
                 tickFormatter={(v) => `₹${(v / 1000).toFixed(0)}K`} />
               <Tooltip content={<CustomTooltip />} />
-              <Area type="monotone" dataKey="amount" stroke="#FF7468" strokeWidth={2.5}
-                fill="url(#donationGrad)" dot={{ fill: "#FF7468", strokeWidth: 0, r: 4 }}
-                activeDot={{ r: 6, fill: "#F64F40", strokeWidth: 0 }} />
+              <Area type="monotone" dataKey="amount" stroke="#1B8271" strokeWidth={2.5}
+                fill="url(#donationGrad)" dot={{ fill: "#1B8271", strokeWidth: 0, r: 4 }}
+                activeDot={{ r: 6, fill: "#186F61", strokeWidth: 0 }} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -428,7 +428,7 @@ export default function AdminDashboardPage() {
               <p className="text-xs text-slate-400 mt-0.5">Funnel by stage</p>
             </div>
             <Link href="/admin/volunteers"
-              className="flex items-center gap-1 rounded-lg bg-[#FFF0EE] px-3 py-1.5 text-xs font-semibold text-[#FF7468] hover:bg-[#FFE7E4] transition-colors">
+              className="flex items-center gap-1 rounded-lg bg-[#E8F5F3] px-3 py-1.5 text-xs font-semibold text-[#1B8271] hover:bg-[#D4EDE9] transition-colors">
               View <ArrowUpRight className="size-3" />
             </Link>
           </div>
@@ -436,14 +436,14 @@ export default function AdminDashboardPage() {
             <BarChart data={volunteerData} layout="vertical" margin={{ top: 0, right: 8, bottom: 0, left: 16 }}>
               <defs>
                 <linearGradient id="volGrad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#FF7468" />
-                  <stop offset="100%" stopColor="#F64F40" />
+                  <stop offset="0%" stopColor="#1B8271" />
+                  <stop offset="100%" stopColor="#186F61" />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" horizontal={false} />
               <XAxis type="number" tick={{ fontSize: 10, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
               <YAxis type="category" dataKey="label" tick={{ fontSize: 11, fill: "#64748b" }} axisLine={false} tickLine={false} width={60} />
-              <Tooltip cursor={{ fill: "rgba(255,116,104,0.05)" }} formatter={(v) => [`${v} people`, "Count"]} />
+              <Tooltip cursor={{ fill: "rgba(27,130,113,0.05)" }} formatter={(v) => [`${v} people`, "Count"]} />
               <Bar dataKey="count" fill="url(#volGrad)" radius={[0, 6, 6, 0]} barSize={18} />
             </BarChart>
           </ResponsiveContainer>
@@ -511,7 +511,7 @@ export default function AdminDashboardPage() {
                   href={action.href}
                   className="group flex flex-col items-center gap-2 rounded-xl p-3 text-center transition-all hover:scale-105"
                   style={{ border: "1px solid rgba(0,0,0,0.06)" }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,116,104,0.3)"; (e.currentTarget as HTMLElement).style.background = "rgba(255,116,104,0.03)"; }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(27,130,113,0.3)"; (e.currentTarget as HTMLElement).style.background = "rgba(27,130,113,0.03)"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,0,0,0.06)"; (e.currentTarget as HTMLElement).style.background = ""; }}
                 >
                   <div className={cn("flex size-9 items-center justify-center rounded-xl bg-gradient-to-br text-white shadow-sm", action.gradient)}>
@@ -539,9 +539,9 @@ export default function AdminDashboardPage() {
                 <div
                   key={i}
                   className="flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-slate-50"
-                  style={{ borderLeft: "3px solid #FF7468", background: "rgba(255,116,104,0.025)" }}
+                  style={{ borderLeft: "3px solid #1B8271", background: "rgba(27,130,113,0.025)" }}
                 >
-                  <p className="text-xs font-bold text-[#FF7468] w-14 shrink-0 pt-0.5">{item.time}</p>
+                  <p className="text-xs font-bold text-[#1B8271] w-14 shrink-0 pt-0.5">{item.time}</p>
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-medium text-slate-800 leading-tight">{item.title}</p>
                     <div className="flex items-center gap-1.5 mt-1">
@@ -575,7 +575,7 @@ export default function AdminDashboardPage() {
               <div
                 className="absolute inset-0 rounded-2xl"
                 style={{ background: `linear-gradient(135deg, ${
-                  card.gradient === "from-[#FF7468] to-[#F64F40]"   ? "#FF7468, #F64F40" :
+                  card.gradient === "from-[#1B8271] to-[#186F61]"   ? "#1B8271, #186F61" :
                   card.gradient === "from-emerald-500 to-teal-500"   ? "#10b981, #14b8a6" :
                   card.gradient === "from-blue-500 to-cyan-500"      ? "#3b82f6, #06b6d4" :
                                                                         "#8b5cf6, #a855f7"

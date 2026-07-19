@@ -31,8 +31,10 @@ import {
 const palette = {
   primary: "#1B8271",
   primaryHover: "#186F61",
-  secondary: "#FF7468",
-  secondaryHover: "#F64F40",
+  secondary: "#1B8271",
+  secondaryHover: "#186F61",
+  coral: "#FF7468",
+  coralHover: "#F64F40",
   surface: "#F3F4F8",
   heading: "#071C35",
   body: "#475569",
@@ -249,7 +251,7 @@ function Navbar() {
           <Link
             href="/donate"
             className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all hover:shadow-lg hover:scale-105"
-            style={{ background: palette.secondary, boxShadow: "0 6px 18px rgba(255,116,104,0.3)" }}
+            style={{ background: palette.coral, boxShadow: "0 6px 18px rgba(255,116,104,0.3)" }}
           >
             <Heart className="size-4" /> Donate
           </Link>
@@ -358,7 +360,7 @@ export default function HomePage() {
                 <Link
                   href="/donate"
                   className="flex items-center gap-2 rounded-[4px] px-7 py-4 text-base font-semibold text-white transition-all hover:shadow-2xl hover:scale-105"
-                  style={{ background: palette.secondary, boxShadow: "0 8px 30px rgba(255,116,104,0.35)" }}
+                  style={{ background: palette.coral, boxShadow: "0 8px 30px rgba(255,116,104,0.35)" }}
                 >
                   <Heart className="size-5" />
                   Support Our Mission
@@ -404,7 +406,7 @@ export default function HomePage() {
                   <div className="text-center">
                     <div
                       className="mx-auto mb-6 flex size-24 items-center justify-center rounded-3xl"
-                      style={{ background: palette.secondary, boxShadow: "0 0 60px rgba(255,116,104,0.5)" }}
+                      style={{ background: palette.secondary, boxShadow: "0 0 60px rgba(27,130,113,0.5)" }}
                     >
                       <Sun className="size-12 text-white" />
                     </div>
@@ -427,7 +429,7 @@ export default function HomePage() {
               </div>
               <div
                 className="absolute -right-5 -top-5 flex size-28 items-center justify-center rounded-2xl text-center text-white"
-                style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})`, boxShadow: "0 8px 30px rgba(255,116,104,0.4)" }}
+style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})`, boxShadow: "0 8px 30px rgba(27,130,113,0.4)" }}
               >
                 <div>
                   <p className="text-2xl font-bold">10K+</p>
@@ -454,7 +456,7 @@ export default function HomePage() {
 
               <div className="mt-8 grid grid-cols-2 gap-4">
                 {[
-                  { icon: Target, label: "Our Mission", bg: "rgba(255,116,104,0.08)", border: "rgba(255,116,104,0.2)", color: palette.secondary, text: "Inspire through Yoga & Wellness" },
+                  { icon: Target, label: "Our Mission", bg: "rgba(27,130,113,0.08)", border: "rgba(27,130,113,0.2)", color: palette.secondary, text: "Inspire through Yoga & Wellness" },
                   { icon: Eye, label: "Our Vision", bg: "rgba(27,130,113,0.08)", border: "rgba(27,130,113,0.2)", color: palette.primary, text: "Healthier, Happier Society" },
                 ].map((c) => (
                   <div key={c.label} className="rounded-xl p-4" style={{ background: c.bg, border: `1px solid ${c.border}` }}>
@@ -470,7 +472,7 @@ export default function HomePage() {
               <Link
                 href="/about"
                 className="mt-8 inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg"
-                style={{ background: palette.secondary, boxShadow: "0 4px 14px rgba(255,116,104,0.3)" }}
+                style={{ background: palette.coral, boxShadow: "0 4px 14px rgba(255,116,104,0.3)" }}
               >
                 Learn More About NCV
                 <ChevronRight className="size-4" />
@@ -512,7 +514,7 @@ export default function HomePage() {
               >
                 <div
                   className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-110"
-                  style={{ background: "rgba(255,116,104,0.1)", border: "1px solid rgba(255,116,104,0.2)" }}
+                  style={{ background: "rgba(27,130,113,0.1)", border: "1px solid rgba(27,130,113,0.2)" }}
                 >
                   <item.icon className="size-5" style={{ color: palette.secondary }} />
                 </div>
@@ -663,7 +665,7 @@ export default function HomePage() {
                     <Link
                       href={ev.href}
                       className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold text-white transition-all hover:shadow-md"
-                      style={{ background: `linear-gradient(135deg, ${barColor}, ${palette.secondaryHover})` }}
+                      style={{ background: `linear-gradient(135deg, ${palette.coral}, ${palette.coralHover})` }}
                     >
                       Register Now <ArrowRight className="size-4" />
                     </Link>
@@ -696,7 +698,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <div className="relative flex-1">
-                  <Quote className="absolute -top-1 -left-1 size-8" style={{ color: "rgba(255,116,104,0.25)" }} />
+                  <Quote className="absolute -top-1 -left-1 size-8" style={{ color: "rgba(27,130,113,0.25)" }} />
                   <p className="relative pl-2 text-sm leading-relaxed" style={{ color: palette.body }}>
                     &ldquo;{t.quote}&rdquo;
                   </p>
@@ -735,7 +737,7 @@ export default function HomePage() {
           </div>
           <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Join Us in Building a <br />
-            <span style={{ color: "#FFD9D4" }}>Healthier Society</span>
+            <span style={{ color: "#C5E5E0" }}>Healthier Society</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-emerald-50">
             Together, let&apos;s build a healthier, happier, and more compassionate society through Yoga, Positive Thinking, and Selfless Service.
@@ -744,7 +746,7 @@ export default function HomePage() {
             <Link
               href="/volunteer"
               className="flex items-center gap-2 rounded-xl px-8 py-4 text-base font-bold text-white transition-all hover:shadow-2xl hover:scale-105"
-              style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})`, boxShadow: "0 8px 30px rgba(255,116,104,0.4)" }}
+style={{ background: `linear-gradient(135deg, ${palette.coral}, ${palette.coralHover})`, boxShadow: "0 8px 30px rgba(255,116,104,0.4)" }}
             >
               <Heart className="size-5" /> Join Our Programs
             </Link>

@@ -131,7 +131,7 @@ export default function CmsPageEditor({
         setStatus(p.status)
       } else {
         toast.error("Page not found")
-        router.push("/cms")
+        router.push("/admin/cms")
       }
     } catch {
       toast.error("Failed to load page")
@@ -183,7 +183,7 @@ export default function CmsPageEditor({
       const data = await res.json()
       if (data.success) {
         toast.success("Page deleted")
-        router.push("/cms")
+        router.push("/admin/cms")
       } else {
         toast.error(data.error || "Failed to delete")
       }
@@ -220,7 +220,7 @@ export default function CmsPageEditor({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon-sm" render={<Link href="/cms" />}>
+          <Button variant="ghost" size="icon-sm" render={<Link href="/admin/cms" />}>
             <ArrowLeft className="size-4" />
           </Button>
           <h2 className="text-2xl font-bold tracking-tight">Edit Page</h2>

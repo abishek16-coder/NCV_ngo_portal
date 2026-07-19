@@ -140,7 +140,7 @@ export default function AdminUsersPage() {
                 <TableRow key={u.id}>
                   <TableCell>
                     <div className="flex items-center gap-3">
-                      <div className="flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-[#FF7468] to-[#F64F40] text-[10px] font-bold text-white">
+                      <div className="flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-[#1B8271] to-[#186F61] text-[10px] font-bold text-white">
                         {u.firstName[0]}{u.lastName[0]}
                       </div>
                       <div>

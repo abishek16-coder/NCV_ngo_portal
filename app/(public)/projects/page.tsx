@@ -6,7 +6,7 @@ import { FolderOpen, MapPin, ArrowRight, Target, Sun, Users, Activity } from "lu
 
 const palette = {
   primary: "#1B8271",
-  secondary: "#FF7468",
+  secondary: "#1B8271",
   heading: "#071C35",
   body: "#475569",
 }
@@ -83,10 +83,10 @@ export default function ProjectsPage() {
 
                 return (
                   <div key={project.id} className="group rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-lg transition-all">
-                    <div className="h-48 bg-gradient-to-br from-[#1B8271]/10 to-[#FF7468]/10 flex items-center justify-center relative">
+                    <div className="h-48 bg-gradient-to-br from-[#1B8271]/10 to-[#186F61]/10 flex items-center justify-center relative">
                       <Icon className="size-16 text-[#1B8271]/20" />
                       {project.isFeatured && (
-                        <span className="absolute top-3 right-3 rounded-full bg-[#FF7468] px-2.5 py-1 text-[10px] font-bold text-white uppercase tracking-wide">Featured</span>
+                        <span className="absolute top-3 right-3 rounded-full bg-[#1B8271] px-2.5 py-1 text-[10px] font-bold text-white uppercase tracking-wide">Featured</span>
                       )}
                       <span className={`absolute top-3 left-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide border ${statusColors[project.status] || ""}`}>
                         {project.status.replace("_", " ")}
@@ -114,7 +114,7 @@ export default function ProjectsPage() {
                         </div>
                       )}
 
-                      <Link href={`/projects/${project.slug}`} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#FF7468] hover:text-[#F64F40] transition-colors">
+                      <Link href={`/projects/${project.slug}`} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#1B8271] hover:text-[#186F61] transition-colors">
                         Learn More <ArrowRight className="size-3.5" />
                       </Link>
                     </div>
