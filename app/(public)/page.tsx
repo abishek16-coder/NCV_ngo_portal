@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
@@ -170,6 +171,26 @@ function SectionHeader({ badge, title, subtitle, center = true }: {
   );
 }
 
+function HeroLogoCircle() {
+  return (
+    <div className="relative inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 p-2 shadow-[0_20px_60px_rgba(255,255,255,0.08)] backdrop-blur-xl overflow-hidden">
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-orange-400 via-amber-300 to-emerald-500 opacity-40 animate-pulse-slow" />
+      <div className="relative flex h-28 w-28 items-center justify-center rounded-full bg-slate-950/90 border border-white/10 shadow-lg shadow-slate-950/40 overflow-hidden">
+        <div className="absolute inset-0 rounded-full ring-2 ring-white/10" />
+        <Image
+          src="/logo.png"
+          alt="NCV logo"
+          width={104}
+          height={104}
+          className="rounded-full object-cover"
+          priority
+        />
+      </div>
+      <div className="pointer-events-none absolute -right-5 -top-5 h-12 w-12 rounded-full bg-gradient-to-br from-orange-300 to-pink-400 opacity-85 blur-2xl animate-float" />
+    </div>
+  );
+}
+
 // ─────────────────────────── Page ────────────────────────────────────────────
 
 export default function HomePage() {
@@ -200,23 +221,31 @@ export default function HomePage() {
                 <span className="text-sm font-semibold text-orange-300">Narchinthanai Vattam (NCV)</span>
               </div>
 
-              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1]">
-                Health &bull; Yoga &bull;
-                <span
-                  className="block mt-2"
-                  style={{
-                    background: "linear-gradient(90deg, #f97316, #fbbf24, #10b981)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  Positive Thinking
-                </span>
-              </h1>
+              <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+                <div className="min-w-0">
+                  <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1]">
+                    Health &bull; Yoga &bull;
+                    <span
+                      className="block mt-2"
+                      style={{
+                        background: "linear-gradient(90deg, #f97316, #fbbf24, #10b981)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                      }}
+                    >
+                      Positive Thinking
+                    </span>
+                  </h1>
 
-              <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-xl">
-                Transforming lives through Yoga, Wellness, and Selfless Service. Empowering individuals and communities to embrace holistic health and value-based living.
-              </p>
+                  <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-xl">
+                    Transforming lives through Yoga, Wellness, and Selfless Service. Empowering individuals and communities to embrace holistic health and value-based living.
+                  </p>
+                </div>
+
+                <div className="flex shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 p-3 shadow-[0_25px_60px_rgba(15,23,42,0.35)] backdrop-blur-xl">
+                  <HeroLogoCircle />
+                </div>
+              </div>
 
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
