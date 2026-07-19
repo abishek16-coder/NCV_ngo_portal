@@ -6,7 +6,6 @@ import {
   Eye,
   Heart,
   Users,
-  FolderOpen,
   Calendar,
   MapPin,
   ArrowRight,
@@ -15,7 +14,6 @@ import {
   HandHeart,
   Globe,
   BookOpen,
-  Leaf,
   Sun,
   Sparkles,
   Activity,
@@ -23,12 +21,12 @@ import {
   Brain,
   CheckCircle,
   Quote,
-  Play,
   ChevronRight,
   Phone,
+  Mail,
 } from "lucide-react";
 
-// ─────────────────────────── Data ────────────────────────────────────────────
+// ─────────────────────────── Design tokens ────────────────────────────────
 
 const palette = {
   primary: "#1B8271",
@@ -39,6 +37,17 @@ const palette = {
   heading: "#071C35",
   body: "#475569",
 };
+
+// ─────────────────────────── Data ──────────────────────────────────────────
+
+/* eslint-disable @typescript-eslint/no-unused-vars -- The public layout owns the active site header; this legacy component remains available for standalone rendering. */
+const navLinks = [
+  { label: "About", href: "/about" },
+  { label: "Programs", href: "/projects" },
+  { label: "Events", href: "/events" },
+  { label: "Get Involved", href: "/volunteer" },
+  { label: "Contact", href: "/contact" },
+];
 
 const stats = [
   { label: "Yoga Sessions", value: "1,000+", icon: Sun, color: palette.primary },
@@ -118,7 +127,7 @@ const testimonials = [
     name: "Priya S.",
     role: "Yoga Practitioner",
     initials: "PS",
-    color: "from-blue-500 to-blue-600",
+    color: palette.primary,
     rating: 5,
     quote: "NCV's yoga sessions transformed my health completely. I feel stronger, calmer, and more focused. The free online classes make it so easy to stay consistent every day.",
   },
@@ -126,7 +135,7 @@ const testimonials = [
     name: "Rajesh K.",
     role: "Community Member",
     initials: "RK",
-    color: "from-emerald-500 to-emerald-600",
+    color: palette.primaryHover,
     rating: 5,
     quote: "The positive thinking workshops changed my entire outlook on life. NCV's holistic approach to wellness is truly remarkable and accessible to absolutely everyone.",
   },
@@ -134,7 +143,7 @@ const testimonials = [
     name: "Anita R.",
     role: "Senior Wellness Program",
     initials: "AR",
-    color: "from-amber-500 to-[#FF7468]",
+    color: palette.secondary,
     rating: 5,
     quote: "At 65, I never thought I could practice yoga. The senior citizen wellness program at NCV made it possible. I feel healthier and happier than ever before.",
   },
@@ -149,13 +158,13 @@ const coreActivities = [
   "Volunteer Development", "Educational Welfare Projects",
 ];
 
-// ─────────────────────────── Components ──────────────────────────────────────
+// ─────────────────────────── Small components ──────────────────────────────
 
 function SectionBadge({ children }: { children: React.ReactNode }) {
   return (
     <span
       className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider"
-      style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113,0.2)", color: palette.primary }}
+      style={{ background: "rgba(27,130,113,0.1)", border: "1px solid rgba(27,130,113,0.2)", color: palette.primary }}
     >
       <span className="size-1.5 rounded-full" style={{ background: palette.primary }} />
       {children}
@@ -169,11 +178,11 @@ function SectionHeader({ badge, title, subtitle, center = true }: {
   return (
     <div className={cn("mb-12", center && "text-center")}>
       <SectionBadge>{badge}</SectionBadge>
-      <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
+      <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl" style={{ color: palette.heading }}>
         {title}
       </h2>
       {subtitle && (
-        <p className={cn("mt-4 text-lg text-gray-500 leading-relaxed", center && "mx-auto max-w-2xl")}>
+        <p className={cn("mt-4 text-lg leading-relaxed", center && "mx-auto max-w-2xl")} style={{ color: palette.body }}>
           {subtitle}
         </p>
       )}
@@ -181,81 +190,168 @@ function SectionHeader({ badge, title, subtitle, center = true }: {
   );
 }
 
-function HeroLogoCircle() {
+function Logo({ size = 44 }: { size?: number }) {
   return (
-    <div className="relative inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 p-2 shadow-[0_20px_60px_rgba(255,255,255,0.08)] backdrop-blur-xl overflow-hidden">
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#FF7468] via-[#F64F40] to-[#1B8271] opacity-40 animate-pulse-slow" />
-      <div className="relative flex h-28 w-28 items-center justify-center rounded-full bg-slate-950/90 border border-white/10 shadow-lg shadow-slate-950/40 overflow-hidden">
-        <div className="absolute inset-0 rounded-full ring-2 ring-white/10" />
-        <Image
-          src="/logo.png"
-          alt="NCV logo"
-          width={104}
-          height={104}
-          className="rounded-full object-cover"
-          priority
-        />
-      </div>
-      <div className="pointer-events-none absolute -right-5 -top-5 h-12 w-12 rounded-full bg-gradient-to-br from-[#FF7468] to-[#F64F40] opacity-85 blur-2xl animate-float" />
+    <div
+      className="flex shrink-0 items-center justify-center overflow-hidden rounded-full ring-2 ring-white"
+      style={{ width: size, height: size, boxShadow: "0 4px 14px rgba(7,28,53,0.12)" }}
+    >
+      <Image src="/logo.png" alt="NCV logo" width={size} height={size} className="h-full w-full object-cover" priority />
     </div>
   );
 }
 
-// ─────────────────────────── Page ────────────────────────────────────────────
+// ─────────────────────────── Navbar ────────────────────────────────────────
+
+function Navbar() {
+  return (
+    <header
+      className="sticky top-0 z-50 w-full"
+      style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(7,28,53,0.06)" }}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        {/* Logo — top left */}
+        <Link href="/" className="flex items-center gap-3">
+          <Logo size={46} />
+          <div className="hidden leading-tight sm:block">
+            <p className="text-sm font-bold" style={{ color: palette.heading }}>Narchinthanai Vattam</p>
+            <p className="text-[11px] font-semibold tracking-[0.12em]" style={{ color: palette.primary }}>
+              NCV CHARITABLE TRUST
+            </p>
+          </div>
+        </Link>
+
+        {/* Nav links */}
+        <nav className="hidden items-center gap-8 md:flex">
+          {navLinks.map((l) => (
+            <Link
+              key={l.label}
+              href={l.href}
+              className="text-sm font-medium transition-colors hover:text-[#1B8271]"
+              style={{ color: palette.body }}
+            >
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* CTA */}
+        <div className="flex items-center gap-3">
+          <a
+            href="tel:9003075333"
+            className="hidden items-center gap-1.5 text-sm font-medium lg:flex"
+            style={{ color: palette.body }}
+          >
+            <Phone className="size-4" style={{ color: palette.secondary }} />
+            +91 90030 75333
+          </a>
+          <Link
+            href="/donate"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all hover:shadow-lg hover:scale-105"
+            style={{ background: palette.secondary, boxShadow: "0 6px 18px rgba(255,116,104,0.3)" }}
+          >
+            <Heart className="size-4" /> Donate
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+// ─────────────────────────── Page ──────────────────────────────────────────
+
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 export default function HomePage() {
   return (
     <>
       {/* ══════════════════════ HERO ══════════════════════ */}
-      <section className="relative overflow-hidden" style={{ minHeight: "92vh", display: "flex", alignItems: "center" }}>
-        {/* Background layers */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #ffffff 0%, #F3F4F8 45%, #ffffff 100%)" }} />
-        {/* Animated orbs */}
-        <div className="absolute -top-24 -right-24 size-[500px] rounded-full opacity-20 blur-3xl"
-          style={{ background: "radial-gradient(circle, #FF7468, transparent 70%)" }} />
-        <div className="absolute -bottom-24 -left-24 size-[400px] rounded-full opacity-15 blur-3xl"
-          style={{ background: "radial-gradient(circle, #1B8271, transparent 70%)" }} />
-        <div className="absolute top-1/3 right-1/3 size-64 rounded-full opacity-10 blur-3xl"
-          style={{ background: "radial-gradient(circle, #F64F40, transparent 70%)" }} />
-        {/* Dot grid */}
-        <div className="absolute inset-0 opacity-20"
-          style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+      <section className="relative overflow-hidden" style={{ background: palette.surface }}>
+        {/* Ambient color washes */}
+        <div className="absolute -top-32 -right-32 size-[520px] rounded-full opacity-20 blur-3xl"
+          style={{ background: `radial-gradient(circle, ${palette.secondary}, transparent 70%)` }} />
+        <div className="absolute -bottom-32 -left-32 size-[440px] rounded-full opacity-20 blur-3xl"
+          style={{ background: `radial-gradient(circle, ${palette.primary}, transparent 70%)` }} />
+        <div className="absolute inset-0 opacity-[0.35]"
+          style={{ backgroundImage: "radial-gradient(rgba(7,28,53,0.06) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
 
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 w-full">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            {/* Left — text */}
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6"
-style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113,0.2)" }}>
+        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+          <div className="grid items-center gap-14 lg:grid-cols-[0.85fr_1.15fr]">
+            {/* Left — visual identity panel */}
+            <div className="order-2 lg:order-1">
+              <div
+                className="relative rounded-[2rem] p-8"
+                style={{ background: "#fff", border: "1px solid rgba(7,28,53,0.06)", boxShadow: "0 30px 70px rgba(7,28,53,0.1)" }}
+              >
+                <div className="flex items-center justify-center py-8">
+                  <div className="relative">
+                    <div
+                      className="absolute inset-0 rounded-full opacity-30 blur-2xl"
+                      style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.primary})` }}
+                    />
+                    <div className="relative rounded-full p-2" style={{ background: "#fff", boxShadow: "0 20px 50px rgba(7,28,53,0.12)" }}>
+                      <Logo size={174} />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <p className="text-lg font-bold" style={{ color: palette.heading }}>Est. 2015</p>
+                  <p className="mt-1 text-sm" style={{ color: palette.body }}>Serving communities across India</p>
+                </div>
+
+                <div className="mt-8 grid grid-cols-2 gap-3">
+                  {stats.map((s) => (
+                    <div key={s.label} className="rounded-2xl p-4" style={{ background: palette.surface }}>
+                      <div
+                        className="mb-2 flex size-9 items-center justify-center rounded-xl text-white"
+                        style={{ background: `linear-gradient(135deg, ${s.color}, ${s.color}cc)` }}
+                      >
+                        <s.icon className="size-4" />
+                      </div>
+                      <p className="text-lg font-bold" style={{ color: palette.heading }}>{s.value}</p>
+                      <p className="text-xs" style={{ color: palette.body }}>{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right — big headline */}
+            <div className="order-1 lg:order-2">
+              <div
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2"
+                style={{ background: "rgba(27,130,113,0.1)", border: "1px solid rgba(27,130,113,0.2)" }}
+              >
                 <span className="size-2 rounded-full" style={{ background: palette.primary }} />
-                <span className="text-sm font-semibold" style={{ color: palette.primaryHover }}>Narchinthanai Vattam (NCV)</span>
+                <span className="text-sm font-semibold" style={{ color: palette.primaryHover }}>
+                  Narchinthanai Vattam (NCV) &middot; Registered Charitable Trust
+                </span>
               </div>
 
-              <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-                <div className="min-w-0">
-<h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1]">
-                    Health &bull; Yoga &bull;
-                    <span
-                      className="block mt-2"
-                      style={{
-                        background: "linear-gradient(90deg, #FF7468, #F64F40, #1B8271)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                      }}
-                    >
-                      Positive Thinking
-                    </span>
-                  </h1>
+              <h1
+                className="mt-6 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
+                style={{ color: palette.heading }}
+              >
+                Yoga
+                <span className="mx-3" style={{ color: palette.secondary }}>&bull;</span>
+                Health
+                <span
+                  className="block mt-2"
+                  style={{
+                    background: `linear-gradient(90deg, ${palette.secondary}, ${palette.secondaryHover}, ${palette.primary})`,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Positive Thinking
+                </span>
+              </h1>
 
-                  <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-xl">
-                    Transforming lives through Yoga, Wellness, and Selfless Service. Empowering individuals and communities to embrace holistic health and value-based living.
-                  </p>
-                </div>
-
-                <div className="flex shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 p-3 shadow-[0_25px_60px_rgba(15,23,42,0.35)] backdrop-blur-xl">
-                  <HeroLogoCircle />
-                </div>
-              </div>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed" style={{ color: palette.body }}>
+                Transforming lives through Yoga, Wellness, and Selfless Service. Empowering individuals and
+                communities to embrace holistic health and value-based living.
+              </p>
 
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
@@ -268,47 +364,26 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
                 </Link>
                 <Link
                   href="/volunteer"
-                  className="flex items-center gap-2 rounded-xl px-7 py-4 text-base font-semibold text-white transition-all hover:bg-white/15"
-                  style={{ border: "1px solid rgba(255,255,255,0.25)", background: "rgba(255,255,255,0.08)" }}
+                  className="flex items-center gap-2 rounded-xl px-7 py-4 text-base font-semibold transition-all hover:shadow-lg"
+                  style={{ background: "#fff", border: `1px solid rgba(7,28,53,0.12)`, color: palette.heading }}
                 >
                   Join Our Programs
                   <ArrowRight className="size-5" />
                 </Link>
               </div>
 
-              {/* Trust badges */}
-              <div className="mt-10 flex flex-wrap items-center gap-6">
+              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
                 {[
                   { icon: CheckCircle, text: "Registered Charitable Trust" },
                   { icon: Award, text: "Certified Instructors" },
                   { icon: Globe, text: "Free Online Sessions" },
                 ].map((b) => (
                   <div key={b.text} className="flex items-center gap-2">
-                    <b.icon className="size-4 text-emerald-400" />
-                    <span className="text-sm text-slate-400">{b.text}</span>
+                    <b.icon className="size-4" style={{ color: palette.primary }} />
+                    <span className="text-sm" style={{ color: palette.body }}>{b.text}</span>
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Right — stats + visual card */}
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((s) => (
-                <div
-                  key={s.label}
-                  className="rounded-2xl p-6 text-white transition-transform hover:scale-105"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(10px)" }}
-                >
-                  <div
-                    className="mb-4 flex size-12 items-center justify-center rounded-xl"
-                    style={{ background: `linear-gradient(135deg, ${s.color}, ${s.color}CC)` }}
-                  >
-                    <s.icon className="size-6 text-white" />
-                  </div>
-                  <p className="text-3xl font-bold">{s.value}</p>
-                  <p className="mt-1 text-sm text-slate-300">{s.label}</p>
-                </div>
-              ))}
             </div>
           </div>
         </div>
@@ -321,10 +396,9 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
             {/* Left visual */}
             <div className="relative">
               <div
-                className="aspect-[4/3] rounded-3xl overflow-hidden"
-                style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.primary})` }}
+                className="relative aspect-[4/3] overflow-hidden rounded-3xl"
+                style={{ background: `linear-gradient(135deg, ${palette.primary}, ${palette.primaryHover})` }}
               >
-                {/* Placeholder visual */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <div
@@ -334,31 +408,29 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
                       <Sun className="size-12 text-white" />
                     </div>
                     <p className="text-2xl font-bold text-white">Est. 2015</p>
-                    <p className="text-slate-400 mt-1">Serving Communities Across India</p>
+                    <p className="mt-1 text-emerald-100">Serving Communities Across India</p>
                   </div>
                 </div>
-                {/* Corner badges */}
                 <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-3">
                   {[
                     { label: "Cities Reached", value: "15+" },
                     { label: "Years of Service", value: "10+" },
                   ].map((b) => (
-                    <div key={b.label} className="rounded-xl px-4 py-3 text-white text-center"
-                      style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)" }}>
+                    <div key={b.label} className="rounded-xl px-4 py-3 text-center text-white"
+                      style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)" }}>
                       <p className="text-xl font-bold">{b.value}</p>
-                      <p className="text-xs text-slate-300 mt-0.5">{b.label}</p>
+                      <p className="mt-0.5 text-xs text-emerald-100">{b.label}</p>
                     </div>
                   ))}
                 </div>
               </div>
-              {/* Floating accent */}
               <div
-                className="absolute -right-5 -top-5 size-28 rounded-2xl flex items-center justify-center text-white font-bold text-sm text-center leading-tight"
-                style={{ background: "linear-gradient(135deg, #1B8271, #186F61)", boxShadow: "0 8px 30px rgba(27,130,113,0.4)" }}
+                className="absolute -right-5 -top-5 flex size-28 items-center justify-center rounded-2xl text-center text-white"
+                style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})`, boxShadow: "0 8px 30px rgba(255,116,104,0.4)" }}
               >
                 <div>
                   <p className="text-2xl font-bold">10K+</p>
-                  <p className="text-xs text-emerald-100">Lives Touched</p>
+                  <p className="text-xs text-white/90">Lives Touched</p>
                 </div>
               </div>
             </div>
@@ -366,7 +438,7 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
             {/* Right — text */}
             <div>
               <SectionBadge>About NCV</SectionBadge>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
+              <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl" style={{ color: palette.heading }}>
                 Narchinthanai Vattam (NCV)
               </h2>
               <div className="mt-6 space-y-4">
@@ -375,22 +447,21 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
                   "We believe that true transformation begins within. By combining the timeless principles of Yoga with modern health awareness and personal development, we inspire people of all ages to lead disciplined, healthy, and meaningful lives.",
                   "Our initiatives are open to everyone, irrespective of age, gender, religion, or background, making wellness and education truly accessible to all.",
                 ].map((para, i) => (
-                  <p key={i} className="text-base text-gray-500 leading-relaxed">{para}</p>
+                  <p key={i} className="text-base leading-relaxed" style={{ color: palette.body }}>{para}</p>
                 ))}
               </div>
 
-              {/* Mission & Vision mini cards */}
               <div className="mt-8 grid grid-cols-2 gap-4">
                 {[
-                  { icon: Target, label: "Our Mission", color: palette.secondary, bg: "rgba(255,116,104,0.08)", border: "rgba(255,116,104,0.2)", text: "Inspire through Yoga & Wellness" },
-                  { icon: Eye, label: "Our Vision", color: palette.primary, bg: "rgba(27,130,113,0.08)", border: "rgba(27,130,113,0.2)", text: "Healthier, Happier Society" },
+                  { icon: Target, label: "Our Mission", bg: "rgba(255,116,104,0.08)", border: "rgba(255,116,104,0.2)", color: palette.secondary, text: "Inspire through Yoga & Wellness" },
+                  { icon: Eye, label: "Our Vision", bg: "rgba(27,130,113,0.08)", border: "rgba(27,130,113,0.2)", color: palette.primary, text: "Healthier, Happier Society" },
                 ].map((c) => (
                   <div key={c.label} className="rounded-xl p-4" style={{ background: c.bg, border: `1px solid ${c.border}` }}>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="mb-2 flex items-center gap-2">
                       <c.icon className="size-4" style={{ color: c.color }} />
-                      <span className="text-xs font-semibold text-gray-600">{c.label}</span>
+                      <span className="text-xs font-semibold" style={{ color: palette.heading }}>{c.label}</span>
                     </div>
-                    <p className="text-sm text-gray-700 font-medium">{c.text}</p>
+                    <p className="text-sm font-medium" style={{ color: palette.body }}>{c.text}</p>
                   </div>
                 ))}
               </div>
@@ -409,16 +480,14 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
       </section>
 
       {/* ══════════════════════ MOTTO STRIP ══════════════════════ */}
-      <div
-        className="py-8 overflow-hidden"
-        style={{ background: "linear-gradient(90deg, #FF7468 0%, #F64F40 45%, #1B8271 100%)" }}
-      >
+      <div className="overflow-hidden py-8"
+        style={{ background: `linear-gradient(90deg, ${palette.secondary} 0%, ${palette.secondaryHover} 45%, ${palette.primary} 100%)` }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
-            <p className="text-xl font-bold text-white sm:text-2xl italic">
+            <p className="text-xl font-bold italic text-white sm:text-2xl">
               &ldquo;Health &bull; Yoga &bull; Positive Thinking&rdquo;
             </p>
-            <p className="text-[#FFB5AB] text-sm text-center sm:text-right">
+            <p className="text-center text-sm text-white/85 sm:text-right">
               Transforming Lives Through Yoga, Wellness &amp; Selfless Service
             </p>
           </div>
@@ -426,7 +495,7 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
       </div>
 
       {/* ══════════════════════ WHY NCV ══════════════════════ */}
-      <section className="py-20 lg:py-28" style={{ background: "#f8fafc" }}>
+      <section className="py-20 lg:py-28" style={{ background: palette.surface }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Why NCV"
@@ -434,21 +503,21 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
             subtitle="We believe wellness is not just about physical fitness — it is about achieving complete harmony of body, mind, and spirit."
           />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {whyNcv.map((item, i) => (
+            {whyNcv.map((item) => (
               <div
                 key={item.title}
                 className="group flex gap-4 rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
+                style={{ background: "#fff", border: "1px solid rgba(7,28,53,0.06)", boxShadow: "0 1px 4px rgba(7,28,53,0.04)" }}
               >
                 <div
                   className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-110"
-                  style={{ background: "linear-gradient(135deg, rgba(255,116,104,0.12), rgba(255,116,104,0.06))", border: "1px solid rgba(255,116,104,0.2)" }}
+                  style={{ background: "rgba(255,116,104,0.1)", border: "1px solid rgba(255,116,104,0.2)" }}
                 >
-                  <item.icon className="size-5 text-[#FF7468]" />
+                  <item.icon className="size-5" style={{ color: palette.secondary }} />
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-800">{item.title}</p>
-                  <p className="mt-1 text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                  <p className="font-semibold" style={{ color: palette.heading }}>{item.title}</p>
+                  <p className="mt-1 text-sm leading-relaxed" style={{ color: palette.body }}>{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -465,17 +534,17 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
             subtitle="A comprehensive range of programs focused on health, education, and community development."
           />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {coreActivities.map((activity, i) => (
+            {coreActivities.map((activity) => (
               <div
                 key={activity}
                 className="group flex items-center gap-3 rounded-xl px-4 py-3.5 transition-all duration-200 hover:shadow-sm"
-                style={{ background: "#f8fafc", border: "1px solid rgba(0,0,0,0.06)" }}
+                style={{ background: palette.surface, border: "1px solid rgba(7,28,53,0.06)" }}
               >
                 <span
                   className="size-2 shrink-0 rounded-full transition-transform group-hover:scale-150"
                   style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})` }}
                 />
-                <span className="text-sm text-gray-700">{activity}</span>
+                <span className="text-sm" style={{ color: palette.body }}>{activity}</span>
               </div>
             ))}
           </div>
@@ -483,22 +552,22 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
       </section>
 
       {/* ══════════════════════ PROJECTS ══════════════════════ */}
-      <section className="py-20 lg:py-28" style={{ background: "#f8fafc" }}>
+      <section className="py-20 lg:py-28" style={{ background: palette.surface }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between mb-12">
+          <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <SectionBadge>Our Work</SectionBadge>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: palette.heading }}>
                 Projects &amp; Initiatives
               </h2>
-              <p className="mt-3 text-gray-500 max-w-xl">
+              <p className="mt-3 max-w-xl" style={{ color: palette.body }}>
                 Impactful programs throughout the year to promote holistic wellness and social responsibility.
               </p>
             </div>
             <Link
               href="/projects"
-              className="inline-flex shrink-0 items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all hover:bg-gray-50"
-              style={{ borderColor: "rgba(0,0,0,0.12)" }}
+              className="inline-flex shrink-0 items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold transition-all hover:bg-white"
+              style={{ borderColor: "rgba(7,28,53,0.12)", color: palette.heading }}
             >
               View All Projects <ArrowRight className="size-4" />
             </Link>
@@ -510,9 +579,8 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
                 key={p.title}
                 href={p.href}
                 className="group overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-                style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}
+                style={{ background: "#fff", border: "1px solid rgba(7,28,53,0.06)", boxShadow: "0 2px 8px rgba(7,28,53,0.06)" }}
               >
-                {/* Visual header */}
                 <div
                   className="relative flex h-44 items-center justify-center overflow-hidden"
                   style={{ background: `linear-gradient(135deg, ${p.color}22, ${p.color}11)` }}
@@ -523,16 +591,13 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
                   >
                     <p.icon className="size-10 text-white" />
                   </div>
-                  <div
-                    className="absolute top-4 right-4 rounded-full px-3 py-1 text-xs font-semibold text-white"
-                    style={{ background: p.color }}
-                  >
+                  <div className="absolute top-4 right-4 rounded-full px-3 py-1 text-xs font-semibold text-white" style={{ background: p.color }}>
                     {p.tag}
                   </div>
                 </div>
                 <div className="p-5">
-                  <h3 className="text-lg font-bold text-gray-900">{p.title}</h3>
-                  <p className="mt-2 text-sm text-gray-500 leading-relaxed line-clamp-2">{p.desc}</p>
+                  <h3 className="text-lg font-bold" style={{ color: palette.heading }}>{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed line-clamp-2" style={{ color: palette.body }}>{p.desc}</p>
                   <div className="mt-4 flex items-center gap-1 text-sm font-semibold" style={{ color: p.color }}>
                     Learn More <ChevronRight className="size-4" />
                   </div>
@@ -546,72 +611,71 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
       {/* ══════════════════════ EVENTS ══════════════════════ */}
       <section className="py-20 lg:py-28" style={{ background: "#fff" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between mb-12">
+          <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <SectionBadge>Join Us</SectionBadge>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: palette.heading }}>
                 Upcoming Events
               </h2>
-              <p className="mt-3 text-gray-500 max-w-xl">
+              <p className="mt-3 max-w-xl" style={{ color: palette.body }}>
                 Participate in our wellness programs and community events open to everyone.
               </p>
             </div>
             <Link
               href="/events"
-              className="inline-flex shrink-0 items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all hover:bg-gray-50"
-              style={{ borderColor: "rgba(0,0,0,0.12)" }}
+              className="inline-flex shrink-0 items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold transition-all hover:bg-gray-50"
+              style={{ borderColor: "rgba(7,28,53,0.12)", color: palette.heading }}
             >
               View All Events <ArrowRight className="size-4" />
             </Link>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {events.map((ev, i) => (
-              <div
-                key={ev.title}
-                className="group rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
-              >
-                {/* Colored top bar */}
-                <div className="h-1.5" style={{ background: i === 0 ? palette.secondary : i === 1 ? palette.primary : palette.primaryHover }} />
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div
-                      className="flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
-                      style={{
-                        background: i === 0 ? "rgba(255,116,104,0.1)" : i === 1 ? "rgba(27,130,113,0.1)" : "rgba(24,111,97,0.08)",
-                        color: i === 0 ? palette.secondary : i === 1 ? palette.primary : palette.primaryHover,
-                      }}
-                    >
-                      <Calendar className="size-3" />
-                      {ev.date}
+            {events.map((ev, i) => {
+              const barColor = i === 0 ? palette.secondary : i === 1 ? palette.primary : palette.primaryHover;
+              return (
+                <div
+                  key={ev.title}
+                  className="group overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                  style={{ background: "#fff", border: "1px solid rgba(7,28,53,0.06)", boxShadow: "0 2px 8px rgba(7,28,53,0.04)" }}
+                >
+                  <div className="h-1.5" style={{ background: barColor }} />
+                  <div className="p-6">
+                    <div className="mb-4 flex items-center justify-between">
+                      <div
+                        className="flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
+                        style={{ background: `${barColor}1a`, color: barColor }}
+                      >
+                        <Calendar className="size-3" />
+                        {ev.date}
+                      </div>
+                      <span className="rounded-full px-2.5 py-1 text-xs font-semibold" style={{ background: palette.surface, color: palette.body }}>
+                        {ev.tag}
+                      </span>
                     </div>
-                    <span className="text-xs font-semibold rounded-full px-2.5 py-1 bg-gray-100 text-gray-500">{ev.tag}</span>
+                    <h3 className="text-lg font-bold" style={{ color: palette.heading }}>{ev.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed line-clamp-2" style={{ color: palette.body }}>{ev.desc}</p>
+                    <div className="mt-4 flex items-center gap-1.5 text-xs" style={{ color: palette.body }}>
+                      <MapPin className="size-3.5" style={{ color: palette.secondary }} />
+                      {ev.location}
+                    </div>
+                    <Link
+                      href={ev.href}
+                      className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold text-white transition-all hover:shadow-md"
+                      style={{ background: `linear-gradient(135deg, ${barColor}, ${palette.secondaryHover})` }}
+                    >
+                      Register Now <ArrowRight className="size-4" />
+                    </Link>
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900">{ev.title}</h3>
-                  <p className="mt-2 text-sm text-gray-500 leading-relaxed line-clamp-2">{ev.desc}</p>
-                  <div className="mt-4 flex items-center gap-1.5 text-xs text-gray-400">
-                    <MapPin className="size-3.5 text-[#FF7468]" />
-                    {ev.location}
-                  </div>
-                  <Link
-                    href={ev.href}
-                    className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold text-white transition-all hover:shadow-md"
-                    style={{
-                      background: i === 0 ? `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})` : i === 1 ? `linear-gradient(135deg, ${palette.primary}, ${palette.primaryHover})` : `linear-gradient(135deg, ${palette.primaryHover}, ${palette.primary})`,
-                    }}
-                  >
-                    Register Now <ArrowRight className="size-4" />
-                  </Link>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* ══════════════════════ TESTIMONIALS ══════════════════════ */}
-      <section className="py-20 lg:py-28" style={{ background: "#f8fafc" }}>
+      <section className="py-20 lg:py-28" style={{ background: palette.surface }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Stories of Change"
@@ -623,23 +687,20 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
               <div
                 key={t.name}
                 className="group flex flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+                style={{ background: "#fff", border: "1px solid rgba(7,28,53,0.06)", boxShadow: "0 2px 8px rgba(7,28,53,0.04)" }}
               >
-                {/* Stars */}
-                <div className="flex gap-1 mb-4">
+                <div className="mb-4 flex gap-1">
                   {Array.from({ length: t.rating }).map((_, i) => (
                     <Star key={i} className="size-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                {/* Quote */}
                 <div className="relative flex-1">
-                  <Quote className="absolute -top-1 -left-1 size-8 text-[#FFB5AB]" />
-                  <p className="relative text-sm text-gray-600 leading-relaxed pl-2">
+                  <Quote className="absolute -top-1 -left-1 size-8" style={{ color: "rgba(255,116,104,0.25)" }} />
+                  <p className="relative pl-2 text-sm leading-relaxed" style={{ color: palette.body }}>
                     &ldquo;{t.quote}&rdquo;
                   </p>
                 </div>
-                {/* Author */}
-                <div className="mt-6 flex items-center gap-3 pt-5" style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}>
+                <div className="mt-6 flex items-center gap-3 pt-5" style={{ borderTop: "1px solid rgba(7,28,53,0.06)" }}>
                   <div
                     className="flex size-11 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white"
                     style={{ background: t.color }}
@@ -647,8 +708,8 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
                     {t.initials}
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-800">{t.name}</p>
-                    <p className="text-xs text-gray-400">{t.role}</p>
+                    <p className="font-semibold" style={{ color: palette.heading }}>{t.name}</p>
+                    <p className="text-xs" style={{ color: palette.body }}>{t.role}</p>
                   </div>
                 </div>
               </div>
@@ -658,24 +719,24 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
       </section>
 
       {/* ══════════════════════ CTA BANNER ══════════════════════ */}
-      <section className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #1B8271 0%, #F3F4F8 60%, #ffffff 100%)" }} />
+      <section className="relative overflow-hidden py-20 lg:py-28"
+        style={{ background: `linear-gradient(135deg, ${palette.primary} 0%, ${palette.primaryHover} 100%)` }}>
         <div className="absolute -right-16 -top-16 size-72 rounded-full opacity-20 blur-3xl"
-          style={{ background: "radial-gradient(circle, #FF7468, transparent)" }} />
-        <div className="absolute -left-16 -bottom-16 size-72 rounded-full opacity-15 blur-3xl"
-          style={{ background: "radial-gradient(circle, #1B8271, transparent)" }} />
+          style={{ background: `radial-gradient(circle, ${palette.secondary}, transparent)` }} />
+        <div className="absolute -left-16 -bottom-16 size-72 rounded-full opacity-20 blur-3xl"
+          style={{ background: "radial-gradient(circle, #fff, transparent)" }} />
 
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6"
-            style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113,0.2)" }}>
-            <Sparkles className="size-4 text-[#FF7468]" />
-            <span className="text-sm font-semibold text-[#F64F40]">Together We Transform</span>
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2"
+            style={{ background: "rgba(255,255,255,0.14)", border: "1px solid rgba(255,255,255,0.25)" }}>
+            <Sparkles className="size-4" style={{ color: palette.secondary }} />
+            <span className="text-sm font-semibold text-white">Together We Transform</span>
           </div>
           <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Join Us in Building a <br />
-            <span style={{ color: palette.secondary }}>Healthier Society</span>
+            <span style={{ color: "#FFD9D4" }}>Healthier Society</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-300 leading-relaxed">
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-emerald-50">
             Together, let&apos;s build a healthier, happier, and more compassionate society through Yoga, Positive Thinking, and Selfless Service.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -689,20 +750,23 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
             <Link
               href="/contact"
               className="flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white transition-all hover:bg-white/15"
-              style={{ border: "1px solid rgba(255,255,255,0.25)", background: "rgba(255,255,255,0.08)" }}
+              style={{ border: "1px solid rgba(255,255,255,0.3)", background: "rgba(255,255,255,0.1)" }}
             >
               Contact Us <ArrowRight className="size-5" />
             </Link>
           </div>
 
-          {/* Contact info strip */}
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
-            <a href="tel:9003075333" className="flex items-center gap-2 text-slate-400 hover:text-[#FF7468] transition-colors text-sm">
+            <a href="tel:9003075333" className="flex items-center gap-2 text-sm text-emerald-50 transition-colors hover:text-white">
               <Phone className="size-4" /> +91 9003075333
             </a>
-            <span className="text-slate-700">|</span>
-            <span className="flex items-center gap-2 text-slate-400 text-sm">
-              <MapPin className="size-4 text-[#FF7468]" /> Valasaravakkam, Chennai
+            <span className="text-white/30">|</span>
+            <a href="mailto:info@ncv.org" className="flex items-center gap-2 text-sm text-emerald-50 transition-colors hover:text-white">
+              <Mail className="size-4" /> info@ncv.org
+            </a>
+            <span className="text-white/30">|</span>
+            <span className="flex items-center gap-2 text-sm text-emerald-50">
+              <MapPin className="size-4" /> Valasaravakkam, Chennai
             </span>
           </div>
         </div>
@@ -713,15 +777,15 @@ style={{ background: "rgba(27,130,113,0.12)", border: "1px solid rgba(27,130,113
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
             <SectionBadge>Our Network</SectionBadge>
-            <h2 className="mt-4 text-2xl font-bold text-gray-900">Partners &amp; Supporters</h2>
-            <p className="mt-2 text-gray-500">Proud to collaborate with organizations sharing our vision.</p>
+            <h2 className="mt-4 text-2xl font-bold" style={{ color: palette.heading }}>Partners &amp; Supporters</h2>
+            <p className="mt-2" style={{ color: palette.body }}>Proud to collaborate with organizations sharing our vision.</p>
           </div>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
             {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
-                className="flex aspect-[3/2] items-center justify-center rounded-2xl text-xs text-gray-400 font-medium transition-all hover:shadow-md"
-                style={{ background: "#f8fafc", border: "1px dashed rgba(0,0,0,0.12)" }}
+                className="flex aspect-[3/2] items-center justify-center rounded-2xl text-xs font-medium transition-all hover:shadow-md"
+                style={{ background: palette.surface, border: "1px dashed rgba(7,28,53,0.12)", color: palette.body }}
               >
                 Partner {i + 1}
               </div>

@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X, Heart, Sparkles, ArrowRight, HandHeart } from "lucide-react";
+import { Menu, X, Heart, Sparkles, ArrowRight } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -20,20 +21,27 @@ function TrustLogo({ size = "default" }: { size?: "default" | "small" }) {
   const isSmall = size === "small";
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3.5">
       <div
         className={cn(
-          "flex shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#FF7468] via-[#F64F40] to-[#FF9A81] text-white shadow-lg shadow-[#FFB5AB]",
-          isSmall ? "size-10" : "size-12"
+          "relative flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-white ring-2 ring-[#1B8271]/15 shadow-[0_8px_24px_rgba(27,130,113,0.18)]",
+          isSmall ? "size-11" : "size-[58px]"
         )}
       >
-        <HandHeart className={cn("text-white", isSmall ? "size-5" : "size-6")} />
+        <Image
+          src="/logo.png"
+          alt="NCV Charitable Trust logo"
+          fill
+          sizes={isSmall ? "44px" : "58px"}
+          className="object-cover"
+          priority
+        />
       </div>
       <div className="leading-tight">
-        <p className="text-sm font-semibold tracking-[0.2em] text-slate-800 uppercase">
+        <p className="text-sm font-bold tracking-[0.16em] text-[#071C35] uppercase">
           NCV Trust
         </p>
-        <p className="text-[11px] font-medium text-slate-500">
+        <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#1B8271]">
           Narchinthanai Vattam
         </p>
       </div>
@@ -55,10 +63,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
-
   const handleLogoTap = useCallback(() => {
     tapCount.current += 1;
     if (tapTimer.current) clearTimeout(tapTimer.current);
@@ -77,7 +81,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="hidden items-center justify-center gap-2 bg-gradient-to-r from-[#FF7468] via-[#F64F40] to-[#FF9A81] px-4 py-2 text-center text-xs font-medium text-white sm:flex">
+      <div className="hidden items-center justify-center gap-2 bg-gradient-to-r from-[#FF7468] to-[#F64F40] px-4 py-2 text-center text-xs font-medium text-white sm:flex">
         <Sparkles className="size-3.5" />
         <span>Free online yoga sessions daily at 6:00 AM</span>
         <span className="mx-1 opacity-60">•</span>
@@ -94,7 +98,7 @@ export function Navbar() {
             : "bg-white/90 backdrop-blur-sm"
         )}
       >
-        <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-[82px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <button
             onClick={handleLogoTap}
             className="flex items-center rounded-full transition-transform duration-200 hover:scale-[1.01]"
