@@ -80,7 +80,7 @@ export default function AdminVolunteersPage() {
 
       <div className="flex flex-wrap items-center gap-3">
         <Input placeholder="Search volunteers..." value={search} onChange={(e) => setSearch(e.target.value)} className="w-64" />
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
+        <Select value={statusFilter} onValueChange={(v) => { if (v) setStatusFilter(v) }}>
           <SelectTrigger className="w-40"><SelectValue placeholder="All statuses" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Statuses</SelectItem>
@@ -130,7 +130,7 @@ export default function AdminVolunteersPage() {
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-1">
                       <Button variant="ghost" size="icon-sm" onClick={() => setDetailTarget(v)}>👁</Button>
-                      <Select value={v.status} onValueChange={(val) => updateStatus(v.id, val as Volunteer["status"])}>
+                      <Select value={v.status} onValueChange={(val) => { if (val) updateStatus(v.id, val as Volunteer["status"]) }}>
                         <SelectTrigger className="w-8 h-8 border-0 bg-transparent"><span className="text-xs">⋯</span></SelectTrigger>
                         <SelectContent>
                           <SelectItem value="ACTIVE">Active</SelectItem>

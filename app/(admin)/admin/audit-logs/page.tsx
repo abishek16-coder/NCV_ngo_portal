@@ -62,7 +62,7 @@ export default function AdminAuditLogsPage() {
       </div>
 
       <div className="flex items-center gap-3">
-        <Select value={actionFilter} onValueChange={(v) => { setActionFilter(v); setPage(1) }}>
+        <Select value={actionFilter} onValueChange={(v) => { if (v) { setActionFilter(v); setPage(1) } }}>
           <SelectTrigger className="w-40"><SelectValue placeholder="All actions" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Actions</SelectItem>

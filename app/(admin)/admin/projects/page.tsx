@@ -179,7 +179,7 @@ export default function AdminProjectsPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Status</Label>
-                  <Select value={form.status} onValueChange={(v) => setForm({ ...form, status: v as Project["status"] })}>
+                  <Select value={form.status} onValueChange={(v) => { if (v) setForm({ ...form, status: v as Project["status"] }) }}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="ACTIVE">Active</SelectItem>

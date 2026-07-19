@@ -181,6 +181,7 @@ function SectionHeader({ badge, title, subtitle, center = true }: {
       <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl" style={{ color: palette.heading }}>
         {title}
       </h2>
+      <div className="ncv-classic-rule" />
       {subtitle && (
         <p className={cn("mt-4 text-lg leading-relaxed", center && "mx-auto max-w-2xl")} style={{ color: palette.body }}>
           {subtitle}
@@ -264,7 +265,7 @@ function Navbar() {
 
 export default function HomePage() {
   return (
-    <>
+    <div className="ncv-classic-theme">
       {/* ══════════════════════ HERO ══════════════════════ */}
       <section className="relative overflow-hidden" style={{ background: palette.surface }}>
         {/* Ambient color washes */}
@@ -280,7 +281,7 @@ export default function HomePage() {
             {/* Left — visual identity panel */}
             <div className="order-2 lg:order-1">
               <div
-                className="relative rounded-[2rem] p-8"
+                className="relative rounded-[4px] p-8"
                 style={{ background: "#fff", border: "1px solid rgba(7,28,53,0.06)", boxShadow: "0 30px 70px rgba(7,28,53,0.1)" }}
               >
                 <div className="flex items-center justify-center py-8">
@@ -302,7 +303,7 @@ export default function HomePage() {
 
                 <div className="mt-8 grid grid-cols-2 gap-3">
                   {stats.map((s) => (
-                    <div key={s.label} className="rounded-2xl p-4" style={{ background: palette.surface }}>
+                    <div key={s.label} className="rounded-[4px] p-4" style={{ background: palette.surface }}>
                       <div
                         className="mb-2 flex size-9 items-center justify-center rounded-xl text-white"
                         style={{ background: `linear-gradient(135deg, ${s.color}, ${s.color}cc)` }}
@@ -330,7 +331,7 @@ export default function HomePage() {
               </div>
 
               <h1
-                className="mt-6 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
+                className="mt-6 text-5xl font-light uppercase leading-[1.05] tracking-[0.01em] sm:text-6xl lg:text-7xl"
                 style={{ color: palette.heading }}
               >
                 Yoga
@@ -356,7 +357,7 @@ export default function HomePage() {
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/donate"
-                  className="flex items-center gap-2 rounded-xl px-7 py-4 text-base font-semibold text-white transition-all hover:shadow-2xl hover:scale-105"
+                  className="flex items-center gap-2 rounded-[4px] px-7 py-4 text-base font-semibold text-white transition-all hover:shadow-2xl hover:scale-105"
                   style={{ background: palette.secondary, boxShadow: "0 8px 30px rgba(255,116,104,0.35)" }}
                 >
                   <Heart className="size-5" />
@@ -364,7 +365,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/volunteer"
-                  className="flex items-center gap-2 rounded-xl px-7 py-4 text-base font-semibold transition-all hover:shadow-lg"
+                  className="flex items-center gap-2 rounded-[4px] px-7 py-4 text-base font-semibold transition-all hover:shadow-lg"
                   style={{ background: "#fff", border: `1px solid rgba(7,28,53,0.12)`, color: palette.heading }}
                 >
                   Join Our Programs
@@ -793,6 +794,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

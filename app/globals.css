@@ -116,6 +116,44 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* Classic NCV landing theme: clean white canvas, Poppins body, Oswald display type. */
+.ncv-classic-theme {
+  color: #777;
+  font-family: var(--font-sans), sans-serif;
+  line-height: 1.75;
+}
+
+.ncv-classic-theme h1,
+.ncv-classic-theme h2,
+.ncv-classic-theme h3,
+.ncv-classic-theme h4 {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.ncv-classic-theme ::selection {
+  color: #fff;
+  background: #1B8271;
+}
+
+.ncv-classic-theme .ncv-classic-rule {
+  width: 165px;
+  height: 1px;
+  margin: 1.25rem auto 0;
+  background: #1B8271;
+}
+
+/* Lightweight equivalent of the supplied scroll theme, without its legacy plugin. */
+html {
+  scrollbar-color: rgba(27, 130, 113, 0.7) #f7f8fa;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #f7f8fa; }
+::-webkit-scrollbar-thumb { background: rgba(27, 130, 113, 0.7); border-radius: 16px; }
+::-webkit-scrollbar-thumb:hover { background: #1B8271; }
+
 @layer utilities {
   @keyframes pulse-slow {
     0%, 100% { opacity: 0.4; transform: scale(1); }

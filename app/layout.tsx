@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Oswald, Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "@/components/providers";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const playfair = Playfair_Display({
+const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+});
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-display",
 });
 
@@ -84,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn("font-sans", inter.variable)}>
+    <html lang="en" suppressHydrationWarning className={cn("font-sans", poppins.variable)}>
       <head>
         <script
           type="application/ld+json"
@@ -109,7 +113,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={cn(inter.className, playfair.variable)}>
+      <body className={cn(poppins.className, oswald.variable)}>
         <Providers>{children}</Providers>
       </body>
     </html>

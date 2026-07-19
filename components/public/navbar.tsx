@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
-import { useState, useRef, useCallback, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X, Heart, Sparkles, ArrowRight } from "lucide-react";
 
@@ -52,29 +52,13 @@ function TrustLogo({ size = "default" }: { size?: "default" | "small" }) {
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const router = useRouter();
   const pathname = usePathname();
-  const tapCount = useRef(0);
-  const tapTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const handleLogoTap = useCallback(() => {
-    tapCount.current += 1;
-    if (tapTimer.current) clearTimeout(tapTimer.current);
-    if (tapCount.current >= 5) {
-      tapCount.current = 0;
-      router.push("/admin");
-      return;
-    }
-    tapTimer.current = setTimeout(() => {
-      tapCount.current = 0;
-    }, 1000);
-  }, [router]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -99,13 +83,13 @@ export function Navbar() {
         )}
       >
         <div className="mx-auto flex h-[82px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <button
-            onClick={handleLogoTap}
+          <Link
+            href="/"
             className="flex items-center rounded-full transition-transform duration-200 hover:scale-[1.01]"
             aria-label="NCV Trust Home"
           >
             <TrustLogo />
-          </button>
+          </Link>
 
           <nav className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => (
@@ -113,15 +97,15 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "relative rounded-full px-3.5 py-2 text-sm font-semibold transition-all duration-200",
+                  "relative px-3 py-7 text-[12px] font-medium uppercase tracking-[0.08em] transition-colors duration-200",
                   isActive(link.href)
-                    ? "bg-[#FFF0EE] text-[#FF7468] shadow-sm"
-                    : "text-slate-600 hover:bg-[#FFF0EE] hover:text-[#FF7468]"
+                    ? "text-[#1B8271]"
+                    : "text-slate-600 hover:text-[#1B8271]"
                 )}
               >
                 {link.label}
                 {isActive(link.href) && (
-                  <span className="absolute bottom-1 left-1/2 h-1 w-5 -translate-x-1/2 rounded-full bg-[#FF7468]" />
+                  <span className="absolute bottom-4 left-1/2 h-px w-7 -translate-x-1/2 bg-[#1B8271]" />
                 )}
               </Link>
             ))}
@@ -130,14 +114,14 @@ export function Navbar() {
           <div className="hidden items-center gap-2 md:flex">
             <Link
               href="/donate"
-              className="inline-flex items-center gap-2 rounded-full border border-[#FFD1CC] bg-[#FFF0EE] px-4 py-2 text-sm font-semibold text-[#FF7468] transition-all hover:border-[#FFC2B7] hover:bg-[#FFE7E4]"
+              className="inline-flex items-center gap-2 rounded-[4px] border border-[#FF7468] bg-white px-4 py-2 text-sm font-semibold text-[#FF7468] transition-all hover:bg-[#FFF0EE]"
             >
               <Heart className="size-4 fill-[#FFB5AB] text-[#FF7468]" />
               Donate
             </Link>
             <Link
               href="/volunteer"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#FF7468] to-[#F64F40] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-[#FFB5AB] transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 rounded-[4px] bg-[#1B8271] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-[#1B8271]/20 transition-all hover:bg-[#186F61]"
             >
               <Sparkles className="size-4" />
               Join Us

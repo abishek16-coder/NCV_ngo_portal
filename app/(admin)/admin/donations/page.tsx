@@ -104,7 +104,7 @@ export default function AdminDonationsPage() {
       </div>
 
       <div className="flex items-center gap-3">
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
+        <Select value={statusFilter} onValueChange={(v) => { if (v) setStatusFilter(v) }}>
           <SelectTrigger className="w-40"><SelectValue placeholder="All statuses" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Statuses</SelectItem>
@@ -150,7 +150,7 @@ export default function AdminDonationsPage() {
                   <TableCell><StatusBadge status={d.status} /></TableCell>
                   <TableCell className="text-sm text-muted-foreground">{format(new Date(d.createdAt), "MMM d, yyyy")}</TableCell>
                   <TableCell className="text-right">
-                    <Select value={d.status} onValueChange={(val) => updateStatus(d.id, val as Donation["status"])}>
+                    <Select value={d.status} onValueChange={(val) => { if (val) updateStatus(d.id, val as Donation["status"]) }}>
                       <SelectTrigger className="w-8 h-8 border-0 bg-transparent"><span className="text-xs">⋯</span></SelectTrigger>
                       <SelectContent>
                         <SelectItem value="PENDING">Pending</SelectItem>

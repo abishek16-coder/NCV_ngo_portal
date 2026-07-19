@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
 const adminRoutes = ["/admin"];
 const apiProtectedRoutes = ["/api/admin"];
 
@@ -29,17 +27,17 @@ function verifyToken(token: string): boolean {
   }
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isAdminRoute = adminRoutes.some((route) => pathname.startsWith(route));
   const isApiProtected = apiProtectedRoutes.some((route) => pathname.startsWith(route));
-  const isPublic = publicRoutes.some((route) => pathname.startsWith(route));
 
   if (!isAdminRoute && !isApiProtected) {
     return NextResponse.next();
   }
 
+  const isPublic = publicRoutes.some((route) => pathname.startsWith(route));
   if (isPublic) {
     return NextResponse.next();
   }

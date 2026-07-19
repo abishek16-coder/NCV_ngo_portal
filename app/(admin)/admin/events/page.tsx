@@ -180,7 +180,7 @@ export default function AdminEventsPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Status</Label>
-                  <Select value={form.status} onValueChange={(v) => setForm({ ...form, status: v as Event["status"] })}>
+                  <Select value={form.status} onValueChange={(v) => { if (v) setForm({ ...form, status: v as Event["status"] }) }}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="UPCOMING">Upcoming</SelectItem>

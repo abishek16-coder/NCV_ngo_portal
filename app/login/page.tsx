@@ -47,7 +47,7 @@ export default function LoginPage() {
         setError(data.error || "Invalid credentials. Please try again.");
         return;
       }
-      router.push("/admin");
+      window.location.href = "/admin";
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
