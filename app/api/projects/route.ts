@@ -10,7 +10,7 @@ const createProjectSchema = z.object({
   description: z.string().min(1),
   content: z.string().optional(),
   shortDescription: z.string().optional(),
-  coverImageUrl: z.string().url().optional(),
+  coverImageUrl: z.string().optional(),
   status: z.nativeEnum(ProjectStatus).optional(),
   startDate: z.string().optional(),
   endDate: z.string().optional(),

@@ -8,7 +8,7 @@ import { TestimonialStatus } from "@prisma/client";
 const createTestimonialSchema = z.object({
   authorName: z.string().min(1, "Author name is required"),
   authorRole: z.string().optional(),
-  authorPhotoUrl: z.string().url().optional(),
+  authorPhotoUrl: z.string().optional(),
   content: z.string().min(10, "Content must be at least 10 characters"),
   rating: z.number().int().min(1).max(5).optional(),
   orderIndex: z.number().int().optional(),

@@ -9,7 +9,7 @@ const updateScholarshipSchema = z.object({
   description: z.string().min(1).optional(),
   eligibility: z.string().optional().nullable(),
   benefits: z.string().optional().nullable(),
-  coverImageUrl: z.string().url().optional().nullable(),
+  coverImageUrl: z.string().optional().nullable(),
   applicationDeadline: z.string().optional().nullable(),
   totalAmount: z.number().positive().optional().nullable(),
   totalSlots: z.number().int().positive().optional().nullable(),

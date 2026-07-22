@@ -17,7 +17,7 @@ const applySchema = z.object({
   course: z.string().optional(),
   yearOfStudy: z.number().int().positive().optional(),
   familyIncome: z.number().min(0).optional(),
-  documentsUrl: z.string().url().optional(),
+  documentsUrl: z.string().optional(),
 });
 
 export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {

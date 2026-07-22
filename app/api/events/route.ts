@@ -10,7 +10,7 @@ const createEventSchema = z.object({
   slug: z.string().min(1).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   description: z.string().min(1),
   shortDescription: z.string().optional(),
-  coverImageUrl: z.string().url().optional(),
+  coverImageUrl: z.string().optional(),
   eventDate: z.string(),
   endDate: z.string().optional(),
   startTime: z.string().optional(),

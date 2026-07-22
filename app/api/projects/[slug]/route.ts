@@ -11,7 +11,7 @@ const updateProjectSchema = z.object({
   description: z.string().min(1).optional(),
   content: z.string().optional(),
   shortDescription: z.string().optional(),
-  coverImageUrl: z.string().url().optional().nullable(),
+  coverImageUrl: z.string().optional().nullable(),
   status: z.nativeEnum(ProjectStatus).optional(),
   startDate: z.string().optional().nullable(),
   endDate: z.string().optional().nullable(),

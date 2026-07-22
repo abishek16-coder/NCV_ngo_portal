@@ -10,7 +10,7 @@ const updateEventSchema = z.object({
   slug: z.string().min(1).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
   description: z.string().min(1).optional(),
   shortDescription: z.string().optional().nullable(),
-  coverImageUrl: z.string().url().optional().nullable(),
+  coverImageUrl: z.string().optional().nullable(),
   eventDate: z.string().optional(),
   endDate: z.string().optional().nullable(),
   startTime: z.string().optional().nullable(),

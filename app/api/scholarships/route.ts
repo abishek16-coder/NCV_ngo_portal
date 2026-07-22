@@ -10,7 +10,7 @@ const createScholarshipSchema = z.object({
   description: z.string().min(1),
   eligibility: z.string().optional(),
   benefits: z.string().optional(),
-  coverImageUrl: z.string().url().optional(),
+  coverImageUrl: z.string().optional(),
   applicationDeadline: z.string().optional(),
   totalAmount: z.number().positive().optional(),
   totalSlots: z.number().int().positive().optional(),

@@ -6,8 +6,8 @@ import { handleApiError } from "@/utils/api-error";
 
 const createVideoSchema = z.object({
   title: z.string().min(1),
-  url: z.string().url(),
-  thumbnailUrl: z.string().url().optional(),
+  url: z.string().min(1),
+  thumbnailUrl: z.string().optional(),
   description: z.string().optional(),
   platform: z.string().optional(),
   isFeatured: z.boolean().optional(),
