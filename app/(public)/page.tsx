@@ -362,7 +362,7 @@ export default function HomePage() {
               </div>
 
               <h1
-                className="mt-6 text-5xl font-light uppercase leading-[1.05] tracking-[0.01em] sm:text-6xl lg:text-7xl"
+                className="mt-6 text-4xl font-light uppercase leading-[1.05] tracking-[0.01em] sm:text-5xl lg:text-7xl"
                 style={{ color: palette.heading }}
               >
                 Yoga

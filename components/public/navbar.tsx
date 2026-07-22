@@ -38,7 +38,7 @@ function TrustLogo({ size = "default" }: { size?: "default" | "small" }) {
           priority
         />
       </div>
-      <div className="leading-tight">
+      <div className="hidden leading-tight sm:block">
         <p className="text-sm font-bold tracking-[0.16em] text-white uppercase">
           NCV Trust
         </p>
