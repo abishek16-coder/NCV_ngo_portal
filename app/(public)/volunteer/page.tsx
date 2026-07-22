@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { TrustBackground } from "@/components/public/trust-background"
 
 export default function VolunteerPage() {
   const [form, setForm] = useState({
@@ -45,6 +46,7 @@ export default function VolunteerPage() {
 
   return (
     <div>
+      <TrustBackground />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#071C35] via-[#0f3d33] to-[#1B8271] py-20 sm:py-28">
         <div className="absolute inset-0 dot-grid-bg opacity-10" />

@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Menu, X, Heart, Sparkles, ArrowRight } from "lucide-react";
 
@@ -60,6 +61,25 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const logoClickCount = useRef(0);
+  const logoClickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const router = useRouter();
+
+  const handleLogoClick = useCallback(() => {
+    logoClickCount.current += 1;
+    if (logoClickTimer.current) clearTimeout(logoClickTimer.current);
+    if (logoClickCount.current >= 5) {
+      logoClickCount.current = 0;
+      router.push("/login");
+    } else {
+      logoClickTimer.current = setTimeout(() => { logoClickCount.current = 0; }, 2000);
+    }
+  }, [router]);
+
+  useEffect(() => {
+    return () => { if (logoClickTimer.current) clearTimeout(logoClickTimer.current); };
+  }, []);
+
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
@@ -84,13 +104,16 @@ export function Navbar() {
         style={{ background: scrolled ? undefined : "linear-gradient(135deg, #1B8271 0%, #186F61 100%)" }}
       >
         <div className="mx-auto flex h-[82px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/"
-            className="flex items-center rounded-full transition-transform duration-200 hover:scale-[1.01]"
+          <div
+            role="link"
+            tabIndex={0}
+            onClick={handleLogoClick}
+            onKeyDown={(e) => { if (e.key === "Enter") handleLogoClick(); }}
+            className="flex items-center rounded-full transition-transform duration-200 hover:scale-[1.01] cursor-pointer"
             aria-label="NCV Trust Home"
           >
             <TrustLogo />
-          </Link>
+          </div>
 
           <nav className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => (

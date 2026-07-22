@@ -4,6 +4,7 @@ import {
   ArrowRight, Star, HandHeart, Brain, Smile, CheckCircle, Sparkles,
   Phone, Mail, MapPin, ChevronRight, Quote,
 } from "lucide-react";
+import { TrustBackground } from "@/components/public/trust-background";
 
 const values = [
   { icon: Heart, title: "Compassion", desc: "We serve with empathy and kindness, treating every individual with dignity and respect." },
@@ -12,13 +13,6 @@ const values = [
   { icon: Sparkles, title: "Excellence", desc: "We maintain the highest standards in our teaching, programs, and impact." },
   { icon: BookOpen, title: "Education", desc: "Spreading knowledge of yoga, wellness, and positive thinking to all." },
   { icon: HandHeart, title: "Service", desc: "Selfless service (Seva) is at the heart of everything we do." },
-];
-
-const team = [
-  { name: "Dr. Rajesh Sharma", role: "Founder & Director", desc: "A visionary leader with 20+ years in yoga and community service." },
-  { name: "Priya Nair", role: "Program Director", desc: "Expert in designing holistic wellness programs for diverse communities." },
-  { name: "Arun Kumar", role: "Operations Head", desc: "Ensures smooth execution of all NCV Trust initiatives across India." },
-  { name: "Meera Patel", role: "Community Lead", desc: "Passionate about connecting volunteers with communities in need." },
 ];
 
 const milestones = [
@@ -33,6 +27,7 @@ const milestones = [
 export default function AboutPage() {
   return (
     <div>
+      <TrustBackground />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#0f3d33] via-[#1B8271] to-[#0f3d33] py-20 sm:py-28">
         <div className="absolute inset-0 dot-grid-bg opacity-10" />
@@ -128,28 +123,6 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="py-16 sm:py-24 bg-[#F8FAFB]">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-[#071C35] sm:text-4xl">Our Team</h2>
-            <p className="mt-4 text-[#475569]">Dedicated leaders driving our mission forward</p>
-          </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {team.map((t) => (
-              <div key={t.name} className="rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm transition-all hover:shadow-md">
-                <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-gradient-to-br from-[#1B8271] to-[#0f3d33] text-lg font-bold text-white">
-                  {t.name.split(" ").map((n) => n[0]).join("")}
-                </div>
-                <h3 className="mt-4 text-lg font-bold text-[#071C35]">{t.name}</h3>
-                <p className="text-sm font-medium text-[#1B8271]">{t.role}</p>
-                <p className="mt-2 text-xs text-[#475569] leading-relaxed">{t.desc}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useRef, useCallback, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import {
   Target,
@@ -207,6 +211,25 @@ function Logo({ size = 44 }: { size?: number }) {
 // ─────────────────────────── Navbar ────────────────────────────────────────
 
 function Navbar() {
+  const logoClickCount = useRef(0);
+  const logoClickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const router = useRouter();
+
+  const handleLogoClick = useCallback(() => {
+    logoClickCount.current += 1;
+    if (logoClickTimer.current) clearTimeout(logoClickTimer.current);
+    if (logoClickCount.current >= 5) {
+      logoClickCount.current = 0;
+      router.push("/login");
+    } else {
+      logoClickTimer.current = setTimeout(() => { logoClickCount.current = 0; }, 2000);
+    }
+  }, [router]);
+
+  useEffect(() => {
+    return () => { if (logoClickTimer.current) clearTimeout(logoClickTimer.current); };
+  }, []);
+
   return (
     <header
       className="sticky top-0 z-50 w-full"
@@ -214,7 +237,13 @@ function Navbar() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         {/* Logo — top left */}
-        <Link href="/" className="flex items-center gap-3">
+        <div
+          role="link"
+          tabIndex={0}
+          onClick={handleLogoClick}
+          onKeyDown={(e) => { if (e.key === "Enter") handleLogoClick(); }}
+          className="flex items-center gap-3 cursor-pointer"
+        >
           <Logo size={46} />
           <div className="hidden leading-tight sm:block">
             <p className="text-sm font-bold" style={{ color: palette.heading }}>Narchinthanai Vattam</p>
@@ -222,7 +251,7 @@ function Navbar() {
               NCV CHARITABLE TRUST
             </p>
           </div>
-        </Link>
+        </div>
 
         {/* Nav links */}
         <nav className="hidden items-center gap-8 md:flex">

@@ -27,6 +27,8 @@ export default function AdminGalleryPage() {
   const [videoOpen, setVideoOpen] = useState(false)
   const [deleteTarget, setDeleteTarget] = useState<{ type: "photo" | "video"; id: string } | null>(null)
   const [photoForm, setPhotoForm] = useState({ url: "", alt: "", caption: "", album: "", isFeatured: false })
+  const [photoFiles, setPhotoFiles] = useState<File[]>([])
+  const [photoPreviews, setPhotoPreviews] = useState<string[]>([])
   const [videoForm, setVideoForm] = useState({ title: "", url: "", description: "", isFeatured: false })
   const [saving, setSaving] = useState(false)
 
@@ -47,17 +49,45 @@ export default function AdminGalleryPage() {
   useEffect(() => { fetchData() }, [fetchData])
 
   const handleSavePhoto = async () => {
-    if (!photoForm.url.trim()) { toast.error("URL is required"); return }
     setSaving(true)
     try {
-      const res = await fetch("/api/gallery/photos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(photoForm),
-      })
-      const data = await res.json()
-      if (data.success) { toast.success("Photo added"); setPhotoOpen(false); setPhotoForm({ url: "", alt: "", caption: "", album: "", isFeatured: false }); fetchData() }
-      else { toast.error(data.error) }
+      if (photoFiles.length > 0) {
+        let successCount = 0
+        for (const file of photoFiles) {
+          const fd = new FormData()
+          fd.append("file", file)
+          const uploadRes = await fetch("/api/upload", { method: "POST", body: fd })
+          const uploadData = await uploadRes.json()
+          if (!uploadData.success) { toast.error(`Failed to upload ${file.name}: ${uploadData.error}`); continue }
+          const res = await fetch("/api/gallery/photos", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...photoForm, url: uploadData.data.url }),
+          })
+          const data = await res.json()
+          if (data.success) successCount++
+          else toast.error(data.error)
+        }
+        if (successCount > 0) toast.success(`${successCount} photo${successCount > 1 ? "s" : ""} added`)
+      } else if (photoForm.url?.trim()) {
+        const res = await fetch("/api/gallery/photos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(photoForm),
+        })
+        const data = await res.json()
+        if (data.success) toast.success("Photo added")
+        else { toast.error(data.error); setSaving(false); return }
+      } else {
+        toast.error("Please select files or enter a URL")
+        setSaving(false)
+        return
+      }
+      setPhotoOpen(false)
+      setPhotoForm({ url: "", alt: "", caption: "", album: "", isFeatured: false })
+      setPhotoFiles([])
+      setPhotoPreviews([])
+      fetchData()
     } catch { toast.error("Failed to save") }
     finally { setSaving(false) }
   }
@@ -104,13 +134,47 @@ export default function AdminGalleryPage() {
 
         <TabsContent value="photos" className="space-y-4">
           <div className="flex justify-end">
-            <Dialog open={photoOpen} onOpenChange={(open) => { setPhotoOpen(open); if (!open) setPhotoForm({ url: "", alt: "", caption: "", album: "", isFeatured: false }) }}>
+            <Dialog open={photoOpen} onOpenChange={(open) => { setPhotoOpen(open); if (!open) { setPhotoForm({ url: "", alt: "", caption: "", album: "", isFeatured: false }); setPhotoFiles([]); setPhotoPreviews([]) } }}>
               <DialogTrigger render={<Button onClick={() => setPhotoOpen(true)} />}>
                 <Plus className="size-4" /> Add Photo
               </DialogTrigger>
               <DialogContent>
-                <DialogHeader><DialogTitle>Add Photo</DialogTitle></DialogHeader>
+                <DialogHeader><DialogTitle>Add Photos</DialogTitle></DialogHeader>
                 <div className="grid gap-4 py-2">
+                  <div className="space-y-2">
+                    <Label>Upload from Device</Label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground"
+                      onChange={(e) => {
+                        const files = Array.from(e.target.files || [])
+                        setPhotoFiles(files)
+                        setPhotoPreviews(files.map((f) => URL.createObjectURL(f)))
+                      }}
+                    />
+                    {photoPreviews.length > 0 && (
+                      <div className="grid grid-cols-3 gap-2 mt-2">
+                        {photoPreviews.map((src, i) => (
+                          <div key={i} className="relative">
+                            <img src={src} alt="" className="h-24 w-full rounded-lg object-cover" />
+                            <button type="button" onClick={() => {
+                              const newFiles = photoFiles.filter((_, idx) => idx !== i)
+                              const newPreviews = photoPreviews.filter((_, idx) => idx !== i)
+                              setPhotoFiles(newFiles)
+                              setPhotoPreviews(newPreviews)
+                            }} className="absolute top-1 right-1 size-5 rounded-full bg-black/50 text-white flex items-center justify-center text-xs">&times;</button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {photoFiles.length > 0 && <p className="text-xs text-muted-foreground">{photoFiles.length} file{photoFiles.length > 1 ? "s" : ""} selected</p>}
+                  </div>
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center"><div className="w-full border-t" /></div>
+                    <div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-muted-foreground">or paste URL</span></div>
+                  </div>
                   <div className="space-y-2"><Label>Image URL</Label><Input value={photoForm.url} onChange={(e) => setPhotoForm({ ...photoForm, url: e.target.value })} placeholder="https://..." /></div>
                   <div className="space-y-2"><Label>Alt Text</Label><Input value={photoForm.alt} onChange={(e) => setPhotoForm({ ...photoForm, alt: e.target.value })} /></div>
                   <div className="space-y-2"><Label>Caption</Label><Input value={photoForm.caption} onChange={(e) => setPhotoForm({ ...photoForm, caption: e.target.value })} /></div>
@@ -119,7 +183,7 @@ export default function AdminGalleryPage() {
                 </div>
                 <DialogFooter>
                   <Button variant="outline" onClick={() => setPhotoOpen(false)}>Cancel</Button>
-                  <Button onClick={handleSavePhoto} disabled={saving}>{saving ? "Saving..." : "Save"}</Button>
+                  <Button onClick={handleSavePhoto} disabled={saving}>{saving ? "Uploading..." : "Save"}</Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>

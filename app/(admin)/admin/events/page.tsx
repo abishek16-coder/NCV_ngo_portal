@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from "react"
 import { format } from "date-fns"
-import { Plus, Pencil, Trash2, Calendar, Users } from "lucide-react"
+import { Plus, Pencil, Trash2, Calendar, Users, Eye, Mail, Phone, MapPin } from "lucide-react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
@@ -37,6 +37,12 @@ interface Event {
   _count: { registrations: number }
 }
 
+interface Registration {
+  id: string; firstName: string; lastName: string; email: string
+  phone: string | null; city: string | null; organization: string | null
+  status: string; notes: string | null; createdAt: string
+}
+
 function slugify(text: string) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
 }
@@ -57,7 +63,12 @@ export default function AdminEventsPage() {
   const [createOpen, setCreateOpen] = useState(false)
   const [editTarget, setEditTarget] = useState<Event | null>(null)
   const [deleteTarget, setDeleteTarget] = useState<Event | null>(null)
+  const [registrationsTarget, setRegistrationsTarget] = useState<Event | null>(null)
+  const [registrations, setRegistrations] = useState<Registration[]>([])
+  const [regLoading, setRegLoading] = useState(false)
   const [form, setForm] = useState({ title: "", slug: "", description: "", eventDate: "", venue: "", city: "", maxAttendees: "", status: "UPCOMING" as Event["status"], isFeatured: false })
+  const [coverFile, setCoverFile] = useState<File | null>(null)
+  const [coverPreview, setCoverPreview] = useState<string | null>(null)
   const slugEdited = useRef(false)
   const [saving, setSaving] = useState(false)
 
@@ -72,9 +83,22 @@ export default function AdminEventsPage() {
 
   useEffect(() => { fetchEvents() }, [fetchEvents])
 
+  const openRegistrations = async (e: Event) => {
+    setRegistrationsTarget(e)
+    setRegLoading(true)
+    try {
+      const res = await fetch(`/api/events/${e.slug}/registrations`)
+      const data = await res.json()
+      if (data.success) setRegistrations(data.data)
+    } catch { toast.error("Failed to load registrations") }
+    finally { setRegLoading(false) }
+  }
+
   const resetForm = () => {
     setForm({ title: "", slug: "", description: "", eventDate: "", venue: "", city: "", maxAttendees: "", status: "UPCOMING", isFeatured: false })
     slugEdited.current = false
+    setCoverFile(null)
+    setCoverPreview(null)
   }
 
   const handleSave = async () => {
@@ -84,9 +108,19 @@ export default function AdminEventsPage() {
     }
     setSaving(true)
     try {
+      let coverImageUrl: string | undefined
+      if (coverFile) {
+        const fd = new FormData()
+        fd.append("file", coverFile)
+        const uploadRes = await fetch("/api/upload", { method: "POST", body: fd })
+        const uploadData = await uploadRes.json()
+        if (!uploadData.success) { toast.error(uploadData.error || "Upload failed"); setSaving(false); return }
+        coverImageUrl = uploadData.data.url
+      }
       const payload = {
         ...form,
         maxAttendees: form.maxAttendees ? parseInt(form.maxAttendees) : undefined,
+        ...(coverImageUrl && { coverImageUrl }),
       }
       const url = editTarget ? `/api/events/${editTarget.slug}` : "/api/events"
       const res = await fetch(url, {
@@ -156,6 +190,26 @@ export default function AdminEventsPage() {
               <div className="space-y-2">
                 <Label>Description</Label>
                 <Textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} />
+              </div>
+              <div className="space-y-2">
+                <Label>Cover Image</Label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0] || null
+                    setCoverFile(f)
+                    if (f) setCoverPreview(URL.createObjectURL(f))
+                    else setCoverPreview(null)
+                  }}
+                />
+                {coverPreview && (
+                  <div className="relative mt-2">
+                    <img src={coverPreview} alt="Cover preview" className="h-32 w-full rounded-lg object-cover" />
+                    <button type="button" onClick={() => { setCoverFile(null); setCoverPreview(null) }} className="absolute top-2 right-2 size-6 rounded-full bg-black/50 text-white flex items-center justify-center text-xs">&times;</button>
+                  </div>
+                )}
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -235,10 +289,10 @@ export default function AdminEventsPage() {
                   <TableCell><StatusBadge status={e.status} /></TableCell>
                   <TableCell className="text-sm text-muted-foreground">{e.city || e.venue || "—"}</TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-1.5 text-sm">
-                      <Users className="size-3.5 text-muted-foreground" />
+                    <button onClick={() => openRegistrations(e)} className="flex items-center gap-1.5 text-sm text-[#1B8271] hover:underline cursor-pointer">
+                      <Users className="size-3.5" />
                       {e._count.registrations}{e.maxAttendees ? `/${e.maxAttendees}` : ""}
-                    </div>
+                    </button>
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-1">
@@ -262,6 +316,50 @@ export default function AdminEventsPage() {
           <DialogFooter>
             <Button variant="outline" onClick={() => setDeleteTarget(null)}>Cancel</Button>
             <Button variant="destructive" onClick={handleDelete}>Delete</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={!!registrationsTarget} onOpenChange={(open) => { if (!open) { setRegistrationsTarget(null); setRegistrations([]) } }}>
+        <DialogContent className="max-w-3xl">
+          <DialogHeader>
+            <DialogTitle>Registrations — {registrationsTarget?.title}</DialogTitle>
+            <DialogDescription>View all registrations for this event</DialogDescription>
+          </DialogHeader>
+          <div className="max-h-[60vh] overflow-y-auto">
+            {regLoading ? (
+              <div className="space-y-3 py-4">{Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-10 w-full" />)}</div>
+            ) : registrations.length === 0 ? (
+              <div className="py-8 text-center text-sm text-muted-foreground">No registrations yet</div>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Email</TableHead>
+                    <TableHead>Phone</TableHead>
+                    <TableHead>City</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Date</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {registrations.map((r) => (
+                    <TableRow key={r.id}>
+                      <TableCell className="font-medium">{r.firstName} {r.lastName}</TableCell>
+                      <TableCell className="text-sm"><span className="flex items-center gap-1"><Mail className="size-3 text-muted-foreground" />{r.email}</span></TableCell>
+                      <TableCell className="text-sm">{r.phone ? <span className="flex items-center gap-1"><Phone className="size-3 text-muted-foreground" />{r.phone}</span> : "—"}</TableCell>
+                      <TableCell className="text-sm">{r.city ? <span className="flex items-center gap-1"><MapPin className="size-3 text-muted-foreground" />{r.city}</span> : "—"}</TableCell>
+                      <TableCell><Badge variant="outline" className={r.status === "CONFIRMED" ? "bg-green-500/10 text-green-700" : r.status === "CANCELLED" ? "bg-red-500/10 text-red-700" : "bg-amber-500/10 text-amber-700"}>{r.status}</Badge></TableCell>
+                      <TableCell className="text-xs text-muted-foreground">{format(new Date(r.createdAt), "MMM d, yyyy")}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setRegistrationsTarget(null); setRegistrations([]) }}>Close</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

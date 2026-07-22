@@ -5,8 +5,8 @@ import { requireAuth, requireRole } from "@/lib/auth";
 import { handleApiError } from "@/utils/api-error";
 
 const createPhotoSchema = z.object({
-  url: z.string().url(),
-  thumbnailUrl: z.string().url().optional(),
+  url: z.string().min(1),
+  thumbnailUrl: z.string().optional(),
   alt: z.string().optional(),
   caption: z.string().optional(),
   album: z.string().optional(),

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Calendar, MapPin, Clock, Users, ArrowRight } from "lucide-react"
+import { TrustBackground } from "@/components/public/trust-background"
 
 const palette = {
   primary: "#1B8271",
@@ -45,6 +46,7 @@ export default function EventsPage() {
 
   return (
     <div>
+      <TrustBackground />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#0f3d33] via-[#1B8271] to-[#0a5e4e] py-20 sm:py-28">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />

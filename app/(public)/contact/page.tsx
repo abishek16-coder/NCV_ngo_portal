@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { TrustBackground } from "@/components/public/trust-background"
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" })
@@ -36,6 +37,7 @@ export default function ContactPage() {
 
   return (
     <div>
+      <TrustBackground />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#071C35] via-[#0f3d33] to-[#1B8271] py-20 sm:py-28">
         <div className="absolute inset-0 dot-grid-bg opacity-10" />
@@ -72,7 +74,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-[#071C35]">Address</h3>
-                    <p className="mt-1 text-sm text-[#475569]">NCV Trust, Navi Mumbai, Maharashtra, India</p>
+                    <p className="mt-1 text-sm text-[#475569]">126, Balakumaran nagar part B Meenakshi Nagar,Thirupathi Nagar,Valasaravakkam , Chennai</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -81,7 +83,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-[#071C35]">Email</h3>
-                    <p className="mt-1 text-sm text-[#475569]">info@ncvtrust.org</p>
+                    <p className="mt-1 text-sm text-[#475569]">narchinthanaivattam@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -90,7 +92,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-[#071C35]">Phone</h3>
-                    <p className="mt-1 text-sm text-[#475569]">+91 98765 43210</p>
+                    <p className="mt-1 text-sm text-[#475569]">+91 90030 75333 ,+91 90031 33661 </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
