@@ -28,8 +28,15 @@ export function handleApiError(error: unknown) {
   }
 
   console.error("Unhandled error:", error);
+  const message =
+    error instanceof Error
+      ? error.message
+      : typeof error === "string"
+      ? error
+      : "Internal server error";
+
   return NextResponse.json(
-    { success: false, error: "Internal server error" },
+    { success: false, error: message },
     { status: 500 }
   );
 }

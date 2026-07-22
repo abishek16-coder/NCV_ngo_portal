@@ -6,11 +6,11 @@ import { prisma } from "./prisma";
 import type { SafeUser } from "@/types";
 import type { UserRole } from "@prisma/client";
 
-const JWT_SECRET = (() => {
+function getJwtSecret() {
   const secret = process.env.JWT_SECRET;
   if (!secret) throw new Error("JWT_SECRET environment variable is required");
   return secret;
-})();
+}
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
 const COOKIE_NAME = "session";
 

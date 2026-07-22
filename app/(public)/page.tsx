@@ -457,8 +457,8 @@ export default function HomePage() {
                 </div>
               </div>
               <div
-                className="absolute -right-5 -top-5 flex size-28 items-center justify-center rounded-2xl text-center text-white"
-style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})`, boxShadow: "0 8px 30px rgba(27,130,113,0.4)" }}
+                className="relative mx-auto mt-6 flex min-h-[112px] min-w-[112px] max-w-[240px] items-center justify-center rounded-2xl text-center text-white sm:absolute sm:-right-5 sm:-top-5"
+                style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})`, boxShadow: "0 8px 30px rgba(27,130,113,0.4)" }}
               >
                 <div>
                   <p className="text-2xl font-bold">10K+</p>
