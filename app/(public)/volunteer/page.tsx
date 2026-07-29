@@ -48,15 +48,15 @@ export default function VolunteerPage() {
     <div>
       <TrustBackground />
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#071C35] via-[#0f3d33] to-[#1B8271] py-20 sm:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#1B8271] via-[#1B8271] to-[#1B8271] py-20 sm:py-28">
         <div className="absolute inset-0 dot-grid-bg opacity-10" />
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-sm">
-            <HandHeart className="size-4 text-[#1B8271]" />
+            <HandHeart className="size-4 text-white" />
             Volunteer With Us
           </div>
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Be the <span className="text-[#1B8271]">Change</span> You Wish to See
+            Be the <span className="text-[#FF6B35]">Change</span> You Wish to See
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80">
             Join our community of dedicated volunteers and help us create a healthier, happier world through yoga, education, and service.
@@ -68,17 +68,17 @@ export default function VolunteerPage() {
       <section className="py-16 sm:py-24 bg-white">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-[#071C35] sm:text-4xl">Why Volunteer?</h2>
-            <p className="mx-auto mt-4 max-w-xl text-[#475569]">Volunteering with NCV Trust is a rewarding experience</p>
+            <h2 className="text-3xl font-bold text-[#1B8271] sm:text-4xl">Why Volunteer?</h2>
+            <p className="mx-auto mt-4 max-w-xl text-[#1B8271]">Volunteering with NCV Trust is a rewarding experience</p>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {benefits.map((b) => (
-              <div key={b.title} className="text-center rounded-2xl border border-slate-100 p-6">
+              <div key={b.title} className="text-center rounded-2xl border border-[#1B8271]/10 p-6">
                 <div className="mx-auto flex size-12 items-center justify-center rounded-xl bg-[#1B8271]/10">
                   <b.icon className="size-6 text-[#1B8271]" />
                 </div>
-                <h3 className="mt-4 text-lg font-bold text-[#071C35]">{b.title}</h3>
-                <p className="mt-2 text-sm text-[#475569]">{b.desc}</p>
+                <h3 className="mt-4 text-lg font-bold text-[#1B8271]">{b.title}</h3>
+                <p className="mt-2 text-sm text-[#1B8271]">{b.desc}</p>
               </div>
             ))}
           </div>
@@ -86,21 +86,21 @@ export default function VolunteerPage() {
       </section>
 
       {/* Registration Form */}
-      <section className="py-16 sm:py-24 bg-[#F8FAFB]">
+      <section className="py-16 sm:py-24 bg-[#ffffff]">
         <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
           {sent ? (
-            <div className="rounded-3xl border border-green-200 bg-green-50 p-12 text-center">
-              <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-green-100">
-                <CheckCircle className="size-7 text-green-600" />
+            <div className="rounded-3xl border border-[#1B8271]/10 bg-white p-12 text-center">
+              <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-[#1B8271]/10">
+                <CheckCircle className="size-7 text-[#1B8271]" />
               </div>
-              <h3 className="mt-5 text-xl font-bold text-green-800">Welcome Aboard!</h3>
-              <p className="mt-2 text-sm text-green-600">Thank you for volunteering with NCV Trust. Our team will review your application and get in touch within 3-5 business days.</p>
+              <h3 className="mt-5 text-xl font-bold text-[#1B8271]">Welcome Aboard!</h3>
+              <p className="mt-2 text-sm text-[#1B8271]">Thank you for volunteering with NCV Trust. Our team will review your application and get in touch within 3-5 business days.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="rounded-3xl border border-slate-100 bg-white p-8 shadow-lg">
+            <form onSubmit={handleSubmit} className="rounded-3xl border border-[#1B8271]/10 bg-white p-8 shadow-lg">
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-[#071C35]">Volunteer Registration</h3>
-                <p className="mt-2 text-sm text-[#475569]">Fill out this form to join our volunteer network</p>
+                <h3 className="text-2xl font-bold text-[#1B8271]">Volunteer Registration</h3>
+                <p className="mt-2 text-sm text-[#1B8271]">Fill out this form to join our volunteer network</p>
               </div>
               <div className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -145,7 +145,7 @@ export default function VolunteerPage() {
                   <Label>Why do you want to volunteer?</Label>
                   <Textarea value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} rows={3} />
                 </div>
-                <Button type="submit" disabled={sending} className="w-full bg-[#1B8271] hover:bg-[#186F61]">
+                <Button type="submit" disabled={sending} className="w-full bg-[#1B8271] hover:bg-[#1B8271]">
                   {sending ? "Submitting..." : <>Submit Application <Send className="ml-2 size-4" /></>}
                 </Button>
               </div>

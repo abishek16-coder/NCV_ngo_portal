@@ -55,15 +55,15 @@ export default function DonatePage() {
     <div>
       <TrustBackground />
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#071C35] via-[#0f3d33] to-[#1B8271] py-20 sm:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#1B8271] via-[#1B8271] to-[#1B8271] py-20 sm:py-28">
         <div className="absolute inset-0 dot-grid-bg opacity-10" />
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-sm">
-            <Heart className="size-4 text-[#1B8271]" />
+            <Heart className="size-4 text-white" />
             Make a Difference
           </div>
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Your <span className="text-[#1B8271]">Donation</span> Changes Lives
+            Your <span className="text-[#FF6B35]">Donation</span> Changes Lives
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80">
             Every contribution, big or small, helps us provide free yoga, education, and wellness programs to communities in need.
@@ -77,20 +77,20 @@ export default function DonatePage() {
             {/* Donation Form */}
             <div className="lg:col-span-3">
               {sent ? (
-                <div className="rounded-3xl border border-green-200 bg-green-50 p-12 text-center">
-                  <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-green-100">
-                    <CheckCircle className="size-7 text-green-600" />
+                <div className="rounded-3xl border border-[#1B8271]/10 bg-white p-12 text-center">
+                  <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-[#1B8271]/10">
+                    <CheckCircle className="size-7 text-[#1B8271]" />
                   </div>
-                  <h3 className="mt-5 text-xl font-bold text-green-800">Thank You!</h3>
-                  <p className="mt-2 text-sm text-green-600">Your donation of ₹{form.amount} is deeply appreciated. You will receive a confirmation email shortly.</p>
+                  <h3 className="mt-5 text-xl font-bold text-[#1B8271]">Thank You!</h3>
+                  <p className="mt-2 text-sm text-[#1B8271]">Your donation of ₹{form.amount} is deeply appreciated. You will receive a confirmation email shortly.</p>
                   <Button className="mt-6" variant="outline" onClick={() => { setSent(false); setForm({ donorName: "", email: "", phone: "", amount: "", message: "", isAnonymous: false, paymentMethod: "RAZORPAY" }) }}>
                     Make Another Donation
                   </Button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="rounded-3xl border border-slate-100 bg-white p-8 shadow-lg">
-                  <h3 className="text-2xl font-bold text-[#071C35]">Donate Now</h3>
-                  <p className="mt-2 text-sm text-[#475569]">Your generosity fuels our mission</p>
+                <form onSubmit={handleSubmit} className="rounded-3xl border border-[#1B8271]/10 bg-white p-8 shadow-lg">
+                  <h3 className="text-2xl font-bold text-[#1B8271]">Donate Now</h3>
+                  <p className="mt-2 text-sm text-[#1B8271]">Your generosity fuels our mission</p>
 
                   <div className="mt-8 space-y-6">
                     {/* Amount Selection */}
@@ -149,10 +149,10 @@ export default function DonatePage() {
 
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" checked={form.isAnonymous} onChange={(e) => setForm({ ...form, isAnonymous: e.target.checked })} className="size-4 rounded" />
-                      <span className="text-sm text-[#475569]">Make this donation anonymous</span>
+                      <span className="text-sm text-[#1B8271]">Make this donation anonymous</span>
                     </label>
 
-                    <Button type="submit" disabled={sending} className="w-full bg-[#1B8271] hover:bg-[#186F61] py-6 text-base">
+                    <Button type="submit" disabled={sending} className="w-full bg-[#1B8271] hover:bg-[#1B8271] py-6 text-base">
                       {sending ? "Processing..." : <>Donate {form.amount ? `₹${parseFloat(form.amount).toLocaleString("en-IN")}` : ""} <ArrowRight className="ml-2 size-4" /></>}
                     </Button>
 
@@ -167,31 +167,31 @@ export default function DonatePage() {
 
             {/* Impact Sidebar */}
             <div className="lg:col-span-2 space-y-6">
-              <div className="rounded-2xl border border-[#D4EDE9] bg-[#F2FAFA] p-6">
-                <h3 className="text-lg font-bold text-[#071C35]">Your Impact</h3>
-                <p className="mt-2 text-sm text-[#475569]">See how your donation makes a difference</p>
+              <div className="rounded-2xl border border-[rgba(27, 130, 113, 0.15)] bg-[#ffffff] p-6">
+                <h3 className="text-lg font-bold text-[#1B8271]">Your Impact</h3>
+                <p className="mt-2 text-sm text-[#1B8271]">See how your donation makes a difference</p>
                 <div className="mt-4 space-y-4">
                   {impactItems.map((item) => (
                     <div key={item.amount} className="flex items-start gap-3">
                       <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#1B8271]/10 text-xs font-bold text-[#1B8271]">
                         {item.amount.replace("₹", "")}
                       </div>
-                      <p className="text-sm text-[#475569]">{item.impact}</p>
+                      <p className="text-sm text-[#1B8271]">{item.impact}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-                <h3 className="text-lg font-bold text-[#071C35]">Tax Benefits</h3>
-                <p className="mt-2 text-sm text-[#475569] leading-relaxed">
+              <div className="rounded-2xl border border-[#1B8271]/10 bg-white p-6 shadow-sm">
+                <h3 className="text-lg font-bold text-[#1B8271]">Tax Benefits</h3>
+                <p className="mt-2 text-sm text-[#1B8271] leading-relaxed">
                   All donations to NCV Trust are eligible for tax deduction under Section 80G of the Income Tax Act. You will receive your donation receipt via email.
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-                <h3 className="text-lg font-bold text-[#071C35]">Other Ways to Give</h3>
-                <ul className="mt-3 space-y-2 text-sm text-[#475569]">
+              <div className="rounded-2xl border border-[#1B8271]/10 bg-white p-6 shadow-sm">
+                <h3 className="text-lg font-bold text-[#1B8271]">Other Ways to Give</h3>
+                <ul className="mt-3 space-y-2 text-sm text-[#1B8271]">
                   <li className="flex items-center gap-2"><Heart className="size-3.5 text-[#1B8271] shrink-0" /> Monthly recurring donations</li>
                   <li className="flex items-center gap-2"><Heart className="size-3.5 text-[#1B8271] shrink-0" /> Corporate partnerships</li>
                   <li className="flex items-center gap-2"><Heart className="size-3.5 text-[#1B8271] shrink-0" /> In-kind donations (supplies, equipment)</li>

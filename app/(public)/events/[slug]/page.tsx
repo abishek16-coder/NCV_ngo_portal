@@ -92,13 +92,13 @@ export default function EventDetailPage() {
   return (
     <div className="min-h-screen bg-white">
       <TrustBackground />
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#0f3d33] via-[#1B8271] to-[#0a5e4e] py-16 sm:py-20">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#1B8271] via-[#1B8271] to-[#1B8271] py-16 sm:py-20">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
         <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Link href="/events" className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors mb-6">
             <ArrowLeft className="size-4" /> All Events
           </Link>
-          <span className={`inline-block rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${event.status === "UPCOMING" ? "bg-amber-500/20 text-amber-300" : event.status === "COMPLETED" ? "bg-blue-500/20 text-blue-300" : "bg-green-500/20 text-green-300"}`}>
+          <span className={`inline-block rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${event.status === "UPCOMING" ? "bg-amber-500/20 text-amber-300" : event.status === "COMPLETED" ? "bg-blue-500/20 text-blue-300" : "bg-white0/20 text-green-300"}`}>
             {event.status}
           </span>
           <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">{event.title}</h1>
@@ -115,20 +115,20 @@ export default function EventDetailPage() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-5">
             <div className="lg:col-span-3 space-y-6">
-              <h2 className="text-xl font-bold text-[#071C35]">About This Event</h2>
-              <p className="text-[#475569] leading-relaxed whitespace-pre-line">{event.description}</p>
+              <h2 className="text-xl font-bold text-[#1B8271]">About This Event</h2>
+              <p className="text-[#1B8271] leading-relaxed whitespace-pre-line">{event.description}</p>
             </div>
 
             <div className="lg:col-span-2">
               {registered ? (
-                <div className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center">
-                  <CheckCircle className="mx-auto size-12 text-green-500" />
-                  <h3 className="mt-4 text-lg font-bold text-green-800">You&apos;re Registered!</h3>
-                  <p className="mt-2 text-sm text-green-700">We look forward to seeing you at the event. Check your email for confirmation details.</p>
-                  <Link href="/events" className="mt-4 inline-block text-sm font-semibold text-green-600 hover:underline">Browse more events</Link>
+                <div className="rounded-2xl border border-[#1B8271]/10 bg-white p-8 text-center">
+                  <CheckCircle className="mx-auto size-12 text-[#1B8271]" />
+                  <h3 className="mt-4 text-lg font-bold text-[#1B8271]">You&apos;re Registered!</h3>
+                  <p className="mt-2 text-sm text-[#1B8271]">We look forward to seeing you at the event. Check your email for confirmation details.</p>
+                  <Link href="/events" className="mt-4 inline-block text-sm font-semibold text-[#1B8271] hover:underline">Browse more events</Link>
                 </div>
               ) : event.status !== "UPCOMING" ? (
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center">
+                <div className="rounded-2xl border border-[#1B8271]/10 bg-white p-8 text-center">
                   <p className="text-sm font-medium text-slate-500">Registration is {event.status === "COMPLETED" ? "closed" : "not available"} for this event.</p>
                 </div>
               ) : event.maxAttendees && event._count.registrations >= event.maxAttendees ? (
@@ -136,8 +136,8 @@ export default function EventDetailPage() {
                   <p className="text-sm font-medium text-amber-700">This event is fully booked.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
-                  <h3 className="text-lg font-bold text-[#071C35]">Register for This Event</h3>
+                <form onSubmit={handleSubmit} className="rounded-2xl border border-[#1B8271]/10 bg-white p-6 shadow-sm space-y-4">
+                  <h3 className="text-lg font-bold text-[#1B8271]">Register for This Event</h3>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-1.5">
                       <Label htmlFor="firstName" className="text-sm">First Name *</Label>
@@ -170,7 +170,7 @@ export default function EventDetailPage() {
                     <Label htmlFor="notes" className="text-sm">Notes</Label>
                     <Textarea id="notes" value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} rows={3} />
                   </div>
-                  <Button type="submit" disabled={submitting} className="w-full" style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)" }}>
+                  <Button type="submit" disabled={submitting} className="w-full" style={{ background: "linear-gradient(135deg, #1B8271 0%, #1B8271 100%)" }}>
                     {submitting ? "Registering..." : "Register Now"}
                   </Button>
                 </form>

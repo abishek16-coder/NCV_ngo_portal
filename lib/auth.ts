@@ -28,11 +28,11 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
 }
 
 export function signToken(payload: JwtPayload): string {
-  return sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN } as jwt.SignOptions);
+  return sign(payload, getJwtSecret(), { expiresIn: JWT_EXPIRES_IN } as jwt.SignOptions);
 }
 
 export function verifyToken(token: string): JwtPayload {
-  return verify(token, JWT_SECRET) as JwtPayload;
+  return verify(token, getJwtSecret()) as JwtPayload;
 }
 
 export async function createSession(user: { id: string; role: UserRole }): Promise<string> {

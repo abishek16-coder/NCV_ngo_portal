@@ -109,7 +109,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       .catch(() => router.push("/login"));
   }, [router]);
 
-  // Close dropdowns on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (notifRef.current && !notifRef.current.contains(e.target as Node)) setShowNotifications(false);
@@ -149,7 +148,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
         style={{
-          background: "linear-gradient(180deg, #1B8271 0%, #0f3d33 100%)",
+          background: "linear-gradient(180deg, #1B8271 0%, #1B8271 100%)",
           borderRight: "1px solid rgba(255,255,255,0.06)",
         }}
       >
@@ -162,18 +161,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/admin" className="flex items-center gap-2.5 group">
               <div
                 className="flex size-9 items-center justify-center rounded-xl shrink-0 transition-transform group-hover:scale-105"
-style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxShadow: "0 0 20px rgba(27,130,113,0.4)" }}
+style={{ background: "#FF6B35", boxShadow: "0 0 20px rgba(255,107,53,0.4)" }}
               >
                 <Sun className="size-4 text-white" />
               </div>
               <div>
                 <p className="text-sm font-bold text-white leading-none">NCV Admin</p>
-                <p className="text-[10px] text-slate-400 leading-none mt-0.5">Management Portal</p>
+                <p className="text-[10px] text-white/60 leading-none mt-0.5">Management Portal</p>
               </div>
             </Link>
           ) : (
             <div className="mx-auto flex size-9 items-center justify-center rounded-xl shrink-0"
-              style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxShadow: "0 0 20px rgba(27,130,113,0.4)" }}
+              style={{ background: "#FF6B35", boxShadow: "0 0 20px rgba(255,107,53,0.4)" }}
             >
               <Sun className="size-4 text-white" />
             </div>
@@ -181,13 +180,13 @@ style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxSha
 
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="hidden rounded-lg p-1.5 text-slate-400 hover:text-white hover:bg-white/10 transition-colors lg:flex items-center justify-center"
+            className="hidden rounded-lg p-1.5 text-white/60 hover:text-white hover:bg-white/10 transition-colors lg:flex items-center justify-center"
           >
             {sidebarOpen ? <ChevronLeft className="size-4" /> : <ChevronRight className="size-4" />}
           </button>
           <button
             onClick={() => setMobileOpen(false)}
-            className="rounded-lg p-1.5 text-slate-400 hover:text-white hover:bg-white/10 transition-colors lg:hidden"
+            className="rounded-lg p-1.5 text-white/60 hover:text-white hover:bg-white/10 transition-colors lg:hidden"
           >
             <X className="size-4" />
           </button>
@@ -198,7 +197,7 @@ style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxSha
           {navGroups.map((group) => (
             <div key={group.label}>
               {sidebarOpen && (
-                <p className="mb-1.5 px-3 text-[10px] font-semibold uppercase tracking-widest text-slate-500">
+                <p className="mb-1.5 px-3 text-[10px] font-semibold uppercase tracking-widest text-white/40">
                   {group.label}
                 </p>
               )}
@@ -214,22 +213,21 @@ style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxSha
                         "sidebar-item flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium relative group",
                         active
                           ? "text-white"
-                          : "text-slate-400 hover:text-white hover:bg-white/5",
+                          : "text-white/60 hover:text-white hover:bg-white/5",
                         !sidebarOpen && "justify-center px-2"
                       )}
                       style={active ? {
-                        background: "linear-gradient(90deg, rgba(27,130,113,0.18) 0%, rgba(27,130,113,0.05) 100%)",
-                        boxShadow: "inset 3px 0 0 #1B8271",
+                        background: "linear-gradient(90deg, rgba(255,107,53,0.18) 0%, rgba(255,107,53,0.05) 100%)",
+                        boxShadow: "inset 3px 0 0 #FF6B35",
                       } : {}}
                     >
-                      <link.icon className={cn("size-5 shrink-0", active ? "text-[#1B8271]" : "")} />
+                      <link.icon className={cn("size-5 shrink-0", active ? "text-[#FF6B35]" : "")} />
                       {sidebarOpen && <span>{link.label}</span>}
                       {active && sidebarOpen && (
-                        <span className="ml-auto flex size-1.5 rounded-full bg-[#1B8271]" />
+                        <span className="ml-auto flex size-1.5 rounded-full bg-[#FF6B35]" />
                       )}
-                      {/* Tooltip when collapsed */}
                       {!sidebarOpen && (
-                        <span className="absolute left-full ml-2.5 whitespace-nowrap rounded-md bg-slate-800 px-2.5 py-1.5 text-xs text-white opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
+                        <span className="absolute left-full ml-2.5 whitespace-nowrap rounded-md bg-black/80 px-2.5 py-1.5 text-xs text-white opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
                           {link.label}
                         </span>
                       )}
@@ -248,20 +246,20 @@ style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxSha
               style={{ background: "rgba(255,255,255,0.05)" }}>
               <div
                 className="flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
-                style={{ background: "linear-gradient(135deg, #1B8271, #186F61)" }}
+                style={{ background: "#FF6B35" }}
               >
                 {user.firstName[0]}{user.lastName[0]}
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium text-white">{user.firstName} {user.lastName}</p>
-                <p className="text-[10px] text-[#1B8271] uppercase tracking-wide">{user.role.replace("_", " ")}</p>
+                <p className="text-[10px] text-[#FF6B35] uppercase tracking-wide">{user.role.replace("_", " ")}</p>
               </div>
             </div>
           )}
           <button
             onClick={handleLogout}
             className={cn(
-              "sidebar-item flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400 hover:text-red-400 hover:bg-red-400/10",
+              "sidebar-item flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/60 hover:text-red-400 hover:bg-red-400/10",
               !sidebarOpen && "justify-center px-2"
             )}
           >
@@ -284,7 +282,6 @@ style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxSha
           }}
         >
           <div className="flex items-center gap-3">
-            {/* Mobile menu */}
             <button
               onClick={() => setMobileOpen(true)}
               className="rounded-lg p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors lg:hidden"
@@ -315,9 +312,9 @@ style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxSha
 
           <div className="flex items-center gap-2">
             {/* Live indicator */}
-            <div className="hidden sm:flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-emerald-700"
-              style={{ background: "rgba(5,150,105,0.08)", border: "1px solid rgba(5,150,105,0.2)" }}>
-              <span className="animate-pulse-dot size-1.5 rounded-full bg-emerald-500" />
+            <div className="hidden sm:flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-white"
+              style={{ background: "rgba(27,130,113,0.15)", border: "1px solid rgba(27,130,113,0.2)" }}>
+              <span className="animate-pulse-dot size-1.5 rounded-full bg-[#1B8271]" />
               Live
             </div>
 
@@ -329,7 +326,7 @@ style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxSha
               >
                 <Bell className="size-5" />
                 {unreadCount > 0 && (
-                  <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-[#1B8271] text-[9px] font-bold text-white">
+                  <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-[#FF6B35] text-[9px] font-bold text-white">
                     {unreadCount}
                   </span>
                 )}
@@ -342,12 +339,12 @@ style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxSha
                 >
                   <div className="flex items-center justify-between px-4 py-3 border-b">
                     <p className="text-sm font-semibold text-slate-800">Notifications</p>
-                    <span className="rounded-full bg-[#D4EDE9] px-2 py-0.5 text-[10px] font-semibold text-[#1B8271]">{unreadCount} new</span>
+                    <span className="rounded-full bg-[#1B8271]/10 px-2 py-0.5 text-[10px] font-semibold text-[#1B8271]">{unreadCount} new</span>
                   </div>
                   {notifications.map((n) => (
                     <div key={n.id} className={cn(
                       "flex items-start gap-3 px-4 py-3 rounded-xl transition-colors cursor-pointer hover:bg-slate-50",
-                      n.unread && "bg-[#E8F5F3]/60"
+                      n.unread && "bg-[#1B8271]/5"
                     )}>
                       <div className={cn(
                         "mt-0.5 size-2 rounded-full shrink-0",
@@ -360,7 +357,7 @@ style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxSha
                     </div>
                   ))}
                   <div className="px-4 py-2 border-t">
-                    <button className="text-xs font-medium text-[#1B8271] hover:text-[#186F61]">View all notifications</button>
+                    <button className="text-xs font-medium text-[#1B8271]">View all notifications</button>
                   </div>
                 </div>
               )}
@@ -374,7 +371,7 @@ style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)", boxSha
               >
                 <div
                   className="flex size-8 items-center justify-center rounded-full text-[11px] font-bold text-white"
-                  style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)" }}
+                  style={{ background: "#FF6B35" }}
                 >
                   {user ? `${user.firstName[0]}${user.lastName[0]}` : "A"}
                 </div>

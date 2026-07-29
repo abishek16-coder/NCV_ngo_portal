@@ -34,14 +34,9 @@ import {
 
 const palette = {
   primary: "#1B8271",
-  primaryHover: "#186F61",
-  secondary: "#1B8271",
-  secondaryHover: "#186F61",
-  coral: "#FF7468",
-  coralHover: "#F64F40",
-  surface: "#F3F4F8",
-  heading: "#071C35",
-  body: "#475569",
+  orange: "#FF6B35",
+  heading: "#1B8271",
+  body: "#1B8271",
 };
 
 // ─────────────────────────── Data ──────────────────────────────────────────
@@ -57,8 +52,8 @@ const navLinks = [
 
 const stats = [
   { label: "Yoga Sessions", value: "1,000+", icon: Sun, color: palette.primary },
-  { label: "Lives Reached", value: "10,000+", icon: Heart, color: palette.secondary },
-  { label: "Workshops", value: "200+", icon: Star, color: palette.primaryHover },
+  { label: "Lives Reached", value: "10,000+", icon: Heart, color: palette.orange },
+  { label: "Workshops", value: "200+", icon: Star, color: palette.primary },
   { label: "Volunteers", value: "500+", icon: Users, color: palette.primary },
 ];
 
@@ -87,7 +82,7 @@ const projects = [
     title: "Free Online Yoga Sessions",
     desc: "Daily yoga classes streamed live for participants of all ages, promoting fitness and mental wellness from home.",
     tag: "Daily Program",
-    color: palette.primaryHover,
+    color: palette.primary,
     icon: Activity,
     href: "/projects/online-yoga",
   },
@@ -95,7 +90,7 @@ const projects = [
     title: "Yoga Sangamam",
     desc: "Community gatherings bringing together practitioners and instructors for immersive wellness experiences.",
     tag: "Community",
-    color: palette.secondary,
+    color: palette.orange,
     icon: Users,
     href: "/projects/yoga-sangamam",
   },
@@ -141,7 +136,7 @@ const testimonials = [
     name: "Rajesh K.",
     role: "Community Member",
     initials: "RK",
-    color: palette.primaryHover,
+    color: palette.primary,
     rating: 5,
     quote: "The positive thinking workshops changed my entire outlook on life. NCV's holistic approach to wellness is truly remarkable and accessible to absolutely everyone.",
   },
@@ -149,7 +144,7 @@ const testimonials = [
     name: "Anita R.",
     role: "Senior Wellness Program",
     initials: "AR",
-    color: palette.secondary,
+    color: palette.orange,
     rating: 5,
     quote: "At 65, I never thought I could practice yoga. The senior citizen wellness program at NCV made it possible. I feel healthier and happier than ever before.",
   },
@@ -201,7 +196,7 @@ function Logo({ size = 44 }: { size?: number }) {
   return (
     <div
       className="flex shrink-0 items-center justify-center overflow-hidden rounded-full ring-2 ring-white"
-      style={{ width: size, height: size, boxShadow: "0 4px 14px rgba(7,28,53,0.12)" }}
+      style={{ width: size, height: size, boxShadow: "0 4px 14px rgba(27,130,113,0.12)" }}
     >
       <Image src="/logo.png" alt="NCV logo" width={size} height={size} className="h-full w-full object-cover" priority />
     </div>
@@ -233,7 +228,7 @@ function Navbar() {
   return (
     <header
       className="sticky top-0 z-50 w-full"
-      style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(7,28,53,0.06)" }}
+      style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(27,130,113,0.06)" }}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         {/* Logo — top left */}
@@ -274,13 +269,13 @@ function Navbar() {
             className="hidden items-center gap-1.5 text-sm font-medium lg:flex"
             style={{ color: palette.body }}
           >
-            <Phone className="size-4" style={{ color: palette.secondary }} />
+            <Phone className="size-4" style={{ color: palette.orange }} />
             +91 90030 75333
           </a>
           <Link
             href="/donate"
             className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all hover:shadow-lg hover:scale-105"
-            style={{ background: palette.coral, boxShadow: "0 6px 18px rgba(255,116,104,0.3)" }}
+            style={{ background: palette.orange, boxShadow: "0 6px 18px rgba(255,107,53,0.3)" }}
           >
             <Heart className="size-4" /> Donate
           </Link>
@@ -298,14 +293,14 @@ export default function HomePage() {
   return (
     <div className="ncv-classic-theme">
       {/* ══════════════════════ HERO ══════════════════════ */}
-      <section className="relative overflow-hidden" style={{ background: palette.surface }}>
+      <section className="relative overflow-hidden" style={{ background: "#fff" }}>
         {/* Ambient color washes */}
         <div className="absolute -top-32 -right-32 size-[520px] rounded-full opacity-20 blur-3xl"
-          style={{ background: `radial-gradient(circle, ${palette.secondary}, transparent 70%)` }} />
+          style={{ background: `radial-gradient(circle, ${palette.orange}, transparent 70%)` }} />
         <div className="absolute -bottom-32 -left-32 size-[440px] rounded-full opacity-20 blur-3xl"
           style={{ background: `radial-gradient(circle, ${palette.primary}, transparent 70%)` }} />
         <div className="absolute inset-0 opacity-[0.35]"
-          style={{ backgroundImage: "radial-gradient(rgba(7,28,53,0.06) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+          style={{ backgroundImage: "radial-gradient(rgba(27,130,113,0.06) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
 
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
           <div className="grid items-center gap-14 lg:grid-cols-[0.85fr_1.15fr]">
@@ -313,15 +308,15 @@ export default function HomePage() {
             <div className="order-2 lg:order-1">
               <div
                 className="relative rounded-[4px] p-8"
-                style={{ background: "#fff", border: "1px solid rgba(7,28,53,0.06)", boxShadow: "0 30px 70px rgba(7,28,53,0.1)" }}
+                style={{ background: "#fff", border: "1px solid rgba(27,130,113,0.06)", boxShadow: "0 30px 70px rgba(27,130,113,0.1)" }}
               >
                 <div className="flex items-center justify-center py-8">
                   <div className="relative">
                     <div
                       className="absolute inset-0 rounded-full opacity-30 blur-2xl"
-                      style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.primary})` }}
+                      style={{ background: `linear-gradient(135deg, ${palette.orange}, ${palette.primary})` }}
                     />
-                    <div className="relative rounded-full p-2" style={{ background: "#fff", boxShadow: "0 20px 50px rgba(7,28,53,0.12)" }}>
+                    <div className="relative rounded-full p-2" style={{ background: "#fff", boxShadow: "0 20px 50px rgba(27,130,113,0.12)" }}>
                       <Logo size={174} />
                     </div>
                   </div>
@@ -334,7 +329,7 @@ export default function HomePage() {
 
                 <div className="mt-8 grid grid-cols-2 gap-3">
                   {stats.map((s) => (
-                    <div key={s.label} className="rounded-[4px] p-4" style={{ background: palette.surface }}>
+                    <div key={s.label} className="rounded-[4px] p-4" style={{ background: "#fff" }}>
                       <div
                         className="mb-2 flex size-9 items-center justify-center rounded-xl text-white"
                         style={{ background: `linear-gradient(135deg, ${s.color}, ${s.color}cc)` }}
@@ -356,7 +351,7 @@ export default function HomePage() {
                 style={{ background: "rgba(27,130,113,0.1)", border: "1px solid rgba(27,130,113,0.2)" }}
               >
                 <span className="size-2 rounded-full" style={{ background: palette.primary }} />
-                <span className="text-sm font-semibold" style={{ color: palette.primaryHover }}>
+                <span className="text-sm font-semibold" style={{ color: palette.primary }}>
                   Narchinthanai Vattam (NCV) &middot; Registered Charitable Trust
                 </span>
               </div>
@@ -366,12 +361,12 @@ export default function HomePage() {
                 style={{ color: palette.heading }}
               >
                 Yoga
-                <span className="mx-3" style={{ color: palette.secondary }}>&bull;</span>
+                <span className="mx-3" style={{ color: palette.orange }}>&bull;</span>
                 Health
                 <span
                   className="block mt-2"
                   style={{
-                    background: `linear-gradient(90deg, ${palette.secondary}, ${palette.secondaryHover}, ${palette.primary})`,
+                    background: `linear-gradient(90deg, ${palette.orange}, ${palette.orange}, ${palette.primary})`,
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
@@ -389,7 +384,7 @@ export default function HomePage() {
                 <Link
                   href="/donate"
                   className="flex items-center gap-2 rounded-[4px] px-7 py-4 text-base font-semibold text-white transition-all hover:shadow-2xl hover:scale-105"
-                  style={{ background: palette.coral, boxShadow: "0 8px 30px rgba(255,116,104,0.35)" }}
+                  style={{ background: palette.orange, boxShadow: "0 8px 30px rgba(255,107,53,0.35)" }}
                 >
                   <Heart className="size-5" />
                   Support Our Mission
@@ -397,7 +392,7 @@ export default function HomePage() {
                 <Link
                   href="/volunteer"
                   className="flex items-center gap-2 rounded-[4px] px-7 py-4 text-base font-semibold transition-all hover:shadow-lg"
-                  style={{ background: "#fff", border: `1px solid rgba(7,28,53,0.12)`, color: palette.heading }}
+                  style={{ background: "#fff", border: `1px solid rgba(27,130,113,0.12)`, color: palette.heading }}
                 >
                   Join Our Programs
                   <ArrowRight className="size-5" />
@@ -428,22 +423,22 @@ export default function HomePage() {
             {/* Left visual */}
             <div className="relative">
               <div
-                className="relative aspect-[4/3] overflow-hidden rounded-3xl"
-                style={{ background: `linear-gradient(135deg, ${palette.primary}, ${palette.primaryHover})` }}
+                className="relative min-h-[420px] overflow-hidden rounded-3xl sm:min-h-0 sm:aspect-[4/3]"
+                style={{ background: `linear-gradient(135deg, ${palette.primary}, ${palette.primary})` }}
               >
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center justify-center p-4">
                   <div className="text-center">
                     <div
-                      className="mx-auto mb-6 flex size-24 items-center justify-center rounded-3xl"
-                      style={{ background: palette.secondary, boxShadow: "0 0 60px rgba(27,130,113,0.5)" }}
+                      className="mx-auto mb-4 sm:mb-6 flex size-20 sm:size-24 items-center justify-center rounded-2xl sm:rounded-3xl"
+                      style={{ background: palette.orange, boxShadow: "0 0 60px rgba(27,130,113,0.5)" }}
                     >
-                      <Sun className="size-12 text-white" />
+                      <Sun className="size-10 sm:size-12 text-white" />
                     </div>
-                    <p className="text-2xl font-bold text-white">Est. 2015</p>
-                    <p className="mt-1 text-emerald-100">Serving Communities Across India</p>
+                    <p className="text-xl sm:text-2xl font-bold text-white">Est. 2015</p>
+                    <p className="mt-1 text-sm sm:text-base text-emerald-100">Serving Communities Across India</p>
                   </div>
                 </div>
-                <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-3">
+                <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 grid grid-cols-2 gap-2 sm:gap-3">
                   {[
                     { label: "Cities Reached", value: "15+" },
                     { label: "Years of Service", value: "10+" },
@@ -458,7 +453,7 @@ export default function HomePage() {
               </div>
               <div
                 className="relative mx-auto mt-6 flex min-h-[112px] min-w-[112px] max-w-[240px] items-center justify-center rounded-2xl text-center text-white sm:absolute sm:-right-5 sm:-top-5"
-                style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})`, boxShadow: "0 8px 30px rgba(27,130,113,0.4)" }}
+                style={{ background: `linear-gradient(135deg, ${palette.orange}, ${palette.orange})`, boxShadow: "0 8px 30px rgba(27,130,113,0.4)" }}
               >
                 <div>
                   <p className="text-2xl font-bold">10K+</p>
@@ -485,7 +480,7 @@ export default function HomePage() {
 
               <div className="mt-8 grid grid-cols-2 gap-4">
                 {[
-                  { icon: Target, label: "Our Mission", bg: "rgba(27,130,113,0.08)", border: "rgba(27,130,113,0.2)", color: palette.secondary, text: "Inspire through Yoga & Wellness" },
+                  { icon: Target, label: "Our Mission", bg: "rgba(27,130,113,0.08)", border: "rgba(27,130,113,0.2)", color: palette.orange, text: "Inspire through Yoga & Wellness" },
                   { icon: Eye, label: "Our Vision", bg: "rgba(27,130,113,0.08)", border: "rgba(27,130,113,0.2)", color: palette.primary, text: "Healthier, Happier Society" },
                 ].map((c) => (
                   <div key={c.label} className="rounded-xl p-4" style={{ background: c.bg, border: `1px solid ${c.border}` }}>
@@ -501,7 +496,7 @@ export default function HomePage() {
               <Link
                 href="/about"
                 className="mt-8 inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg"
-                style={{ background: palette.coral, boxShadow: "0 4px 14px rgba(255,116,104,0.3)" }}
+                style={{ background: palette.orange, boxShadow: "0 4px 14px rgba(255,107,53,0.3)" }}
               >
                 Learn More About NCV
                 <ChevronRight className="size-4" />
@@ -513,7 +508,7 @@ export default function HomePage() {
 
       {/* ══════════════════════ MOTTO STRIP ══════════════════════ */}
       <div className="overflow-hidden py-8"
-        style={{ background: `linear-gradient(90deg, ${palette.secondary} 0%, ${palette.secondaryHover} 45%, ${palette.primary} 100%)` }}>
+        style={{ background: palette.primary }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
             <p className="text-xl font-bold italic text-white sm:text-2xl">
@@ -527,7 +522,7 @@ export default function HomePage() {
       </div>
 
       {/* ══════════════════════ WHY NCV ══════════════════════ */}
-      <section className="py-20 lg:py-28" style={{ background: palette.surface }}>
+      <section className="py-20 lg:py-28" style={{ background: "#fff" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Why NCV"
@@ -539,13 +534,13 @@ export default function HomePage() {
               <div
                 key={item.title}
                 className="group flex gap-4 rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                style={{ background: "#fff", border: "1px solid rgba(7,28,53,0.06)", boxShadow: "0 1px 4px rgba(7,28,53,0.04)" }}
+                style={{ background: "#fff", border: "1px solid rgba(27,130,113,0.06)", boxShadow: "0 1px 4px rgba(27,130,113,0.04)" }}
               >
                 <div
                   className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-110"
                   style={{ background: "rgba(27,130,113,0.1)", border: "1px solid rgba(27,130,113,0.2)" }}
                 >
-                  <item.icon className="size-5" style={{ color: palette.secondary }} />
+                  <item.icon className="size-5" style={{ color: palette.orange }} />
                 </div>
                 <div>
                   <p className="font-semibold" style={{ color: palette.heading }}>{item.title}</p>
@@ -570,11 +565,11 @@ export default function HomePage() {
               <div
                 key={activity}
                 className="group flex items-center gap-3 rounded-xl px-4 py-3.5 transition-all duration-200 hover:shadow-sm"
-                style={{ background: palette.surface, border: "1px solid rgba(7,28,53,0.06)" }}
+                style={{ background: "#fff", border: "1px solid rgba(27,130,113,0.06)" }}
               >
                 <span
                   className="size-2 shrink-0 rounded-full transition-transform group-hover:scale-150"
-                  style={{ background: `linear-gradient(135deg, ${palette.secondary}, ${palette.secondaryHover})` }}
+                  style={{ background: `linear-gradient(135deg, ${palette.orange}, ${palette.orange})` }}
                 />
                 <span className="text-sm" style={{ color: palette.body }}>{activity}</span>
               </div>
@@ -584,7 +579,7 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════ PROJECTS ══════════════════════ */}
-      <section className="py-20 lg:py-28" style={{ background: palette.surface }}>
+      <section className="py-20 lg:py-28" style={{ background: "#fff" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -599,7 +594,7 @@ export default function HomePage() {
             <Link
               href="/projects"
               className="inline-flex shrink-0 items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold transition-all hover:bg-white"
-              style={{ borderColor: "rgba(7,28,53,0.12)", color: palette.heading }}
+              style={{ borderColor: "rgba(27,130,113,0.12)", color: palette.heading }}
             >
               View All Projects <ArrowRight className="size-4" />
             </Link>
@@ -611,7 +606,7 @@ export default function HomePage() {
                 key={p.title}
                 href={p.href}
                 className="group overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-                style={{ background: "#fff", border: "1px solid rgba(7,28,53,0.06)", boxShadow: "0 2px 8px rgba(7,28,53,0.06)" }}
+                style={{ background: "#fff", border: "1px solid rgba(27,130,113,0.06)", boxShadow: "0 2px 8px rgba(27,130,113,0.06)" }}
               >
                 <div
                   className="relative flex h-44 items-center justify-center overflow-hidden"
@@ -656,7 +651,7 @@ export default function HomePage() {
             <Link
               href="/events"
               className="inline-flex shrink-0 items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold transition-all hover:bg-gray-50"
-              style={{ borderColor: "rgba(7,28,53,0.12)", color: palette.heading }}
+              style={{ borderColor: "rgba(27,130,113,0.12)", color: palette.heading }}
             >
               View All Events <ArrowRight className="size-4" />
             </Link>
@@ -664,12 +659,12 @@ export default function HomePage() {
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {events.map((ev, i) => {
-              const barColor = i === 0 ? palette.secondary : i === 1 ? palette.primary : palette.primaryHover;
+              const barColor = i === 0 ? palette.orange : i === 1 ? palette.primary : palette.primary;
               return (
                 <div
                   key={ev.title}
                   className="group overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                  style={{ background: "#fff", border: "1px solid rgba(7,28,53,0.06)", boxShadow: "0 2px 8px rgba(7,28,53,0.04)" }}
+                  style={{ background: "#fff", border: "1px solid rgba(27,130,113,0.06)", boxShadow: "0 2px 8px rgba(27,130,113,0.04)" }}
                 >
                   <div className="h-1.5" style={{ background: barColor }} />
                   <div className="p-6">
@@ -681,20 +676,20 @@ export default function HomePage() {
                         <Calendar className="size-3" />
                         {ev.date}
                       </div>
-                      <span className="rounded-full px-2.5 py-1 text-xs font-semibold" style={{ background: palette.surface, color: palette.body }}>
+                      <span className="rounded-full px-2.5 py-1 text-xs font-semibold" style={{ background: "#fff", color: palette.body }}>
                         {ev.tag}
                       </span>
                     </div>
                     <h3 className="text-lg font-bold" style={{ color: palette.heading }}>{ev.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed line-clamp-2" style={{ color: palette.body }}>{ev.desc}</p>
                     <div className="mt-4 flex items-center gap-1.5 text-xs" style={{ color: palette.body }}>
-                      <MapPin className="size-3.5" style={{ color: palette.secondary }} />
+                      <MapPin className="size-3.5" style={{ color: palette.orange }} />
                       {ev.location}
                     </div>
                     <Link
                       href={ev.href}
                       className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold text-white transition-all hover:shadow-md"
-                      style={{ background: `linear-gradient(135deg, ${palette.coral}, ${palette.coralHover})` }}
+                      style={{ background: `linear-gradient(135deg, ${palette.orange}, ${palette.orange})` }}
                     >
                       Register Now <ArrowRight className="size-4" />
                     </Link>
@@ -707,7 +702,7 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════ TESTIMONIALS ══════════════════════ */}
-      <section className="py-20 lg:py-28" style={{ background: palette.surface }}>
+      <section className="py-20 lg:py-28" style={{ background: "#fff" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Stories of Change"
@@ -719,7 +714,7 @@ export default function HomePage() {
               <div
                 key={t.name}
                 className="group flex flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                style={{ background: "#fff", border: "1px solid rgba(7,28,53,0.06)", boxShadow: "0 2px 8px rgba(7,28,53,0.04)" }}
+                style={{ background: "#fff", border: "1px solid rgba(27,130,113,0.06)", boxShadow: "0 2px 8px rgba(27,130,113,0.04)" }}
               >
                 <div className="mb-4 flex gap-1">
                   {Array.from({ length: t.rating }).map((_, i) => (
@@ -732,7 +727,7 @@ export default function HomePage() {
                     &ldquo;{t.quote}&rdquo;
                   </p>
                 </div>
-                <div className="mt-6 flex items-center gap-3 pt-5" style={{ borderTop: "1px solid rgba(7,28,53,0.06)" }}>
+                <div className="mt-6 flex items-center gap-3 pt-5" style={{ borderTop: "1px solid rgba(27,130,113,0.06)" }}>
                   <div
                     className="flex size-11 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white"
                     style={{ background: t.color }}
@@ -752,21 +747,21 @@ export default function HomePage() {
 
       {/* ══════════════════════ CTA BANNER ══════════════════════ */}
       <section className="relative overflow-hidden py-20 lg:py-28"
-        style={{ background: `linear-gradient(135deg, ${palette.primary} 0%, ${palette.primaryHover} 100%)` }}>
+        style={{ background: `linear-gradient(135deg, ${palette.primary} 0%, ${palette.primary} 100%)` }}>
         <div className="absolute -right-16 -top-16 size-72 rounded-full opacity-20 blur-3xl"
-          style={{ background: `radial-gradient(circle, ${palette.secondary}, transparent)` }} />
+          style={{ background: `radial-gradient(circle, ${palette.orange}, transparent)` }} />
         <div className="absolute -left-16 -bottom-16 size-72 rounded-full opacity-20 blur-3xl"
           style={{ background: "radial-gradient(circle, #fff, transparent)" }} />
 
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2"
             style={{ background: "rgba(255,255,255,0.14)", border: "1px solid rgba(255,255,255,0.25)" }}>
-            <Sparkles className="size-4" style={{ color: palette.secondary }} />
+            <Sparkles className="size-4" style={{ color: palette.orange }} />
             <span className="text-sm font-semibold text-white">Together We Transform</span>
           </div>
           <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Join Us in Building a <br />
-            <span style={{ color: "#C5E5E0" }}>Healthier Society</span>
+            <span style={{ color: palette.orange }}>Healthier Society</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-emerald-50">
             Together, let&apos;s build a healthier, happier, and more compassionate society through Yoga, Positive Thinking, and Selfless Service.
@@ -775,7 +770,7 @@ export default function HomePage() {
             <Link
               href="/volunteer"
               className="flex items-center gap-2 rounded-xl px-8 py-4 text-base font-bold text-white transition-all hover:shadow-2xl hover:scale-105"
-style={{ background: `linear-gradient(135deg, ${palette.coral}, ${palette.coralHover})`, boxShadow: "0 8px 30px rgba(255,116,104,0.4)" }}
+style={{ background: `linear-gradient(135deg, ${palette.orange}, ${palette.orange})`, boxShadow: "0 8px 30px rgba(255,107,53,0.4)" }}
             >
               <Heart className="size-5" /> Join Our Programs
             </Link>
@@ -817,7 +812,7 @@ style={{ background: `linear-gradient(135deg, ${palette.coral}, ${palette.coralH
               <div
                 key={i}
                 className="flex aspect-[3/2] items-center justify-center rounded-2xl text-xs font-medium transition-all hover:shadow-md"
-                style={{ background: palette.surface, border: "1px dashed rgba(7,28,53,0.12)", color: palette.body }}
+                style={{ background: "#fff", border: "1px dashed rgba(27,130,113,0.12)", color: palette.body }}
               >
                 Partner {i + 1}
               </div>

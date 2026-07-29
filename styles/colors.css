@@ -1,4 +1,4 @@
-/* NCV Trust custom color overrides */
+/* NCV Trust custom color overrides — teal + white + orange only */
 
 /* Admin scrollbar */
 .admin-scroll::-webkit-scrollbar {
@@ -53,7 +53,7 @@
   100% { background-position:  200% 0; }
 }
 .skeleton-shimmer {
-  background: linear-gradient(90deg, #eff6ff 25%, #d9f4ee 50%, #eff6ff 75%);
+  background: linear-gradient(90deg, #ffffff 25%, rgba(27, 130, 113, 0.06) 50%, #ffffff 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }

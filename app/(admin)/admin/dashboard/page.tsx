@@ -63,9 +63,9 @@ const stats = [
     trend: "up",
     icon: Users,
     href: "/admin/users",
-    gradient: "from-blue-500 to-blue-600",
-    lightBg: "bg-blue-50",
-    textColor: "text-blue-600",
+    gradient: "from-[#1B8271] to-[#1B8271]",
+    lightBg: "bg-[#1B8271]/10",
+    textColor: "text-[#1B8271]",
   },
   {
     label: "Active Projects",
@@ -75,9 +75,9 @@ const stats = [
     trend: "up",
     icon: FolderOpen,
     href: "/admin/projects",
-    gradient: "from-emerald-500 to-emerald-600",
-    lightBg: "bg-emerald-50",
-    textColor: "text-emerald-600",
+    gradient: "from-[#1B8271] to-[#1B8271]",
+    lightBg: "bg-[#1B8271]/10",
+    textColor: "text-[#1B8271]",
   },
   {
     label: "Upcoming Events",
@@ -87,9 +87,9 @@ const stats = [
     trend: "up",
     icon: Calendar,
     href: "/admin/events",
-    gradient: "from-violet-500 to-violet-600",
-    lightBg: "bg-violet-50",
-    textColor: "text-violet-600",
+    gradient: "from-[#1B8271] to-[#1B8271]",
+    lightBg: "bg-[#1B8271]/10",
+    textColor: "text-[#1B8271]",
   },
   {
     label: "Donations",
@@ -99,9 +99,9 @@ const stats = [
     trend: "up",
     icon: DollarSign,
     href: "/admin/donations",
-    gradient: "from-green-500 to-green-600",
-    lightBg: "bg-green-50",
-    textColor: "text-green-600",
+    gradient: "from-[#FF6B35] to-[#FF6B35]",
+    lightBg: "bg-[#FF6B35]/10",
+    textColor: "text-[#FF6B35]",
   },
   {
     label: "Volunteers",
@@ -111,7 +111,7 @@ const stats = [
     trend: "up",
     icon: HandHeart,
     href: "/admin/volunteers",
-    gradient: "from-[#1B8271] to-[#186F61]",
+    gradient: "from-[#1B8271] to-[#1B8271]",
     lightBg: "bg-[#E8F5F3]",
     textColor: "text-[#1B8271]",
   },
@@ -123,9 +123,9 @@ const stats = [
     trend: "neutral",
     icon: MessageSquare,
     href: "/admin/contact",
-    gradient: "from-rose-500 to-rose-600",
-    lightBg: "bg-rose-50",
-    textColor: "text-rose-600",
+    gradient: "from-[#FF6B35] to-[#FF6B35]",
+    lightBg: "bg-[#FF6B35]/10",
+    textColor: "text-[#FF6B35]",
   },
 ];
 
@@ -176,20 +176,20 @@ const recentActivities = [
 
 const typeConfig: Record<string, { color: string; bg: string; icon: React.ElementType }> = {
   volunteer: { color: "text-[#1B8271]", bg: "bg-[#D4EDE9]", icon: HandHeart },
-  donation:  { color: "text-green-600",  bg: "bg-green-100",  icon: Heart },
-  event:     { color: "text-violet-600", bg: "bg-violet-100", icon: Calendar },
-  project:   { color: "text-emerald-600",bg: "bg-emerald-100",icon: FolderOpen },
-  contact:   { color: "text-blue-600",   bg: "bg-blue-100",   icon: MessageSquare },
-  scholarship:{ color: "text-amber-600", bg: "bg-amber-100",  icon: GraduationCap },
+  donation:  { color: "text-[#FF6B35]",  bg: "bg-[#FF6B35]/10",  icon: Heart },
+  event:     { color: "text-[#1B8271]", bg: "bg-[#1B8271]/10", icon: Calendar },
+  project:   { color: "text-[#1B8271]",bg: "bg-[#1B8271]/10",icon: FolderOpen },
+  contact:   { color: "text-[#1B8271]",   bg: "bg-[#1B8271]/10",   icon: MessageSquare },
+  scholarship:{ color: "text-[#FF6B35]", bg: "bg-[#FF6B35]/10",  icon: GraduationCap },
 };
 
 const quickActions = [
-  { label: "Add User",       desc: "Create admin account",  icon: UserPlus,    href: "/admin/users",        gradient: "from-blue-500 to-blue-600" },
-  { label: "New Project",    desc: "Launch a campaign",     icon: FolderOpen,  href: "/admin/projects",     gradient: "from-emerald-500 to-emerald-600" },
-  { label: "Create Event",   desc: "Schedule activity",     icon: Calendar,    href: "/admin/events",       gradient: "from-violet-500 to-violet-600" },
-  { label: "View Gallery",   desc: "Manage media",          icon: Eye,         href: "/admin/gallery",      gradient: "from-[#1B8271] to-[#186F61]" },
-  { label: "Volunteers",     desc: "Review applications",   icon: HandHeart,   href: "/admin/volunteers",   gradient: "from-rose-500 to-rose-600" },
-  { label: "Scholarships",   desc: "Student support",       icon: GraduationCap,href:"/admin/scholarships", gradient: "from-amber-500 to-amber-600" },
+  { label: "Add User",       desc: "Create admin account",  icon: UserPlus,    href: "/admin/users",        gradient: "from-[#1B8271] to-[#1B8271]" },
+  { label: "New Project",    desc: "Launch a campaign",     icon: FolderOpen,  href: "/admin/projects",     gradient: "from-[#1B8271] to-[#1B8271]" },
+  { label: "Create Event",   desc: "Schedule activity",     icon: Calendar,    href: "/admin/events",       gradient: "from-[#1B8271] to-[#1B8271]" },
+  { label: "View Gallery",   desc: "Manage media",          icon: Eye,         href: "/admin/gallery",      gradient: "from-[#1B8271] to-[#1B8271]" },
+  { label: "Volunteers",     desc: "Review applications",   icon: HandHeart,   href: "/admin/volunteers",   gradient: "from-[#FF6B35] to-[#FF6B35]" },
+  { label: "Scholarships",   desc: "Student support",       icon: GraduationCap,href:"/admin/scholarships", gradient: "from-[#FF6B35] to-[#FF6B35]" },
 ];
 
 const schedule = [
@@ -201,16 +201,16 @@ const schedule = [
 
 const scheduleTagColor: Record<string, string> = {
   yoga:     "bg-[#E8F5F3] text-[#1B8271]",
-  internal: "bg-slate-100 text-slate-600",
-  workshop: "bg-violet-100 text-violet-700",
-  wellness: "bg-emerald-100 text-emerald-700",
+  internal: "bg-[#1B8271]/10 text-[#1B8271]",
+  workshop: "bg-[#1B8271]/10 text-[#1B8271]",
+  wellness: "bg-[#1B8271]/10 text-[#1B8271]",
 };
 
 const impactCards = [
-  { label: "Yoga Sessions",    value: "124",  sub: "+12% this month",  icon: Activity, gradient: "from-[#1B8271] to-[#186F61]"   },
-  { label: "New Registrations",value: "18",   sub: "This week",        icon: Zap,      gradient: "from-emerald-500 to-teal-500"   },
-  { label: "Website Visitors", value: "2,847",sub: "This month",       icon: Target,   gradient: "from-blue-500 to-cyan-500"      },
-  { label: "Community Reach",  value: "15.2K",sub: "+8% this week",    icon: Award,    gradient: "from-violet-500 to-purple-500"  },
+  { label: "Yoga Sessions",    value: "124",  sub: "+12% this month",  icon: Activity, gradient: "from-[#1B8271] to-[#1B8271]"   },
+  { label: "New Registrations",value: "18",   sub: "This week",        icon: Zap,      gradient: "from-[#1B8271] to-[#1B8271]"   },
+  { label: "Website Visitors", value: "2,847",sub: "This month",       icon: Target,   gradient: "from-[#1B8271] to-[#1B8271]"      },
+  { label: "Community Reach",  value: "15.2K",sub: "+8% this week",    icon: Award,    gradient: "from-[#FF6B35] to-[#FF6B35]"  },
 ];
 
 // ── Custom Tooltip ─────────────────────────────────────────────────────────────
@@ -273,7 +273,7 @@ function StatCard({ stat, delay }: { stat: (typeof stats)[0]; delay: number }) {
         </div>
         <span className={cn(
           "flex items-center gap-1 rounded-full px-2 py-1 text-[10px] font-semibold",
-          stat.trend === "up" ? "bg-emerald-50 text-emerald-600" :
+          stat.trend === "up" ? "bg-[#1B8271]/10 text-[#1B8271]" :
           stat.trend === "down" ? "bg-red-50 text-red-600" :
           "bg-slate-100 text-slate-500"
         )}>
@@ -322,7 +322,7 @@ export default function AdminDashboardPage() {
       <div
         className="relative overflow-hidden rounded-2xl p-6 lg:p-8 animate-fade-up"
         style={{
-          background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)",
+          background: "linear-gradient(135deg, #1B8271 0%, #1B8271 100%)",
           border: "1px solid rgba(255,255,255,0.06)",
         }}
       >
@@ -412,7 +412,7 @@ export default function AdminDashboardPage() {
               <Tooltip content={<CustomTooltip />} />
               <Area type="monotone" dataKey="amount" stroke="#1B8271" strokeWidth={2.5}
                 fill="url(#donationGrad)" dot={{ fill: "#1B8271", strokeWidth: 0, r: 4 }}
-                activeDot={{ r: 6, fill: "#186F61", strokeWidth: 0 }} />
+                activeDot={{ r: 6, fill: "#1B8271", strokeWidth: 0 }} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -437,7 +437,7 @@ export default function AdminDashboardPage() {
               <defs>
                 <linearGradient id="volGrad" x1="0" y1="0" x2="1" y2="0">
                   <stop offset="0%" stopColor="#1B8271" />
-                  <stop offset="100%" stopColor="#186F61" />
+                  <stop offset="100%" stopColor="#1B8271" />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" horizontal={false} />
@@ -575,10 +575,10 @@ export default function AdminDashboardPage() {
               <div
                 className="absolute inset-0 rounded-2xl"
                 style={{ background: `linear-gradient(135deg, ${
-                  card.gradient === "from-[#1B8271] to-[#186F61]"   ? "#1B8271, #186F61" :
-                  card.gradient === "from-emerald-500 to-teal-500"   ? "#10b981, #14b8a6" :
-                  card.gradient === "from-blue-500 to-cyan-500"      ? "#3b82f6, #06b6d4" :
-                                                                        "#8b5cf6, #a855f7"
+                  card.gradient === "from-[#1B8271] to-[#1B8271]"    ? "#1B8271, #1B8271" :
+                  card.gradient === "from-[#1B8271] to-[#1B8271]"    ? "#1B8271, #1B8271" :
+                  card.gradient === "from-[#FF6B35] to-[#FF6B35]"    ? "#FF6B35, #FF6B35" :
+                                                                        "#1B8271, #1B8271"
                 })` }}
               />
               <div className="absolute -right-4 -top-4 size-24 rounded-full bg-white/10 blur-xl" />

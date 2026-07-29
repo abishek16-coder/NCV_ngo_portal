@@ -85,7 +85,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="hidden items-center justify-center gap-2 bg-gradient-to-r from-[#1B8271] to-[#186F61] px-4 py-2 text-center text-xs font-medium text-white sm:flex">
+      <div className="hidden items-center justify-center gap-2 bg-[#1B8271] px-4 py-2 text-center text-xs font-medium text-white sm:flex">
         <Sparkles className="size-3.5" />
         <span>Free online yoga sessions daily at 6:00 AM</span>
         <span className="mx-1 opacity-60">•</span>
@@ -101,7 +101,7 @@ export function Navbar() {
             ? "bg-[#1B8271]/98 shadow-[0_10px_45px_rgba(0,0,0,0.15)] backdrop-blur-xl"
             : "bg-[#1B8271]/95 backdrop-blur-sm"
         )}
-        style={{ background: scrolled ? undefined : "linear-gradient(135deg, #1B8271 0%, #186F61 100%)" }}
+        style={{ background: scrolled ? undefined : "#1B8271" }}
       >
         <div className="mx-auto flex h-[82px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div
@@ -138,7 +138,7 @@ export function Navbar() {
           <div className="hidden items-center gap-2 md:flex">
             <Link
               href="/donate"
-              className="inline-flex items-center gap-2 rounded-[4px] border border-[#FF7468] bg-[#FF7468] px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-[#F64F40]"
+              className="inline-flex items-center gap-2 rounded-[4px] bg-[#FF6B35] px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-[#FF6B35]/90"
             >
               <Heart className="size-4" />
               Donate
@@ -196,7 +196,7 @@ export function Navbar() {
           <div className="mt-4 grid grid-cols-2 gap-2">
             <Link
               href="/donate"
-              className="flex items-center justify-center gap-2 rounded-2xl border border-[#FF7468] bg-[#FF7468] px-3 py-3 text-sm font-semibold text-white"
+              className="flex items-center justify-center gap-2 rounded-2xl bg-[#FF6B35] px-3 py-3 text-sm font-semibold text-white"
               onClick={() => setMobileOpen(false)}
             >
               <Heart className="size-4" />

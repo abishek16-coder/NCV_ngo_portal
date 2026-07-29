@@ -39,7 +39,7 @@ export default function GalleryPage() {
     <div>
       <TrustBackground />
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#0f3d33] via-[#1B8271] to-[#0a5e4e] py-20 sm:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#1B8271] via-[#1B8271] to-[#1B8271] py-20 sm:py-28">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white/90 border border-white/10">
@@ -124,7 +124,7 @@ export default function GalleryPage() {
                         <Video className="size-12 text-slate-300" />
                       </div>
                       <div className="p-4">
-                        <h3 className="font-bold text-sm text-[#071C35]">{v.title}</h3>
+                        <h3 className="font-bold text-sm text-[#1B8271]">{v.title}</h3>
                         <p className="mt-1 text-xs text-slate-400 capitalize">{v.platform}</p>
                       </div>
                     </div>

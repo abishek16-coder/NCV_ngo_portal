@@ -61,7 +61,7 @@ export default function LoginPage() {
       {/* ── Left Panel — Branding ── */}
       <div
         className="relative hidden lg:flex lg:w-[52%] flex-col justify-between p-12 overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)" }}
+        style={{ background: "linear-gradient(135deg, #1B8271 0%, #1B8271 100%)" }}
       >
         {/* Decorative orbs */}
         <Orb style={{ width: 380, height: 380, top: -100, right: -100, background: "rgba(27,130,113,0.12)", filter: "blur(60px)" }} />
@@ -83,7 +83,7 @@ export default function LoginPage() {
             <div
               className="flex size-12 items-center justify-center rounded-2xl"
               style={{
-                background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)",
+                background: "linear-gradient(135deg, #1B8271 0%, #1B8271 100%)",
                 boxShadow: "0 0 30px rgba(27,130,113,0.5)",
               }}
             >
@@ -102,16 +102,14 @@ export default function LoginPage() {
             <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5"
               style={{ background: "rgba(27,130,113,0.15)", border: "1px solid rgba(27,130,113,0.3)" }}>
               <span className="size-1.5 rounded-full bg-[#1B8271] animate-pulse" />
-              <span className="text-xs font-semibold text-[#186F61]">Management Portal</span>
+              <span className="text-xs font-semibold text-[#1B8271]">Management Portal</span>
             </div>
             <h1 className="text-4xl font-bold text-white leading-tight lg:text-5xl">
               Manage your
               <span
                 className="block mt-1"
                 style={{
-                  background: "linear-gradient(90deg, #1B8271, #186F61, #1B8271)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
+                  color: "#ffffff",
                 }}
               >
                 NGO with ease.
@@ -163,7 +161,7 @@ export default function LoginPage() {
           <div className="flex items-center gap-3 mb-8 lg:hidden">
             <div
               className="flex size-10 items-center justify-center rounded-xl"
-              style={{ background: "linear-gradient(135deg, #1B8271 0%, #186F61 100%)" }}
+              style={{ background: "linear-gradient(135deg, #1B8271 0%, #1B8271 100%)" }}
             >
               <Sun className="size-5 text-white" />
             </div>
@@ -211,7 +209,7 @@ export default function LoginPage() {
                   <Label htmlFor="password" className="text-sm font-semibold text-slate-700">
                     Password
                   </Label>
-                <button type="button" className="text-xs text-[#1B8271] hover:text-[#186F61] font-medium transition-colors">
+                <button type="button" className="text-xs text-[#1B8271] hover:text-[#1B8271] font-medium transition-colors">
                     Forgot password?
                   </button>
                 </div>
@@ -254,9 +252,9 @@ export default function LoginPage() {
                 className="h-11 w-full rounded-xl text-sm font-semibold text-white shadow-sm transition-all hover:shadow-md"
                 style={{
                   background: loading
-                    ? "#FF7468"
-                    : "linear-gradient(135deg, #FF7468 0%, #F64F40 100%)",
-                  boxShadow: "0 4px 14px rgba(27,130,113,0.35)",
+                    ? "#FF6B35"
+                    : "#FF6B35",
+                  boxShadow: "0 4px 14px rgba(255,107,53,0.35)",
                 }}
               >
                 {loading ? (
@@ -284,7 +282,7 @@ export default function LoginPage() {
           {/* Back to website */}
           <p className="mt-5 text-center text-sm text-slate-500">
             Looking for the public site?{" "}
-            <a href="/" className="font-semibold text-[#1B8271] hover:text-[#186F61] transition-colors">
+            <a href="/" className="font-semibold text-[#1B8271] hover:text-[#1B8271] transition-colors">
               Visit ncv.org.in →
             </a>
           </p>

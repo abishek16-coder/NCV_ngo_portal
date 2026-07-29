@@ -44,7 +44,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer style={{ background: "linear-gradient(180deg, #1B8271 0%, #0f3d33 100%)" }}>
+    <footer style={{ background: "#1B8271" }}>
       {/* Main footer */}
       <div className="mx-auto max-w-7xl px-4 pt-16 pb-10 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -54,16 +54,16 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2.5 group">
               <span
                 className="flex size-10 items-center justify-center rounded-xl transition-transform group-hover:scale-105"
-                style={{ background: "linear-gradient(135deg, #1B8271, #186F61)", boxShadow: "0 0 20px rgba(27,130,113,0.35)" }}
+                style={{ background: "#1B8271", boxShadow: "0 0 20px rgba(27,130,113,0.35)" }}
               >
                 <Heart className="size-5 text-white" />
               </span>
               <div>
                 <p className="text-base font-bold text-white leading-none">NCV</p>
-                <p className="text-[10px] text-slate-400 leading-none mt-0.5 tracking-wide">Narchinthanai Vattam</p>
+                <p className="text-[10px] text-white/60 leading-none mt-0.5 tracking-wide">Narchinthanai Vattam</p>
               </div>
             </Link>
-            <p className="mt-5 text-sm text-slate-400 leading-relaxed">
+            <p className="mt-5 text-sm text-white/60 leading-relaxed">
               A registered charitable trust dedicated to promoting holistic health, yoga, positive thinking, education, and community welfare across India.
             </p>
 
@@ -79,7 +79,7 @@ export function Footer() {
                   style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
                   aria-label={s.label}
                 >
-                  <s.icon className="size-4 text-slate-300" />
+                  <s.icon className="size-4 text-white/60" />
                 </a>
               ))}
             </div>
@@ -93,7 +93,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="group flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-white"
+                    className="group flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-white"
                   >
                     <span className="size-1 rounded-full bg-white/30 group-hover:bg-white transition-colors" />
                     {link.label}
@@ -108,8 +108,8 @@ export function Footer() {
             <h4 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">Programs</h4>
             <ul className="space-y-2.5">
               {programs.map((p) => (
-                <li key={p} className="flex items-center gap-1.5 text-sm text-slate-400">
-                  <span className="size-1 rounded-full bg-slate-600" />
+                <li key={p} className="flex items-center gap-1.5 text-sm text-white/60">
+                  <span className="size-1 rounded-full bg-white/30" />
                   {p}
                 </li>
               ))}
@@ -125,7 +125,7 @@ export function Footer() {
                   style={{ background: "rgba(255,255,255,0.1)" }}>
                   <MapPin className="size-4 text-white/80" />
                 </div>
-                <p className="text-sm text-slate-400 leading-relaxed">
+                <p className="text-sm text-white/60 leading-relaxed">
                   87, 4th St, West Kamakoti Nagar,<br />
                   Valasaravakkam, Chennai,<br />
                   Tamil Nadu 600095, India
@@ -136,7 +136,7 @@ export function Footer() {
                   style={{ background: "rgba(255,255,255,0.1)" }}>
                   <Phone className="size-4 text-white/80" />
                 </div>
-                <a href="tel:9003075333" className="text-sm text-slate-400 hover:text-white transition-colors">
+                <a href="tel:9003075333" className="text-sm text-white/60 hover:text-white transition-colors">
                   +91 9003075333
                 </a>
               </li>
@@ -145,7 +145,7 @@ export function Footer() {
                   style={{ background: "rgba(255,255,255,0.1)" }}>
                   <InstagramIcon className="size-4 text-white/80" />
                 </div>
-                <a href="https://instagram.com/ncv_speaks" className="text-sm text-slate-400 hover:text-white transition-colors">
+                <a href="https://instagram.com/ncv_speaks" className="text-sm text-white/60 hover:text-white transition-colors">
                   @ncv_speaks
                 </a>
               </li>
@@ -154,8 +154,8 @@ export function Footer() {
             {/* CTA */}
             <Link
               href="/donate"
-              className="mt-6 flex items-center gap-2 rounded-xl bg-[#FF7468] px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-[#F64F40] hover:shadow-lg"
-              style={{ boxShadow: "0 4px 14px rgba(255,116,104,0.25)" }}
+              className="mt-6 flex items-center gap-2 rounded-xl bg-[#FF6B35] px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-[#FF6B35]/90 hover:shadow-lg"
+              style={{ boxShadow: "0 4px 14px rgba(255,107,53,0.25)" }}
             >
               <Heart className="size-4" />
               Support Our Mission
@@ -169,10 +169,10 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-white/40">
             &copy; {new Date().getFullYear()} Narchinthanai Vattam (NCV) Trust. All rights reserved.
           </p>
-          <p className="text-xs text-slate-600 italic">
+          <p className="text-xs text-white/50 italic">
             &ldquo;Health &bull; Yoga &bull; Positive Thinking&rdquo;
           </p>
         </div>
