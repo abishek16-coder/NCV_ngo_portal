@@ -1,8 +1,11 @@
 import { PrismaClient, UserRole } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { hash } from "bcryptjs";
+import { config } from "dotenv";
 
-const adapter = new PrismaPg({ connectionString: "postgresql://postgres:Abishek%4024bca30@localhost:5432/ncv_ngo_portal?schema=public" });
+config();
+
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
