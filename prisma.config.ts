@@ -1,8 +1,11 @@
 import { defineConfig } from "@prisma/config"
+import { config } from "dotenv"
+
+config()
 
 export default defineConfig({
   datasource: {
-    url: "postgresql://postgres:Abishek%4024bca30@localhost:5432/ncv_ngo_portal?schema=public",
+    url: process.env.DATABASE_URL!,
   },
   migrations: {
     seed: "npx tsx prisma/seed.ts",
