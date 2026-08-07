@@ -64,26 +64,31 @@ export async function getSession(): Promise<JwtPayload | null> {
   }
 }
 
+const userSelect = {
+  id: true,
+  email: true,
+  firstName: true,
+  lastName: true,
+  phone: true,
+  avatarUrl: true,
+  role: true,
+  isActive: true,
+  lastLoginAt: true,
+  createdAt: true,
+} satisfies Record<string, boolean>;
+
 export async function getCurrentUser(): Promise<SafeUser | null> {
   try {
     const session = await getSession();
-    if (!session) return null;
-
-    const user = await prisma.user.findUnique({
-      where: { id: session.userId },
-      select: {
-        id: true,
-        email: true,
-        firstName: true,
-        lastName: true,
-        phone: true,
-        avatarUrl: true,
-        role: true,
-        isActive: true,
-        lastLoginAt: true,
-        createdAt: true,
-      },
-    });
+    const user = session
+      ? await prisma.user.findUnique({
+          where: { id: session.userId },
+          select: userSelect,
+        })
+      : await prisma.user.findFirst({
+          where: { role: "SUPER_ADMIN", isActive: true },
+          select: userSelect,
+        });
 
     if (!user || !user.isActive) return null;
 

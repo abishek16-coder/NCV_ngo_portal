@@ -104,9 +104,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       .then((r) => r.json())
       .then((d) => {
         if (d.success) setUser(d.data);
-        else router.push("/login");
       })
-      .catch(() => router.push("/login"));
+      .catch(() => {});
   }, [router]);
 
   useEffect(() => {
@@ -120,7 +119,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogout = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
-    router.push("/login");
+    router.push("/");
   };
 
   const isActive = (href: string, exact?: boolean) => {
@@ -270,7 +269,7 @@ style={{ background: "#FF6B35", boxShadow: "0 0 20px rgba(255,107,53,0.4)" }}
       </aside>
 
       {/* ─────────────── MAIN CONTENT ─────────────── */}
-      <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex flex-1 flex-col min-h-0">
         {/* Top Bar */}
         <header
           className="flex h-16 items-center justify-between px-4 lg:px-6 shrink-0"

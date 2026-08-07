@@ -11,13 +11,13 @@ const prisma = new PrismaClient({ adapter });
 async function main() {
   console.log("Seeding database...");
 
-  // Create super admin
+  // Create super admin (login email = Google account used to sign in)
   const passwordHash = await hash("admin123", 12);
   const admin = await prisma.user.upsert({
-    where: { email: "admin@ncvtrust.org" },
+    where: { email: "narchinthanaivattam@gmail.com" },
     update: {},
     create: {
-      email: "admin@ncvtrust.org",
+      email: "narchinthanaivattam@gmail.com",
       passwordHash,
       firstName: "Admin",
       lastName: "NCV",
@@ -285,8 +285,8 @@ async function main() {
   console.log("Created settings");
 
   console.log("\nSeed completed successfully!");
-  console.log("Admin login: admin@ncvtrust.org / admin123");
-  console.log("Content Manager login: content@ncvtrust.org / content123");
+  console.log("Admin login: narchinthanaivattam@gmail.com (via Google sign-in)");
+  console.log("Content Manager: content@ncvtrust.org (Google email must match)");
 }
 
 main()

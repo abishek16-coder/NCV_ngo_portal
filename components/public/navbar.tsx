@@ -70,7 +70,7 @@ export function Navbar() {
     if (logoClickTimer.current) clearTimeout(logoClickTimer.current);
     if (logoClickCount.current >= 5) {
       logoClickCount.current = 0;
-      router.push("/login");
+      router.push("/admin");
     } else {
       logoClickTimer.current = setTimeout(() => { logoClickCount.current = 0; }, 2000);
     }

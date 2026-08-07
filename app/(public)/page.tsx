@@ -215,7 +215,7 @@ function Navbar() {
     if (logoClickTimer.current) clearTimeout(logoClickTimer.current);
     if (logoClickCount.current >= 5) {
       logoClickCount.current = 0;
-      router.push("/login");
+      router.push("/admin");
     } else {
       logoClickTimer.current = setTimeout(() => { logoClickCount.current = 0; }, 2000);
     }
@@ -799,27 +799,6 @@ style={{ background: `linear-gradient(135deg, ${palette.orange}, ${palette.orang
         </div>
       </section>
 
-      {/* ══════════════════════ PARTNERS ══════════════════════ */}
-      <section className="py-16" style={{ background: "#fff" }}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center">
-            <SectionBadge>Our Network</SectionBadge>
-            <h2 className="mt-4 text-2xl font-bold" style={{ color: palette.heading }}>Partners &amp; Supporters</h2>
-            <p className="mt-2" style={{ color: palette.body }}>Proud to collaborate with organizations sharing our vision.</p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                className="flex aspect-[3/2] items-center justify-center rounded-2xl text-xs font-medium transition-all hover:shadow-md"
-                style={{ background: "#fff", border: "1px dashed rgba(27,130,113,0.12)", color: palette.body }}
-              >
-                Partner {i + 1}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
